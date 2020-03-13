@@ -1,3 +1,5 @@
+drop table if exists news_letter_message_group_mapping; --jefersson serrano
+drop table if exists news_letter_message; --jefersson serrano
 drop table if exists interviewreplies;
 drop table if exists surveyinterviews;
 drop table if exists interviews; 
@@ -256,3 +258,21 @@ create table surveyinterviews (
     CONSTRAINT UC_SurveyInterview UNIQUE (survey_id,interview_id)
     
 );
+
+create table news_letter_message(
+	id bigint primary key not null AUTO_INCREMENT, 
+	message_subject VARCHAR(250) not null,
+	message_text VARCHAR(2000) not null
+);
+--insert into news_letter_message(id, message_subject, message_text) VALUES (1, 'message_subject 1', 'messageText 1', );
+/*
+create table news_letter_message_group_mapping(
+	id bigint not null AUTO_INCREMENT, 
+	it_consultant_group_id bigint not null,
+	news_letter_message_id bigint not null,
+	foreign key (it_consultant_group_id) references it_consultant_group(id),
+    foreign key (news_letter_message_id) references news_letter_message(id)
+);
+*/
+--insert into news_letter_message_group_mapping(id,it_consultant_group_id,news_letter_message_id) values (1,1,1);
+
