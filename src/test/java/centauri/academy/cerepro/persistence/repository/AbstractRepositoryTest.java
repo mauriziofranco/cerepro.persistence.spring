@@ -15,6 +15,7 @@ import centauri.academy.cerepro.persistence.entity.CoursePage;
 import centauri.academy.cerepro.persistence.entity.Employee;
 import centauri.academy.cerepro.persistence.entity.Interview;
 import centauri.academy.cerepro.persistence.entity.ItConsultant;
+import centauri.academy.cerepro.persistence.entity.NewsLetterMessage;
 import centauri.academy.cerepro.persistence.entity.NoteTemplate;
 import centauri.academy.cerepro.persistence.entity.OriginSite;
 import centauri.academy.cerepro.persistence.entity.Question;
@@ -73,7 +74,9 @@ public abstract class AbstractRepositoryTest {
 	private OriginSiteRepository originSiteRepository;
 	@Autowired
 	private SurveyInterviewRepository surveyInterviewRepository;
-
+	@Autowired
+	private NewsLetterMessageRepository newsLetterMessageRepository;
+	
 	protected Role getFakeRole() {
 		return getFakeRole(100);
 	}
@@ -283,6 +286,14 @@ public abstract class AbstractRepositoryTest {
 		os.setImgpath("dream team");
 		originSiteRepository.save(os);
 		return os;
+	}
+	
+	protected NewsLetterMessage getFakeNewsLetterMessage() {
+		NewsLetterMessage newsLetterMessage = new NewsLetterMessage();
+		newsLetterMessage.setSubject("Fake subject 1");
+		newsLetterMessage.setMessage("Fake message 1");
+		newsLetterMessageRepository.save(newsLetterMessage);
+		return newsLetterMessage;
 	}
 	
 }
