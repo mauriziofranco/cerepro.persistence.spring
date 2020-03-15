@@ -10,7 +10,8 @@
 	<packaging>jar</packaging>
 
 	<name>CeReProPersistence</name>
-	<description>Persistence module for CeRePro project designed by milan centauri academy number 3 and 4</description>
+	<description>Persistence module for CeRePro project designed by milan
+		centauri academy number 3 and 4</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -21,7 +22,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UTF-8
+		</project.reporting.outputEncoding>
 		<maven.compiler.release>11</maven.compiler.release>
 		<env>application</env>
 	</properties>
@@ -65,6 +67,11 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M1</version>
 			</plugin>
 		</plugins>
 	</build>
