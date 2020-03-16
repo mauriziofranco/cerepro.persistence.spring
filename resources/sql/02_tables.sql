@@ -1,3 +1,4 @@
+drop table if exists trainee;
 drop table if exists news_letter_message_group_mapping; --jefersson serrano
 drop table if exists news_letter_message; --jefersson serrano
 drop table if exists interviewreplies;
@@ -276,3 +277,17 @@ create table news_letter_message_group_mapping(
 */
 --insert into news_letter_message_group_mapping(id,it_consultant_group_id,news_letter_message_id) values (1,1,1);
 
+CREATE TABLE trainee (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `coursepage_id` bigint(20) DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '0',
+  haspassword tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniqueEmail` (`email`),
+  KEY `coursepage_id` (`coursepage_id`),
+  CONSTRAINT `coursepage_ibfk_1` FOREIGN KEY (`coursepage_id`) REFERENCES `coursepage` (`id`)
+);
