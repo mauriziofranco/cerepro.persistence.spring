@@ -1,4 +1,4 @@
-drop table if exists trainee;
+drop table if exists trainee; --Jesus
 drop table if exists news_letter_message_group_mapping; --jefersson serrano
 drop table if exists news_letter_message; --jefersson serrano
 drop table if exists interviewreplies;
