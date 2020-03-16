@@ -24,6 +24,7 @@ import centauri.academy.cerepro.persistence.entity.Survey;
 import centauri.academy.cerepro.persistence.entity.SurveyInterview;
 import centauri.academy.cerepro.persistence.entity.SurveyQuestion;
 import centauri.academy.cerepro.persistence.entity.SurveyReply;
+import centauri.academy.cerepro.persistence.entity.Trainee;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
@@ -41,6 +42,8 @@ import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurve
 public abstract class AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractRepositoryTest.class);
 
+	@Autowired
+	private TraineeRepository traineeRepository;// added by jesus
 	@Autowired
 	private RoleRepository roleRepository;
 	@Autowired
@@ -296,4 +299,13 @@ public abstract class AbstractRepositoryTest {
 		return newsLetterMessage;
 	}
 	
+	protected Trainee getFakeTrainee() {
+		Trainee tr = new Trainee();
+		tr.setEmail("email@mail.com");
+		tr.setFirstname("bob");
+		tr.setLastname("esponja");
+		tr.setPassword("password!!");
+		traineeRepository.save(tr);
+		return tr;
+	}
 }
