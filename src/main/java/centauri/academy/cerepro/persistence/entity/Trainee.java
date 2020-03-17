@@ -11,6 +11,12 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+
+/**
+ * @author Jesus Bojorquez - jbm.bojorquez@gmail.com
+ * 
+ * 
+ */
 @Entity
 @Table(name = "trainee")
 public class Trainee {
@@ -24,7 +30,7 @@ public class Trainee {
 	@Email(message = "error.user.email.email")
 	@Column(name = "email")
 	private String email;
-	
+
 	@Length(max = 100, message = "error.user.password.length")
 	@Column(name = "password")
 	private String password;
@@ -45,6 +51,36 @@ public class Trainee {
 
 	@Column(name = "haspassword")
 	private int haspassword;
+	
+	/**
+	 * 
+	 */
+	public Trainee() {
+		super();
+	}
+
+	/**
+	 * @param id
+	 * @param email
+	 * @param password
+	 * @param firstname
+	 * @param lastname
+	 * @param coursepageid
+	 * @param enabled
+	 * @param haspassword
+	 */
+	public Trainee(Long id, String email, String password, String firstname, String lastname, Long coursepageid,
+			int enabled, int haspassword) {
+		super();
+		setId(id);
+		setEmail(email);
+		setPassword(password);
+		setFirstname(firstname);
+		setLastname(lastname);
+		setCoursepageid(coursepageid);
+		setEnabled(enabled);
+		setHaspassword(haspassword);
+	}
 
 	/**
 	 * @return the id
@@ -59,8 +95,6 @@ public class Trainee {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 
 	/**
 	 * @return the coursepageid
@@ -160,40 +194,7 @@ public class Trainee {
 		this.haspassword = haspassword;
 	}
 
-	/**
-	 * 
-	 */
-	public Trainee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param id
-	 * @param email
-	 * @param password
-	 * @param firstname
-	 * @param lastname
-	 * @param coursepageid
-	 * @param enabled
-	 * @param haspassword
-	 */
-	public Trainee(Long id,
-			@Length(max = 100, message = "error.user.email.length") @NotEmpty(message = "error.user.email.empty") @Email(message = "error.user.email.email") String email,
-			@Length(max = 100, message = "error.user.password.length") String password,
-			@Length(max = 50, message = "error.user.firstname.length") String firstname,
-			@Length(max = 50, message = "error.user.firstname.length") String lastname, Long coursepageid, int enabled,
-			int haspassword) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.coursepageid = coursepageid;
-		this.enabled = enabled;
-		this.haspassword = haspassword;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -201,7 +202,5 @@ public class Trainee {
 				+ ", lastname=" + lastname + ", coursepageid=" + coursepageid + ", enabled=" + enabled
 				+ ", haspassword=" + haspassword + "]";
 	}
-
-	
 
 }
