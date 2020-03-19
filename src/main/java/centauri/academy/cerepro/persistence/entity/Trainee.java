@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 
 
 /**
- * @author Jesus Bojorquez - jbm.bojorquez@gmail.com
+ * @author Jesus Bojorquez - jbm.bojorquez@gmail.com - jsusbojorquez@outlook.com
  * 
  * 
  */
