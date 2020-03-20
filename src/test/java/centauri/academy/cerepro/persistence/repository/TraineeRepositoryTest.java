@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.Trainee;
-import centauri.academy.cerepro.persistence.entity.User;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -59,7 +58,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 	public void testSelectAllEmpty() {
 		logger.info("TraineeRepositoryTest.testSelectAllEmpty() - START");
 		assertTrue(tr.count() == 0);
-		logger.info("TraineeRepositoryTest.testSelectAllFilled() - END");
+		logger.info("TraineeRepositoryTest.testSelectAllEmpty() - END");
 	}
 
 	/**
@@ -71,7 +70,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 		assertTrue(tr.count() == 0);
 		getFakeTrainee();
 		assertTrue(tr.count() == 1);
-		logger.info("TraineeRepositoryTest.testSelectAllFilled() - END");
+		logger.info("TraineeRepositoryTest.testInsert() - END");
 	}
 
 	/**
@@ -82,7 +81,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 		logger.info("TraineeRepositoryTest.testSelectById() - START");
 		Trainee currentTrainee = getFakeTrainee();
 		assertTrue(tr.findById(currentTrainee.getId()).isPresent());
-		logger.info("TraineeRepositoryTest.testSelectAllFilled() - END");
+		logger.info("TraineeRepositoryTest.testSelectById() - END");
 	}
 
 	/**
@@ -96,7 +95,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 		tr.save(currentTrainee);
 		assertTrue(tr.findById(currentTrainee.getId()).isPresent());
 		assertTrue(tr.findById(currentTrainee.getId()).get().getPassword().equals("pippopippo"));
-		logger.info("TraineeRepositoryTest.testSelectAllFilled() - END");
+		logger.info("TraineeRepositoryTest.testUpdate() - END");
 	}
 
 	/**
@@ -123,6 +122,30 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 		tr.deleteAll();
 		assertTrue(tr.count() == 0);
 		logger.info("TraineeRepositoryTest.testDeleteAll() - END");
+	}
+	
+	/**
+	 * testFindByEmail() method tests if the method testFindByEmail() really works
+	 */
+	@Test
+	public void testFindByEmail() {
+		logger.info("TraineeRepositoryTest.testFindByEmail() - START");
+		getFakeTrainee();
+		assertTrue(tr.findByEmail("email@mail.com").isPresent());
+		logger.info("TraineeRepositoryTest.testFindByEmail() - END");
+	}
+	
+	/**
+	 * testFindByEnabled() method tests if the method testFindByEnabled() really works
+	 */
+	@Test
+	public void testFindByEnabled() {
+		logger.info("TraineeRepositoryTest.testFindByEnabled() - START");
+		Trainee currentTrainee = getFakeTrainee();
+		currentTrainee.setEnabled(0);
+		tr.save(currentTrainee);
+		assertTrue(tr.findByEnabled(0).isPresent());
+		logger.info("TraineeRepositoryTest.testFindByEnabled() - END");
 	}
 
 }
