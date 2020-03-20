@@ -2,10 +2,12 @@ package centauri.academy.cerepro.persistence.repository;
 
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -161,4 +163,66 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 		logger.info(" END --> testSelectAllCandidatesPaginatedByCourseCode() ");
     }
 
+	@Test
+	public void  getCandidateCountWithRegdateInPeriodOfToday() {
+		logger.info("getCandidateCountWithRegdateInPeriodOfToday - START");
+		LocalDate date = LocalDate.now();
+		LocalDateTime startLDT = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0, 0);
+		LocalDateTime endLDT = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 23, 59, 59);
+//		Timestamp start = Timestamp.valueOf(startLDT);
+//		Timestamp end = Timestamp.valueOf(endLDT);
+		this.getFakeCandidate();
+		logger.info("getCandidateCountWithRegdateInPeriodOfToday - DEBUG - ur.getUserRegdateInPeriod(start, end): " + cr.getCandidateCountWithRegdateInPeriod(startLDT, endLDT));
+//		logger.info("getUserRegistratedTodayTest - DEBUG - ur.getUserRegdateInPeriod(start, end): " + ur.getUserRegdateInPeriodSQL(start, end));		
+		Assert.assertEquals(cr.getCandidateCountWithRegdateInPeriod(startLDT, endLDT), 1l);
+		logger.info("getCandidateCountWithRegdateInPeriodOfToday - END");
+	}
+//	
+//	@Test
+//	public void  getUserRegistratedYesterdayTest() {
+//		logger.info("getUserRegistratedToday()  ---------------------- START");
+//		LocalDate date = LocalDate.now();
+//		date = date.minusDays(1);
+//		LocalDateTime start = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0, 0);
+//		LocalDateTime end = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 23, 59, 59);
+//		Long objL = 1L;
+//		long l = objL;
+//		
+//		when(this.userRepository.getUserRegdateInPeriod(start, end )).thenReturn(l);
+//		ResponseEntity<Long> responseEntity = this.userController.getUserRegistratedYesterday();
+//		Assert.assertEquals( HttpStatus.OK, responseEntity.getStatusCode());
+//		assertTrue(((Long)responseEntity.getBody()).equals(l));
+//		logger.info("getUserRegistratedToday()  ---------------------- end");
+//	}
+//	
+//	@Test
+//	public void getUserRegistratedLastSevenDaysTest() {
+//		logger.info("getUserRegistratedLastSevenDays()  ---------------------- START");
+//		LocalDate date = LocalDate.now();
+//		LocalDateTime start = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0, 0);
+//		LocalDateTime end = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 23, 59, 59);
+//		Long objL = 1L;
+//		long l = objL;
+//		
+//		when(this.userRepository.getUserRegdateInPeriod(start, end)).thenReturn(l);
+//		ResponseEntity<Long> responseEntity = this.userController. getUserRegistratedLastSevenDays();
+//		Assert.assertEquals( HttpStatus.OK, responseEntity.getStatusCode());
+//		assertTrue(((Long)responseEntity.getBody()).equals(l));	
+//		logger.info("getUserRegistratedLastSevenDays()  ---------------------- end");
+//	}
+//	@Test
+//	public void  getUserRegistratedLastWeekTest() {
+//		logger.info("getUserRegistratedLastWeek()  ---------------------- START");
+//		LocalDate date = LocalDate.now();
+//		date = date.minusDays(7);
+//		LocalDateTime start = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0, 0);
+//		LocalDateTime end = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 23, 59, 59);
+//		Long objL = 1L;
+//		long l = objL;	
+//		when(this.userRepository.getUserRegdateInPeriod(start, end)).thenReturn(l);
+//		ResponseEntity<Long> responseEntity = this.userController.getUserRegistratedLastWeek();
+//		Assert.assertEquals( HttpStatus.OK, responseEntity.getStatusCode());
+//		assertTrue(((Long)responseEntity.getBody()).equals(l));
+//		logger.info("getUserRegistratedLastWeek()  ---------------------- end");
+//	}
 }
