@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.Length;
 
 /**
  * @author giacomo
- * @author m.franco@proximainformatica.com  
+ * @author m.franco@proximanetwork.it  
  *
  */
 
