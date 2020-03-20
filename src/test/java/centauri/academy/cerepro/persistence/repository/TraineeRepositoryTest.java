@@ -1,7 +1,7 @@
 package centauri.academy.cerepro.persistence.repository;
 
 /**
- * @author jesus
+ * @author jesus centauri milan academy5
  */
 import static org.junit.Assert.assertTrue;
 

@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 /**
  * 
  * The persistent class for the news_letter_message database table.
- *	@author Jefersson Serrano
+ *	@author Jefersson Serrano - Milan Centauri Academy 5th
  */
 @Entity
 @Table( name = "news_letter_message" )
