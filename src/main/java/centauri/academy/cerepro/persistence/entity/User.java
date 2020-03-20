@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.Query;
 /**
  * @author ilaria
  * @author joffre
- * @author m.franco@proximainformatica.com     
+ * @author m.franco@proximanetwork.it
  *
  */
 
