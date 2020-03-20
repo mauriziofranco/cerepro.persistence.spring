@@ -26,6 +26,6 @@ import centauri.academy.cerepro.persistence.entity.Trainee;
 public interface TraineeRepository extends JpaRepository<Trainee, Long> {
 
 	Optional<Trainee> findByEmail(String email);
+	Optional<Trainee> findByEnabled(int enabled);
 	
-
 }
