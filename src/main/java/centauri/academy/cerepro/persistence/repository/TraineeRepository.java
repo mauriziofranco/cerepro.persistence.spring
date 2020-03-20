@@ -11,15 +11,13 @@ import org.springframework.stereotype.Repository;
 import centauri.academy.cerepro.persistence.entity.Trainee;
 
 /**
- * UserRepository
+ * TraineeRepository
  * 
  * It allows the management of the question table, through insert, delete,
  * update and insert question The connection with Database is made by ConfigDB
  * java class
  * 
- * @author joffre
- * @author anna
- * @author m.franco
+ * @author Jesus Bojorquez jbm.bojorquez@gmail.com
  */
 
 @Repository
