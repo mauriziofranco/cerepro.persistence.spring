@@ -1,5 +1,6 @@
 package centauri.academy.cerepro.persistence.repository;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByEmail(String email);
 	List<User> findByRole(int role);
 
-	@Query("select count(can.id) from Candidate can join User us on can.userId = us.id where us.regdate >= :dataStart and us.regdate < :dataEnd")
-	long getUserRegdateInPeriod(LocalDateTime dataStart, LocalDateTime dataEnd);
 }
