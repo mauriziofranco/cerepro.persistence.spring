@@ -117,6 +117,7 @@ public abstract class AbstractRepositoryTest {
 	}
 
 	protected Candidate getFakeCandidate() {
+		logger.info("getFakeCandidate - START");
 		long userId = getFakeUser(Role.JAVA_COURSE_CANDIDATE_LEVEL).getId();
 		String code = getFakeCoursePage().getCode();
 		long candidateStatesId=getFakeCandidateStates().getId();
