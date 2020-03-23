@@ -5,6 +5,8 @@ package centauri.academy.cerepro.persistence.repository;
  */
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.After;
@@ -60,12 +62,24 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 		assertTrue(tr.count() == 0);
 		logger.info("TraineeRepositoryTest.testSelectAllEmpty() - END");
 	}
+	
+	/**
+	 * testSelectAllEmpty() method tests if the method selectAll() is really able to
+	 * select all tuples from a empty users' table
+	 */
+	@Test
+	public void testfindAll() {// findAll()
+		logger.info("TraineeRepositoryTest.testSelectAllEmpty() - START");
+		List <Trainee> trainees = tr.findAll();
+		assertTrue(trainees.size() == 0);
+		logger.info("TraineeRepositoryTest.testSelectAllEmpty() - END");
+	}
 
 	/**
 	 * testInsert() method tests if the method insert() really works
 	 */
 	@Test
-	public void testInsert() {
+	public void testInsert() {// save()
 		logger.info("TraineeRepositoryTest.testInsert() - START");
 		assertTrue(tr.count() == 0);
 		getFakeTrainee();
@@ -77,7 +91,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 	 * testSelectById() method tests if the method selectById() really works
 	 */
 	@Test
-	public void testSelectById() {
+	public void testFindById() {//findById()
 		logger.info("TraineeRepositoryTest.testSelectById() - START");
 		Trainee currentTrainee = getFakeTrainee();
 		assertTrue(tr.findById(currentTrainee.getId()).isPresent());
@@ -88,7 +102,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 	 * testUpdate() method tests if the method update() really works
 	 */
 	@Test
-	public void testUpdate() {
+	public void testUpdate() {//save()
 		logger.info("TraineeRepositoryTest.testUpdate() - START");
 		Trainee currentTrainee = getFakeTrainee();
 		currentTrainee.setPassword("pippopippo");
@@ -102,7 +116,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 	 * testDeleteById() method tests if the method deleteById() really works
 	 */
 	@Test
-	public void testDeleteById() {
+	public void testDeleteById() {//deleteById()
 		logger.info("TraineeRepositoryTest.testDeleteById() - START");
 		Trainee currentTrainee = getFakeTrainee();
 		assertTrue(tr.count() == 1);
@@ -115,7 +129,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 	 * testDeleteAll() method tests if the method deleteAll() really works
 	 */
 	@Test
-	public void testDeleteAll() {
+	public void testDeleteAll() {//deleteAll()
 		logger.info("TraineeRepositoryTest.testDeleteAll() - START");
 		getFakeTrainee();
 		assertTrue(tr.count() == 1);
@@ -128,7 +142,7 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 	 * testFindByEmail() method tests if the method testFindByEmail() really works
 	 */
 	@Test
-	public void testFindByEmail() {
+	public void testFindByEmail() {//findByEmail()
 		logger.info("TraineeRepositoryTest.testFindByEmail() - START");
 		getFakeTrainee();
 		assertTrue(tr.findByEmail("email@mail.com").isPresent());
@@ -139,13 +153,36 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 	 * testFindByEnabled() method tests if the method testFindByEnabled() really works
 	 */
 	@Test
-	public void testFindByEnabled() {
+	public void testFindByEnabled() {//findByEnabled
 		logger.info("TraineeRepositoryTest.testFindByEnabled() - START");
 		Trainee currentTrainee = getFakeTrainee();
 		currentTrainee.setEnabled(0);
 		tr.save(currentTrainee);
 		assertTrue(tr.findByEnabled(0).isPresent());
 		logger.info("TraineeRepositoryTest.testFindByEnabled() - END");
+	}
+	
+	/**
+	 * testFindFilled() method tests if the method testFindFilled() really works
+	 */
+	@Test
+	public void testFindFilled() {//findFilled()
+		logger.info("TraineeRepositoryTest.testFindFilled() - START");
+		Trainee fakeTrainee = getFakeTrainee();
+		fakeTrainee.setHaspassword(1);
+		tr.save(fakeTrainee);
+		Trainee currentTrainee = new Trainee();
+		currentTrainee.setEmail("mail2@mail.com");
+		currentTrainee.setPassword("password!");
+		currentTrainee.setFirstname("Juan");
+		currentTrainee.setLastname("Perez");
+		currentTrainee.setHaspassword(0);
+		tr.save(currentTrainee);
+		// check if there are two entities in the table, fakeTrainee and currentTrainee
+		assertTrue(tr.count()==2);
+		// check if only currentTrainee is selected (haspassword = 0)
+		assertTrue(tr.findByFilled().size()==1);
+		logger.info("TraineeRepositoryTest.testFindFilled() - END");
 	}
 
 }
