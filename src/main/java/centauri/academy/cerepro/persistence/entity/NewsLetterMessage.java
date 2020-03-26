@@ -25,13 +25,13 @@ public class NewsLetterMessage extends CeReProAbstractEntity{
 	private Long id;
 	
 	
-	@NotBlank(message = "error.newsLetterMessage.title.blank")
-    @Length(max = 250, message = "error.newsLetterMessage.title.length")
+	@NotBlank(message = "error.newsLetterMessage.subject.blank")
+    @Length(max = 250, message = "error.newsLetterMessage.subject.length")
 	@Column(name = "message_subject")
 	private String subject;
 	
-    @NotBlank(message = "error.newLetterMessage.content.blank")
-    @Length(max = 2000, message = "error.newsLetterMessage.content.length")
+    @NotBlank(message = "error.newsLetterMessage.message.blank")
+    @Length(max = 2000, message = "error.newsLetterMessage.message.length")
 	@Column(name = "message_text")
 	private String message;
 
@@ -48,14 +48,21 @@ public class NewsLetterMessage extends CeReProAbstractEntity{
 	 * @param subject
 	 * @param message
 	 */
-	public NewsLetterMessage(Long id,
-			@NotBlank(message = "error.newsLetterMessage.title.blank") @Length(max = 250, message = "error.newsLetterMessage.title.length") String subject,
-			@NotBlank(message = "error.newsLetterMessage.content.blank") @Length(max = 2000, message = "error.newsLetterMessage.content.length") String message) {
-		super();
+	public NewsLetterMessage(Long id,String subject,String message) {
 		this.id = id;
 		this.subject = subject;
 		this.message = message;
 	}
+	
+	public NewsLetterMessage(String subject,String message) {
+		this.subject = subject;
+		this.message = message;
+	}
+	
+	public NewsLetterMessage(String subject) {
+		this.subject = subject;
+	}
+	
 
 	/**
 	 * @return the id
