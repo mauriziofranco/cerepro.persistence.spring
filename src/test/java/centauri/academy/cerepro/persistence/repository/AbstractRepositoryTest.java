@@ -87,7 +87,7 @@ public abstract class AbstractRepositoryTest {
 	protected Role getFakeRole(int level) {
 		Role role = new Role();
 		role.setLabel("admin");
-		role.setDescription("administrador");
+		role.setDescription("administrator");
 		role.setLevel(level);
 		Role roles = roleRepository.findByLevel(level);
 		if (roles == null) {
