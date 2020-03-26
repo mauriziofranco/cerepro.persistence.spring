@@ -54,6 +54,7 @@ create table users (
 
 --insert into users (email,firstname,lastname, password, regdate, dateofbirth, role) VALUES ('1@2.3','bbb','aaa', '$2a$10$FKozujcHmWdulk6naR/XveW3x46hWPnRY2S/cyI/XhmjZZEOwz.bW', '2018-11-01', '2018-11-01',10);
 
+
 create table coursepage (
     id bigint primary key auto_increment,
     title varchar(1000) not null,
