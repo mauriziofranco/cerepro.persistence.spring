@@ -28,17 +28,18 @@ public class Role extends CeReProAbstractEntity{
 	@Column(name = "id")
 	private Long id;
 	
-	@NotNull(message = "error.survey.label.null")
-	@NotEmpty(message = "error.survey.label.empty")
+//	@NotNull(message = "error.role.label.null")
+	@Length(max = 50, message = "error.role.label.length")
+	@NotEmpty(message = "error.role.label.empty")
 	@Column(name = "label")
 	private String label;
 		
 	
-	@Length(max = 100, message = "error.survey.description.length")
+	@Length(max = 100, message = "error.role.description.length")
 	@Column(name = "description")
 	private String description;
 	
-	@NotNull(message = "error.role.level.empty")
+	@NotNull(message = "error.role.level.notnull")
 	@Column(name = "level")
 	private int level;
 
