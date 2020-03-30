@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Entity
 @Table(name = "trainee")
-public class Trainee {
+public class Trainee extends CeReProAbstractEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
