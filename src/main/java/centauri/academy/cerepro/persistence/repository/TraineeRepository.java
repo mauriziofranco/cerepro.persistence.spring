@@ -29,4 +29,6 @@ public interface TraineeRepository extends JpaRepository<Trainee, Long> {
 	@Query("SELECT obj FROM Trainee obj WHERE password is not null AND firstname is not null AND lastname is not null and haspassword = '0'")
 	List<Trainee> findByFilled();
 	
+	@Query("SELECT obj FROM Trainee obj WHERE enabled = '0'")
+	List<Trainee> findListByEnabled();
 }
