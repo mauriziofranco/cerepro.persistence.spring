@@ -184,5 +184,29 @@ public class TraineeRepositoryTest extends AbstractRepositoryTest {
 		assertTrue(tr.findByFilled().size()==1);
 		logger.info("TraineeRepositoryTest.testFindFilled() - END");
 	}
+	
+	/**
+	 * testFindListByEnabled() method tests if the method findListByEnabled() really works
+	 */
+	@Test
+	public void testFindListByEnabled() {//findFilled()
+		logger.info("TraineeRepositoryTest.testFindListByEnabled() - START");
+		Trainee fakeTrainee = getFakeTrainee();
+		fakeTrainee.setEnabled(1);
+		tr.save(fakeTrainee);
+		Trainee currentTrainee = new Trainee();
+		currentTrainee.setEmail("mail2@mail.com");
+		currentTrainee.setPassword("password!");
+		currentTrainee.setFirstname("Juan");
+		currentTrainee.setLastname("Perez");
+		currentTrainee.setHaspassword(0);
+		currentTrainee.setEnabled(0);
+		tr.save(currentTrainee);
+		// check if there are two entities in the table, fakeTrainee and currentTrainee
+		assertTrue(tr.count()==2);
+		// check if only currentTrainee is selected (enabled = 0)
+		assertTrue(tr.findListByEnabled().size()==1);
+		logger.info("TraineeRepositoryTest.testFindListByEnabled() - END");
+	}
 
 }
