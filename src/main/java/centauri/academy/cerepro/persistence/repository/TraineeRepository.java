@@ -13,9 +13,7 @@ import centauri.academy.cerepro.persistence.entity.Trainee;
 /**
  * TraineeRepository
  * 
- * It allows the management of the question table, through insert, delete,
- * update and insert question The connection with Database is made by ConfigDB
- * java class
+ * A class that manages basic operations like save(), delete(), getById, etc. between the database and the Entity class Trainee.
  * 
  * @author Jesus Bojorquez jbm.bojorquez@gmail.com
  */
