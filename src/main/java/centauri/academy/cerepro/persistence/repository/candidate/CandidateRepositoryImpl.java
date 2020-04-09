@@ -88,7 +88,7 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 //	}
 
 	
-/********** PAGEABLE  -> START */
+/* PAGEABLE  -> START */
 	/**
 	 * Commented because probably no more used or used by old Backoffice Application just dismissed
 	 */
