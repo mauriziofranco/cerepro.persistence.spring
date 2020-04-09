@@ -12,6 +12,13 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 
+/**
+ * 
+ * Provides a survey representation.
+ * It contains informations about title(label), description and end-time-survey(expressed in minutes) 
+ * @author maurizio
+ *
+ */
 @Entity
 @Table(name = "surveys")
 public class Survey extends CeReProAbstractEntity {

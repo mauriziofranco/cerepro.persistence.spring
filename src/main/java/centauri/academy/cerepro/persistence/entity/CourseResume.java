@@ -3,6 +3,12 @@ package centauri.academy.cerepro.persistence.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * 
+ * Provides a resume for the course.
+ * 
+ * @author maurizio
+ */
 @Entity
 @Table(name="course_resume")
 public class CourseResume extends CeReProAbstractEntity {

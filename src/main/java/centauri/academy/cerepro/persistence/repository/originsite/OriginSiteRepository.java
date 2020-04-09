@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.OriginSite;
 
+/**
+ * Provides a repository for the OriginSite entity
+ * 
+ * @author Centauri Academy
+ *
+ */
 @Repository
 public interface OriginSiteRepository extends JpaRepository<OriginSite, Long> {
 

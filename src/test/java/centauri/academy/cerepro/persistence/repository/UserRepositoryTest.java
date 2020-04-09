@@ -1,9 +1,5 @@
 package centauri.academy.cerepro.persistence.repository;
-/**
- *
- * @author anna
- * @author m.franco@proximanetwork.it
- */
+
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -22,6 +18,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 
+/**
+ * 
+ * Provides a repository test class to test repository methods
+ * 
+ * @author Centauri Academy
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserRepositoryTest extends AbstractRepositoryTest {

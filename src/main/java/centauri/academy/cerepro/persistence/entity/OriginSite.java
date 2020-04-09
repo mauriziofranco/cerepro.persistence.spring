@@ -3,6 +3,12 @@ package centauri.academy.cerepro.persistence.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+/**
+ * Provides an origin site information to the candidate form
+ * 
+ * @author maurizio
+ *
+ */
 @Entity
 @Table(name="origin_sites")
 public class OriginSite extends CeReProAbstractEntity {

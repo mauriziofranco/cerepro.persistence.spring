@@ -21,6 +21,13 @@ import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.User;
 
 
+/**
+ * 
+ * Provides a repository test class to test repository methods
+ * 
+ * @author Centauri Academy
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class EmployeeRepositoryTest extends AbstractRepositoryTest{

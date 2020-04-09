@@ -16,7 +16,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.OriginSite;
 import centauri.academy.cerepro.persistence.repository.originsite.OriginSiteRepository;
-
+/**
+ * 
+ * Provides a repository test class to test repository methods
+ * 
+ * @author Centauri Academy
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class OriginSiteRepositoryTest extends AbstractRepositoryTest  {

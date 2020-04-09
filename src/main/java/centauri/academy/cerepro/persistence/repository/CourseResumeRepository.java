@@ -7,6 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.CourseResume;
 
+
+/**
+ * Provides a repository for the CourseResume entity
+ * 
+ * @author Centauri Academy
+ *
+ */
 @Repository
 public interface CourseResumeRepository extends JpaRepository<CourseResume, Long> {
 	

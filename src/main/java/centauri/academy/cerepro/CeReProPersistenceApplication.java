@@ -6,6 +6,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+/**
+ * 
+ * Spring application main class.
+ * 
+ * Used for tests.
+ * 
+ * @author maurizio.franco@ymail.com
+ *
+ */
 @SpringBootApplication
 public class CeReProPersistenceApplication {
 	private static final Logger logger = LoggerFactory.getLogger(CeReProPersistenceApplication.class);

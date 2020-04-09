@@ -1,7 +1,5 @@
 package centauri.academy.cerepro.persistence.repository;
-/**
- * @author anna
- */
+
 import static org.junit.Assert.assertTrue;
 
 
@@ -19,6 +17,13 @@ import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
 
+/**
+ * 
+ * Provides a repository test class to test repository methods
+ * 
+ * @author Anna
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {

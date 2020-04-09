@@ -12,6 +12,12 @@ import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.SurveyQuestion;
 
+/**
+ * Provides a repository for the SurveyQuestion entity
+ * 
+ * @author Centauri Academy
+ *
+ */
 @Repository
 public interface SurveyQuestionRepository extends JpaRepository<SurveyQuestion, Long> , SurveyQuestionRepositoryCustom {
 
