@@ -34,6 +34,7 @@ insert into roles(id, label, description, level) VALUES (2, 'developer', 'develo
 insert into roles(id, label, description, level) VALUES (3, 'permanent, external consultant', 'dipendente, attualmente impiegato in activita di consulenza esterna', 50);
 insert into roles(id, label, description, level) VALUES (4, 'java course candidate', 'candidato a partecipare a corso java', 90);
 insert into roles(id, label, description, level) VALUES (5, 'guest', 'guest', 100);
+insert into roles(id, label, description, level) VALUES (6, 'hr', 'human resources collegue', 5);
 
 create table users (
 	id bigint not null AUTO_INCREMENT, 
