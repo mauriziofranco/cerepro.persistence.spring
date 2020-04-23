@@ -6,14 +6,14 @@ pipeline {
                 sh "./mvnw clean compile"
             }
         }
-        /* stage("Provides application property file for Integration tests(trying to send mails))") {
+        stage("Provides application property file for Integration tests") {
             steps {
-                sh "rm ./src/test/resources/mail.properties"
-                echo "Original ./src/test/resources/mail.properties successfully removed!!"
-                sh "cp /cerepro_resources/properties/cerepro.mail.manager/mail.test.properties ./src/test/resources/mail.properties"
+                sh "rm ./src/test/resources/application.properties"
+                echo "Original ./src/test/resources/application.properties successfully removed!!"
+                sh "cp /cerepro_resources/properties/cerepro.hr.backend/application.test.properties ./src/test/resources/application.properties"
             }
-        }  */
-        stage("Unit test") {
+        }
+        stage("Unit And Integration tests") {
             steps {
                 sh "./mvnw test"
             }
