@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh "rm ./src/test/resources/application.properties"
                 echo "Original ./src/test/resources/application.properties successfully removed!!"
-                sh "cp /cerepro_resources/properties/cerepro.hr.backend/application.test.properties ./src/test/resources/application.properties"
+                sh "cp /cerepro_resources/properties/cerepro.persistence.spring/application.test.properties ./src/test/resources/application.properties"
             }
         }
         stage("Unit And Integration tests") {
