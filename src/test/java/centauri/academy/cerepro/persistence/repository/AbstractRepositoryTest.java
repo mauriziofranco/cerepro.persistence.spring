@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,16 +123,31 @@ public abstract class AbstractRepositoryTest {
 		long userId = getFakeUser(Role.JAVA_COURSE_CANDIDATE_LEVEL).getId();
 		String code = getFakeCoursePage().getCode();
 		long candidateStatesId=getFakeCandidateStates().getId();
-		Candidate testCandidate = new Candidate(userId, code,candidateStatesId);
-		testCandidate.setCandidacyDateTime(LocalDateTime.now());
+		//Candidate testCandidate = new Candidate(userId, code,candidateStatesId);
+		LocalDateTime regdate = LocalDateTime.now();
+		long insertedBy = userId ;
+		String firstname = "Test_Firstname" ;
+		String lastname = "Test_Lasstname" ;
+		String email = "test@email.com" ;
+		LocalDateTime candidacyDateTime = LocalDateTime.now();
+		Candidate testCandidate = new Candidate(userId, code,candidateStatesId, email, firstname, lastname, regdate, insertedBy, candidacyDateTime);
 		candidateRepository.save(testCandidate);
 		return testCandidate;
 	}
 	
+//	protected Candidate getFakeCandidateByCandidacyTimeAndCourseCode(LocalDateTime ldt, String courseCode) {
+//		long userId = getFakeUser(Role.JAVA_COURSE_CANDIDATE_LEVEL).getId();
+//		long candidateStatesId=getFakeCandidateStates().getId();
+//		Candidate testCandidate = new Candidate(userId, courseCode, candidateStatesId);
+//		testCandidate.setCandidacyDateTime(ldt);
+//		candidateRepository.save(testCandidate);
+//		return testCandidate;
+//	}
+	
 	protected Candidate getFakeCandidateByCandidacyTimeAndCourseCode(LocalDateTime ldt, String courseCode) {
-		long userId = getFakeUser(Role.JAVA_COURSE_CANDIDATE_LEVEL).getId();
-		long candidateStatesId=getFakeCandidateStates().getId();
-		Candidate testCandidate = new Candidate(userId, courseCode, candidateStatesId);
+		logger.info("getFakeCandidateByCandidacyTimeAndCourseCode - START");
+		Candidate testCandidate = getFakeCandidate();
+		testCandidate.setCourseCode(courseCode);
 		testCandidate.setCandidacyDateTime(ldt);
 		candidateRepository.save(testCandidate);
 		return testCandidate;

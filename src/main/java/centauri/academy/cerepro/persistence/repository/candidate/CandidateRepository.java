@@ -21,8 +21,13 @@ import centauri.academy.cerepro.persistence.entity.CandidateCustom;
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate, Long>, CandidateRepositoryCustom {
 	
-	List<Candidate> findByUserId(long userId);
+//	List<Candidate> findByUserId(long userId);
 
-	@Query("select count(can.id) from Candidate can join User us on can.userId = us.id where us.regdate >= :dataStart and us.regdate < :dataEnd")
+//	@Query("select count(can.id) from Candidate can join User us on can.userId = us.id where us.regdate >= :dataStart and us.regdate < :dataEnd")
+//	long getCandidateCountWithRegdateInPeriod(LocalDateTime dataStart, LocalDateTime dataEnd);
+	
+	@Query("select count(can.id) from Candidate where regdate >= :dataStart and regdate < :dataEnd")
 	long getCandidateCountWithRegdateInPeriod(LocalDateTime dataStart, LocalDateTime dataEnd);
+	
+	
 }

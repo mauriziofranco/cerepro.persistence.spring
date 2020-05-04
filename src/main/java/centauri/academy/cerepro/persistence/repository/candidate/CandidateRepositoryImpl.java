@@ -156,6 +156,63 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 	 * @param code
 	 * @return
 	 */
+//	public Page<CandidateCustom> getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode)
+//	{
+//		CriteriaBuilder cb = em.getCriteriaBuilder();
+//		CriteriaQuery<CandidateCustom> query = null;
+//		query = cb.createQuery(CandidateCustom.class);
+//		
+//		Root<Candidate> rootTable = query.from(Candidate.class);
+//		Root<User> joinTable = query.from(User.class);
+//		Root<CandidateStates> joinTable2=query.from(CandidateStates.class);
+//		
+//		List<Predicate> criteria = new ArrayList<Predicate>();
+//		
+//		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
+//		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
+//		if (courseCode!=null) {
+//		    criteria.add(cb.equal(rootTable.get("courseCode"), courseCode));
+//	    }
+//		criteria.add(cb.equal(rootTable.get("candidateStatesId"),joinTable2.get("id")));
+//		
+//		query.orderBy(cb.desc(rootTable.get("candidacyDateTime")));
+//		
+//		query.where(criteria.toArray(new Predicate[criteria.size()]));
+////		query.orderBy(cb.asc(rootTable.get("candidacyDateTime")));//order by for "candidacyDateTime" doesn't works beacause itsn't a field retrieved in the following select!!!! 
+////		query.orderBy(cb.desc(rootTable.get("id")));
+//		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(
+//				rootTable.get("id"),
+//				rootTable.get("userId"), 
+//				rootTable.get("domicileCity"),
+//				rootTable.get("studyQualification"),
+//				rootTable.get("graduate"), 
+//				rootTable.get("highGraduate"),
+//				rootTable.get("stillHighStudy"),
+//				rootTable.get("mobile"),
+//				rootTable.get("cvExternalPath"),
+//				joinTable.get("email"),
+//				joinTable.get("firstname"),
+//				joinTable.get("lastname"),
+//				joinTable.get("dateOfBirth"),
+//				joinTable.get("imgpath"),
+//				rootTable.get("courseCode"),
+//				joinTable.get("note"),
+//				rootTable.get("label"),
+//				rootTable.get("candidateStatesId"),
+//				joinTable2.get("statusColor"),
+//				joinTable2.get("statusLabel")
+//		));
+//
+//		List<CandidateCustom> resultList = q.getResultList();
+//		logger.info(resultList.toString());
+//		int start=(int) info.getOffset();
+//		int end = (start + info.getPageSize()) > resultList.size() ? resultList.size() : (start + info.getPageSize());        
+//		int totalRows = resultList.size();
+//
+//		Page<CandidateCustom> pageToReturn = new PageImpl<CandidateCustom>(resultList.subList(start, end), info, totalRows); 
+//		return pageToReturn;
+//	
+//	}
 	public Page<CandidateCustom> getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode)
 	{
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -163,13 +220,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 		query = cb.createQuery(CandidateCustom.class);
 		
 		Root<Candidate> rootTable = query.from(Candidate.class);
-		Root<User> joinTable = query.from(User.class);
+//		Root<User> joinTable = query.from(User.class);
 		Root<CandidateStates> joinTable2=query.from(CandidateStates.class);
 		
 		List<Predicate> criteria = new ArrayList<Predicate>();
 		
-		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
-		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
+//		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
+//		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
 		if (courseCode!=null) {
 		    criteria.add(cb.equal(rootTable.get("courseCode"), courseCode));
 	    }
@@ -190,13 +247,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				rootTable.get("stillHighStudy"),
 				rootTable.get("mobile"),
 				rootTable.get("cvExternalPath"),
-				joinTable.get("email"),
-				joinTable.get("firstname"),
-				joinTable.get("lastname"),
-				joinTable.get("dateOfBirth"),
-				joinTable.get("imgpath"),
+				rootTable.get("email"),
+				rootTable.get("firstname"),
+				rootTable.get("lastname"),
+				rootTable.get("dateOfBirth"),
+				rootTable.get("imgpath"),
 				rootTable.get("courseCode"),
-				joinTable.get("note"),
+				rootTable.get("technicalNote"),
 				rootTable.get("label"),
 				rootTable.get("candidateStatesId"),
 				joinTable2.get("statusColor"),
@@ -226,13 +283,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 		query = cb.createQuery(CandidateCustom.class);
 		
 		Root<Candidate> rootTable = query.from(Candidate.class);
-		Root<User> joinTable = query.from(User.class);
+//		Root<User> joinTable = query.from(User.class);
 		Root<CandidateStates> joinTable2=query.from(CandidateStates.class);
 		
 		List<Predicate> criteria = new ArrayList<Predicate>();
 		
-		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
-		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
+//		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
+//		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
 		criteria.add(cb.equal(rootTable.get("id"), id));
 		criteria.add(cb.equal(rootTable.get("candidateStatesId"),joinTable2.get("id")));
 		
@@ -247,13 +304,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				rootTable.get("stillHighStudy"),
 				rootTable.get("mobile"),
 				rootTable.get("cvExternalPath"),
-				joinTable.get("email"),
-				joinTable.get("firstname"),
-				joinTable.get("lastname"),
-				joinTable.get("dateOfBirth"),
-				joinTable.get("imgpath"),
+				rootTable.get("email"),
+				rootTable.get("firstname"),
+				rootTable.get("lastname"),
+				rootTable.get("dateOfBirth"),
+				rootTable.get("imgpath"),
 				rootTable.get("courseCode"),
-				joinTable.get("note"),
+				rootTable.get("technicalNote"),
 				rootTable.get("label"),
 				rootTable.get("candidateStatesId"),
 				joinTable2.get("statusColor"),
@@ -274,13 +331,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 		query = cb.createQuery(CandidateCustom.class);
 		
 		Root<Candidate> rootTable = query.from(Candidate.class);
-		Root<User> joinTable = query.from(User.class);
+//		Root<User> joinTable = query.from(User.class);
 		Root<CandidateStates> joinTable2=query.from(CandidateStates.class);
 		
 		List<Predicate> criteria = new ArrayList<Predicate>();
 		
-		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
-		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
+//		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
+//		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
 		criteria.add(cb.equal(rootTable.get("courseCode"), code));
 		criteria.add(cb.equal(rootTable.get("candidateStatesId"),joinTable2.get("id")));
 		
@@ -295,13 +352,13 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				rootTable.get("stillHighStudy"),
 				rootTable.get("mobile"),
 				rootTable.get("cvExternalPath"),
-				joinTable.get("email"),
-				joinTable.get("firstname"),
-				joinTable.get("lastname"),
-				joinTable.get("dateOfBirth"),
-				joinTable.get("imgpath"),
+				rootTable.get("email"),
+				rootTable.get("firstname"),
+				rootTable.get("lastname"),
+				rootTable.get("dateOfBirth"),
+				rootTable.get("imgpath"),
 				rootTable.get("courseCode"),
-				joinTable.get("note"),
+				rootTable.get("technicalNote"),
 				rootTable.get("label"),
 				rootTable.get("candidateStatesId"),
 				joinTable2.get("statusColor"),

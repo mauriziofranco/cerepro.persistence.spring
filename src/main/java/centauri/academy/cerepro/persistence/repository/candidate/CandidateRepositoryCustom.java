@@ -17,13 +17,11 @@ import centauri.academy.cerepro.persistence.entity.CandidateCustom;
  */
 public interface CandidateRepositoryCustom {
 	
-//	List<CandidateCustom> getAllCustomCandidates() ;
 	
 	CandidateCustom getSingleCustomCandidate(Long id);
 	
 	List<CandidateCustom> findByCourseCode(String code);
 
-//	Page<CandidateCustom> getAllCustomCandidatesPaginated(Pageable info);
 	
 	Page<CandidateCustom> getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode);
 	
