@@ -26,7 +26,7 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long>, Can
 //	@Query("select count(can.id) from Candidate can join User us on can.userId = us.id where us.regdate >= :dataStart and us.regdate < :dataEnd")
 //	long getCandidateCountWithRegdateInPeriod(LocalDateTime dataStart, LocalDateTime dataEnd);
 	
-	@Query("select count(can.id) from Candidate where regdate >= :dataStart and regdate < :dataEnd")
+	@Query("select count(can.id) from Candidate can where can.regdate >= :dataStart and can.regdate < :dataEnd")
 	long getCandidateCountWithRegdateInPeriod(LocalDateTime dataStart, LocalDateTime dataEnd);
 	
 	
