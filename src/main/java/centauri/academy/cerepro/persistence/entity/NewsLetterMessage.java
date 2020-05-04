@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.Length;
  *	@author Jefersson Serrano - Milan Centauri Academy 5th
  */
 @Entity
-@Table( name = "news_letter_message" )
+@Table( name = "newslettermessage" )
 public class NewsLetterMessage extends CeReProAbstractEntity{
 	
 	@Id //specifies that this field is a primary key
