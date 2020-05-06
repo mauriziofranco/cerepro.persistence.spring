@@ -77,9 +77,9 @@ public class Candidate extends CeReProAbstractEntity {
 	@Length(max = 100)
 	private String label;
 
-	@Column(name = "candidate_states_id")
-	@NotNull(message = "error.candidate.candidateStatesId.empty")
-	private long candidateStatesId;
+	@Column(name = "candidate_state_code")
+	@NotNull(message = "error.candidate.candidateStatusCode.empty")
+	private long candidateStateCode;
 
 	// TODO..... for the above fill with the beans validation annotation
 
@@ -133,7 +133,7 @@ public class Candidate extends CeReProAbstractEntity {
 	 */
 	public Candidate(@NotNull(message = "error.candidate.userId.empty") long userId,
 			@NotNull(message = "error.????.coursecode.empty") String courseCode,
-			@NotNull(message = "error.candidate.candidateStatesId.empty") long candidateStatesId,
+			@NotNull(message = "error.candidate.candidateStatusCode.empty") long candidateStatusCode,
 			@NotEmpty(message = "error.user.email.empty") String email,
 			@NotNull(message = "error.user.firstname.empty") String firstname,
 			@NotNull(message = "error.user.lastname.empty") String lastname, LocalDateTime regdate,
@@ -142,7 +142,7 @@ public class Candidate extends CeReProAbstractEntity {
 		super();
 		this.userId = userId;
 		this.courseCode = courseCode;
-		this.candidateStatesId = candidateStatesId;
+		this.candidateStateCode = candidateStatusCode;
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -327,20 +327,6 @@ public class Candidate extends CeReProAbstractEntity {
 	}
 
 	/**
-	 * @return the candidateStatesId
-	 */
-	public long getCandidateStatesId() {
-		return candidateStatesId;
-	}
-
-	/**
-	 * @param candidateStatesId the candidateStatesId to set
-	 */
-	public void setCandidateStatesId(long candidateStatesId) {
-		this.candidateStatesId = candidateStatesId;
-	}
-
-	/**
 	 * @return the email
 	 */
 	public String getEmail() {
@@ -466,26 +452,30 @@ public class Candidate extends CeReProAbstractEntity {
 		this.insertedBy = insertedBy;
 	}
 
+	/**
+	 * @return the candidateStatusCode
+	 */
+	public long getCandidateStatusCode() {
+		return candidateStateCode;
+	}
+
+	/**
+	 * @param candidateStatusCode the candidateStatusCode to set
+	 */
+	public void setCandidateStatusCode(long candidateStatusCode) {
+		this.candidateStateCode = candidateStatusCode;
+	}
+
 	@Override
 	public String toString() {
 		return "Candidate [id=" + id + ", userId=" + userId + ", domicileCity=" + domicileCity + ", studyQualification="
 				+ studyQualification + ", graduate=" + graduate + ", highGraduate=" + highGraduate + ", stillHighStudy="
 				+ stillHighStudy + ", mobile=" + mobile + ", cvExternalPath=" + cvExternalPath + ", courseCode="
-				+ courseCode + ", candidacyDateTime=" + candidacyDateTime + ", label=" + label + ", candidateStatesId="
-				+ candidateStatesId + ", email=" + email + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", dateOfBirth=" + dateOfBirth + ", regdate=" + regdate + ", imgpath=" + imgpath + ", technicalNote="
-				+ technicalNote + ", hrNote=" + hrNote + ", insertedBy=" + insertedBy + ", getId()=" + getId()
-				+ ", getUserId()=" + getUserId() + ", getDomicileCity()=" + getDomicileCity()
-				+ ", getStudyQualification()=" + getStudyQualification() + ", getGraduate()=" + getGraduate()
-				+ ", getHighGraduate()=" + getHighGraduate() + ", getStillHighStudy()=" + getStillHighStudy()
-				+ ", getMobile()=" + getMobile() + ", getCvExternalPath()=" + getCvExternalPath() + ", getCourseCode()="
-				+ getCourseCode() + ", getCandidacyDateTime()=" + getCandidacyDateTime() + ", getLabel()=" + getLabel()
-				+ ", getCandidateStatesId()=" + getCandidateStatesId() + ", getEmail()=" + getEmail()
-				+ ", getFirstname()=" + getFirstname() + ", getLastname()=" + getLastname() + ", getDateOfBirth()="
-				+ getDateOfBirth() + ", getRegdate()=" + getRegdate() + ", getImgpath()=" + getImgpath()
-				+ ", getTechnicalNote()=" + getTechnicalNote() + ", getHrNote()=" + getHrNote() + ", getInsertedBy()="
-				+ getInsertedBy() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+				+ courseCode + ", candidacyDateTime=" + candidacyDateTime + ", label=" + label
+				+ ", candidateStatusCode=" + candidateStateCode + ", email=" + email + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", dateOfBirth=" + dateOfBirth + ", regdate=" + regdate + ", imgpath="
+				+ imgpath + ", technicalNote=" + technicalNote + ", hrNote=" + hrNote + ", insertedBy=" + insertedBy
+				+ "]";
 	}
 
 }

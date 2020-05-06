@@ -54,8 +54,8 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 		logger.info(" START -> prepareDB() ");
 		crr.deleteAll();
 		cr.deleteAll();
-		cpr.deleteAll();
 		csr.deleteAll();
+		cpr.deleteAll();
 		ur.deleteAll();
 		rr.deleteAll();
 		logger.info(" END -> prepareDB() ");

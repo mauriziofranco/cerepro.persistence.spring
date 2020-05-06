@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -38,7 +39,7 @@ import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 @Repository
 public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 
-	private static final Logger logger = LoggerFactory.getLogger(CandidateRepositoryImpl.class);
+	private Logger logger = LoggerFactory.getLogger(CandidateRepositoryImpl.class);
 
 	@PersistenceContext
 	private EntityManager em;
@@ -234,7 +235,7 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 		if (courseCode != null) {
 			criteria.add(cb.equal(rootTable.get("courseCode"), courseCode));
 		}
-		criteria.add(cb.equal(rootTable.get("candidateStatesId"), joinTable2.get("id")));
+		criteria.add(cb.equal(rootTable.get("candidateStateCode"), joinTable2.get("statusCode")));
 
 		query.orderBy(cb.desc(rootTable.get("candidacyDateTime")));
 
@@ -291,7 +292,8 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 	/*********** PAGEABLE -> END */
 
 	@Override
-	public CandidateCustom getSingleCustomCandidate(Long id) {
+	public CandidateCustom getSingleCustomCandidate(Long id) throws NoResultException {
+		logger.info("getSingleCustomCandidate - START - with id: {}", id);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<CandidateCustom> query = null;
 		query = cb.createQuery(CandidateCustom.class);
@@ -305,7 +307,8 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 //		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
 //		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
 		criteria.add(cb.equal(rootTable.get("id"), id));
-		criteria.add(cb.equal(rootTable.get("candidateStatesId"), joinTable2.get("id")));
+//		criteria.add(cb.equal(rootTable.get("candidateStatesId"), joinTable2.get("id")));
+		criteria.add(cb.equal(rootTable.get("candidateStateCode"), joinTable2.get("statusCode")));
 
 		query.where(criteria.toArray(new Predicate[criteria.size()]));
 		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(rootTable.get("id"), rootTable.get("userId"),
@@ -314,11 +317,10 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 				rootTable.get("cvExternalPath"), rootTable.get("email"), rootTable.get("firstname"),
 				rootTable.get("lastname"), rootTable.get("dateOfBirth"), rootTable.get("imgpath"),
 				rootTable.get("courseCode"), rootTable.get("technicalNote"), rootTable.get("label"),
-				rootTable.get("candidateStatesId"), joinTable2.get("statusColor"), joinTable2.get("statusLabel")));
+				rootTable.get("candidateStateCode"), joinTable2.get("statusColor"), joinTable2.get("statusLabel")));
 
 		q.setMaxResults(1);
-		CandidateCustom returnValue = q.getSingleResult();
-		return returnValue;
+		return q.getSingleResult();
 	}
 
 	/*

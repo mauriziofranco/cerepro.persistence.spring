@@ -122,7 +122,7 @@ public abstract class AbstractRepositoryTest {
 		logger.info("getFakeCandidate - START");
 		long userId = getFakeUser(Role.JAVA_COURSE_CANDIDATE_LEVEL).getId();
 		String code = getFakeCoursePage().getCode();
-		long candidateStatesId=getFakeCandidateStates().getId();
+		long candidateStateCode=getFakeCandidateStates().getStatusCode();
 		//Candidate testCandidate = new Candidate(userId, code,candidateStatesId);
 		LocalDateTime regdate = LocalDateTime.now();
 		long insertedBy = userId ;
@@ -130,7 +130,7 @@ public abstract class AbstractRepositoryTest {
 		String lastname = "Test_Lasstname" ;
 		String email = "test@email.com" ;
 		LocalDateTime candidacyDateTime = LocalDateTime.now();
-		Candidate testCandidate = new Candidate(userId, code,candidateStatesId, email, firstname, lastname, regdate, insertedBy, candidacyDateTime);
+		Candidate testCandidate = new Candidate(userId, code, candidateStateCode, email, firstname, lastname, regdate, insertedBy, candidacyDateTime);
 		candidateRepository.save(testCandidate);
 		return testCandidate;
 	}
@@ -292,7 +292,24 @@ public abstract class AbstractRepositoryTest {
 		else {
 			csTest.setRoleId(roles.get(0).getId());
 		}
-		csTest.setStatusCode(1);
+		csTest.setStatusCode((int)getRandomLongBetweenLimits());
+		csTest.setStatusLabel("a status label");
+		csTest.setStatusDescription("a status description");
+		csTest.setStatusColor("#FF0000");
+		candidateStatesRepository.save(csTest);
+		return csTest;
+	}
+	
+	protected CandidateStates getFakeCandidateStatesWithDefaultStatusCode() {
+		CandidateStates  csTest = new CandidateStates();
+		List<Role> roles = roleRepository.findAll();
+		if(roles.isEmpty()) {
+			csTest.setRoleId(getFakeRole().getId());
+		}
+		else {
+			csTest.setRoleId(roles.get(0).getId());
+		}
+		csTest.setStatusCode(CandidateStates.DEFAULT_INSERTING_STATUS_CODE);
 		csTest.setStatusLabel("a status label");
 		csTest.setStatusDescription("a status description");
 		csTest.setStatusColor("#FF0000");
@@ -325,5 +342,13 @@ public abstract class AbstractRepositoryTest {
 		tr.setPassword("password!!");
 		traineeRepository.save(tr);
 		return tr;
+	}
+	
+	public long getRandomLongBetweenLimits () {
+		long leftLimit = 100L;
+	    long rightLimit = 1000L;
+	    long generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+	    logger.trace("getRandomLongBetweenLimits GENERATED: " + generatedLong);
+		return generatedLong ;
 	}
 }

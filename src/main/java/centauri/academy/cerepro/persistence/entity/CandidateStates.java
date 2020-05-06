@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "candidate_states")
 public class CandidateStates extends CeReProAbstractEntity {
 	
-	public final static long DEFAULT_INSERTING_STATUS_CODE = 1l ;
+	public final static int DEFAULT_INSERTING_STATUS_CODE = 1 ;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
@@ -35,6 +35,7 @@ public class CandidateStates extends CeReProAbstractEntity {
 	@Column(name = "ROLE_ID")
 	private Long roleId;
 	
+	@NotNull(message="error.candidatestates.statuscode.notnull")
 	@Column(name = "STATUS_CODE")
 	private int statusCode;
 	
@@ -108,7 +109,5 @@ public class CandidateStates extends CeReProAbstractEntity {
 				+ ", getStatusCode()=" + getStatusCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
-	
-	
 
 }
