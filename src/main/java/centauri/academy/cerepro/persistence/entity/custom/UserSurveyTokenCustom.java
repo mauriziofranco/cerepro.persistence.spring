@@ -1,7 +1,7 @@
 /**
  * 
  */
-package centauri.academy.cerepro.persistence.entity;
+package centauri.academy.cerepro.persistence.entity.custom;
 
 import java.time.LocalDateTime;
 

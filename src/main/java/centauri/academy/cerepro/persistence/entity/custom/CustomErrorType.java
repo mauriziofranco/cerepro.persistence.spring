@@ -1,4 +1,6 @@
-package centauri.academy.cerepro.persistence.entity;
+package centauri.academy.cerepro.persistence.entity.custom;
+
+import centauri.academy.cerepro.persistence.entity.CeReProAbstractEntity;
 
 /**
  * Provides a simple default error message class to return to rest api consumers.

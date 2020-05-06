@@ -1,6 +1,8 @@
-package centauri.academy.cerepro.persistence.entity;
+package centauri.academy.cerepro.persistence.entity.custom;
 
 import java.time.LocalDate;
+
+import centauri.academy.cerepro.persistence.entity.CeReProAbstractEntity;
 
 /**
  * @author m.franco

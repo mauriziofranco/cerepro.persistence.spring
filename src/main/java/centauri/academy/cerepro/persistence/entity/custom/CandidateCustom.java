@@ -1,4 +1,4 @@
-package centauri.academy.cerepro.persistence.entity;
+package centauri.academy.cerepro.persistence.entity.custom;
 
 import java.time.LocalDate;
 
@@ -6,13 +6,14 @@ import javax.persistence.Column;
 
 import org.hibernate.validator.constraints.Length;
 
+import centauri.academy.cerepro.persistence.entity.CeReProAbstractEntity;
+
 /**
  * @author m.franco
  *
  */
-public class CandidateCustom extends CeReProAbstractEntity {
+public class CandidateCustom extends ListedCandidateCustom {
 
-	private Long id;
 	private Long userId;
 	private String domicileCity;
 	private String studyQualification;
@@ -20,18 +21,32 @@ public class CandidateCustom extends CeReProAbstractEntity {
 	private Boolean highGraduate;
 	private Boolean stillHighStudy;
 	private String mobile;
-	private String cvExternalPath;
-	private String email;
-	private String firstname;
-	private String lastname;
 	private LocalDate dateOfBirth;
-	private String imgpath;
 	private String courseCode;
 	private String note;
 	private String label;
 	private Long candidateStatesId;
-	private String candidateStatusColor;
-	private String candidateSatusLabel;
+	
+//	private Long id;
+//	private Long userId;
+//	private String domicileCity;
+//	private String studyQualification;
+//	private Boolean graduate;
+//	private Boolean highGraduate;
+//	private Boolean stillHighStudy;
+//	private String mobile;
+//	private String cvExternalPath;
+//	private String email;
+//	private String firstname;
+//	private String lastname;
+//	private LocalDate dateOfBirth;
+//	private String imgpath;
+//	private String courseCode;
+//	private String note;
+//	private String label;
+//	private Long candidateStatesId;
+//	private String candidateStatusColor;
+//	private String candidateSatusLabel;
 
 	public CandidateCustom() {
 
