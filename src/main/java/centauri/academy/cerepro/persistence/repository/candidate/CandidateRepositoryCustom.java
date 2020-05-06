@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import centauri.academy.cerepro.persistence.entity.CandidateCustom;
+import centauri.academy.cerepro.persistence.entity.custom.CandidateCustom;
+import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 
 /**
  * CandidateRepositoryCustom
@@ -20,9 +21,8 @@ public interface CandidateRepositoryCustom {
 	
 	CandidateCustom getSingleCustomCandidate(Long id);
 	
-	List<CandidateCustom> findByCourseCode(String code);
+	List<ListedCandidateCustom> findByCourseCode(String code);
 
-	
-	Page<CandidateCustom> getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode);
+	Page<ListedCandidateCustom> getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode);
 	
 }

@@ -20,8 +20,8 @@ import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.Survey;
 import centauri.academy.cerepro.persistence.entity.User;
-import centauri.academy.cerepro.persistence.entity.UserSurveyTokenCustom;
 import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
+import centauri.academy.cerepro.persistence.entity.custom.UserSurveyTokenCustom;
 /**
  * CandidateRepositoryImpl
  * 

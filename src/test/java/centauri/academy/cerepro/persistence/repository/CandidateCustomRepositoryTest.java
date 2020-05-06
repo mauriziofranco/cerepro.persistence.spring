@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -17,11 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.Candidate;
-import centauri.academy.cerepro.persistence.entity.CandidateCustom;
+import centauri.academy.cerepro.persistence.entity.custom.CandidateCustom;
+import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 
 /**
@@ -137,7 +136,7 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	/**
 	 * 
      * This method tests the getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode) method called by 
-     * the SkillViewHr frontend to list candidates.
+     * the frontend to list candidates.
      * It tests normal functionality and that the candidates list is ordered by the candidacy_date_time
      * 
      * @author maurizio.franco
@@ -153,11 +152,11 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 		LocalDateTime ldtYesterday = LocalDateTime.now().minusDays(1);
 		getFakeCandidateByCandidacyTimeAndCourseCode(ldtYesterday, courseCode);
 		assertTrue(cr.count()==2);
-		Page<CandidateCustom>  currentPage = cr.getAllCustomCandidatesPaginatedByCourseCode(PageRequest.of(0, 10), courseCode);
+		Page<ListedCandidateCustom>  currentPage = cr.getAllCustomCandidatesPaginatedByCourseCode(PageRequest.of(0, 10), courseCode);
 		assertTrue(currentPage.getTotalElements()==2);
-		CandidateCustom first = currentPage.getContent().get(0);
+		ListedCandidateCustom first = currentPage.getContent().get(0);
 		logger.info(" DEBUG - first.getId().longValue(): " + first.getId().longValue() + " - candidacyTime:"  );
-		CandidateCustom second = currentPage.getContent().get(1);
+		ListedCandidateCustom second = currentPage.getContent().get(1);
 		logger.info(" DEBUG - second.getId().longValue(): " + second.getId().longValue() + " - candidacyTime:" );
 		assertTrue(first.getId().longValue()<second.getId().longValue());
 		logger.info(" END --> testSelectAllCandidatesPaginatedByCourseCode() ");

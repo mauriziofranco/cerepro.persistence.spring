@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "candidate_states")
-public class CandidateStates extends CeReProAbstractEntity{
+public class CandidateStates extends CeReProAbstractEntity {
 	
 	public final static long DEFAULT_INSERTING_STATUS_CODE = 1l ;
 	
@@ -97,6 +97,16 @@ public class CandidateStates extends CeReProAbstractEntity{
 
 	public void setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
+	}
+
+	@Override
+	public String toString() {
+		return "CandidateStates [id=" + id + ", roleId=" + roleId + ", statusCode=" + statusCode + ", statusLabel="
+				+ statusLabel + ", statusDescription=" + statusDescription + ", statusColor=" + statusColor
+				+ ", getId()=" + getId() + ", getRoleId()=" + getRoleId() + ", getStatusLabel()=" + getStatusLabel()
+				+ ", getStatusDescription()=" + getStatusDescription() + ", getStatusColor()=" + getStatusColor()
+				+ ", getStatusCode()=" + getStatusCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 	
 	

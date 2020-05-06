@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import centauri.academy.cerepro.persistence.entity.UserSurveyTokenCustom;
+import centauri.academy.cerepro.persistence.entity.custom.UserSurveyTokenCustom;
 
 /**
  * UserSurveyTokenRepositoryCustom

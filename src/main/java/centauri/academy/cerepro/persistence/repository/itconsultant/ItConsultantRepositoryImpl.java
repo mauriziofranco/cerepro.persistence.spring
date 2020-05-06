@@ -18,9 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.ItConsultant;
-import centauri.academy.cerepro.persistence.entity.ItConsultantCustom;
 import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.User;
+import centauri.academy.cerepro.persistence.entity.custom.ItConsultantCustom;
 
 /**
  * ItConsultantRepositoryImpl

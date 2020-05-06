@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import centauri.academy.cerepro.persistence.entity.SurveyQuestionCustom;
+import centauri.academy.cerepro.persistence.entity.custom.SurveyQuestionCustom;
 
 /**
  * 

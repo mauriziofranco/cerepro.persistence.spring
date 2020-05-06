@@ -19,16 +19,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.Candidate;
-import centauri.academy.cerepro.persistence.entity.CandidateCustom;
 import centauri.academy.cerepro.persistence.entity.CandidateStates;
-import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.User;
+import centauri.academy.cerepro.persistence.entity.custom.CandidateCustom;
+import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 
 /**
  * CandidateRepositoryImpl
  * 
  * This class provides implementation for CandidateRepositoryCustom methods
- *  @author m.franco
+ * 
+ * @author m.franco
  * @author joffre
  * @author daniele
  * @author giacomo
@@ -38,10 +39,10 @@ import centauri.academy.cerepro.persistence.entity.User;
 public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 
 	private static final Logger logger = LoggerFactory.getLogger(CandidateRepositoryImpl.class);
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 //	@Override
 //	public List<CandidateCustom> getAllCustomCandidates() {
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -87,10 +88,10 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 //		return resultList ;
 //	}
 
-	
-/* PAGEABLE  -> START */
+	/* PAGEABLE -> START */
 	/**
-	 * Commented because probably no more used or used by old Backoffice Application just dismissed
+	 * Commented because probably no more used or used by old Backoffice Application
+	 * just dismissed
 	 */
 //	public Page<CandidateCustom> getAllCustomCandidatesPaginated(Pageable info) {
 //		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -144,13 +145,15 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 //		return pageToReturn;
 //	
 //	}
-	
+
 	/**
 	 * 
-	 * Method called by frontend to provides a paginated list of candidate custom entities. 
+	 * Method called by frontend to provides a paginated list of candidate custom
+	 * entities.
 	 * 
-	 * Provides a paginated list of candidate filtered by course code, and pagination info.
-	 *  
+	 * Provides a paginated list of candidate filtered by course code, and
+	 * pagination info.
+	 * 
 	 * @param size
 	 * @param number
 	 * @param code
@@ -213,167 +216,150 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 //		return pageToReturn;
 //	
 //	}
-	public Page<CandidateCustom> getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode)
-	{
+	
+
+	public List<ListedCandidateCustom> findByCourseCode(String courseCode) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<CandidateCustom> query = null;
-		query = cb.createQuery(CandidateCustom.class);
-		
+		CriteriaQuery<ListedCandidateCustom> query = null;
+		query = cb.createQuery(ListedCandidateCustom.class);
+
 		Root<Candidate> rootTable = query.from(Candidate.class);
-//		Root<User> joinTable = query.from(User.class);
-		Root<CandidateStates> joinTable2=query.from(CandidateStates.class);
-		
+		Root<User> joinTable = query.from(User.class);
+		Root<CandidateStates> joinTable2 = query.from(CandidateStates.class);
+
 		List<Predicate> criteria = new ArrayList<Predicate>();
-		
-//		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
+
+		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
 //		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
-		if (courseCode!=null) {
-		    criteria.add(cb.equal(rootTable.get("courseCode"), courseCode));
-	    }
-		criteria.add(cb.equal(rootTable.get("candidateStatesId"),joinTable2.get("id")));
-		
+		if (courseCode != null) {
+			criteria.add(cb.equal(rootTable.get("courseCode"), courseCode));
+		}
+		criteria.add(cb.equal(rootTable.get("candidateStatesId"), joinTable2.get("id")));
+
 		query.orderBy(cb.desc(rootTable.get("candidacyDateTime")));
-		
+
 		query.where(criteria.toArray(new Predicate[criteria.size()]));
 //		query.orderBy(cb.asc(rootTable.get("candidacyDateTime")));//order by for "candidacyDateTime" doesn't works beacause itsn't a field retrieved in the following select!!!! 
 //		query.orderBy(cb.desc(rootTable.get("id")));
-		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(
+		TypedQuery<ListedCandidateCustom> q = em.createQuery(query.multiselect(
 				rootTable.get("id"),
-				rootTable.get("userId"), 
-				rootTable.get("domicileCity"),
-				rootTable.get("studyQualification"),
-				rootTable.get("graduate"), 
-				rootTable.get("highGraduate"),
-				rootTable.get("stillHighStudy"),
-				rootTable.get("mobile"),
-				rootTable.get("cvExternalPath"),
-				rootTable.get("email"),
-				rootTable.get("firstname"),
-				rootTable.get("lastname"),
-				rootTable.get("dateOfBirth"),
-				rootTable.get("imgpath"),
-				rootTable.get("courseCode"),
-				rootTable.get("technicalNote"),
-				rootTable.get("label"),
-				rootTable.get("candidateStatesId"),
-				joinTable2.get("statusColor"),
-				joinTable2.get("statusLabel")
+//				rootTable.get("userId"), 
+//				rootTable.get("domicileCity"),
+//				rootTable.get("studyQualification"),
+//				rootTable.get("graduate"), 
+//				rootTable.get("highGraduate"),
+//				rootTable.get("stillHighStudy"),
+//				rootTable.get("mobile"),
+				rootTable.get("firstname"), rootTable.get("lastname"), rootTable.get("email"),
+				joinTable2.get("statusColor"), joinTable2.get("statusLabel"), rootTable.get("imgpath"),
+				rootTable.get("cvExternalPath"), rootTable.get("insertedBy"), joinTable.get("firstname"),
+				joinTable.get("lastname")
+//				rootTable.get("dateOfBirth"),
+//				rootTable.get("courseCode"),
+//				rootTable.get("technicalNote"),
+//				rootTable.get("label"),
+//				rootTable.get("candidateStatesId"),
 		));
 
-		List<CandidateCustom> resultList = q.getResultList();
-		logger.info(resultList.toString());
-		int start=(int) info.getOffset();
-		int end = (start + info.getPageSize()) > resultList.size() ? resultList.size() : (start + info.getPageSize());        
-		int totalRows = resultList.size();
+		List<ListedCandidateCustom> resultList = q.getResultList();
+//		logger.info(resultList.toString());
+//		int start = (int) info.getOffset();
+//		int end = (start + info.getPageSize()) > resultList.size() ? resultList.size() : (start + info.getPageSize());
+//		int totalRows = resultList.size();
+//
+//		Page<ListedCandidateCustom> pageToReturn = new PageImpl<ListedCandidateCustom>(resultList.subList(start, end),
+//				info, totalRows);
+//		return pageToReturn;
+		return resultList ;
 
-		Page<CandidateCustom> pageToReturn = new PageImpl<CandidateCustom>(resultList.subList(start, end), info, totalRows); 
-		return pageToReturn;
-	
 	}
 	
-/*********** PAGEABLE  -> END */
-	
-	
-	
-	
+    public Page<ListedCandidateCustom> getAllCustomCandidatesPaginatedByCourseCode(Pageable info, String courseCode) {
+		
+		List<ListedCandidateCustom> resultList = findByCourseCode(courseCode);
+		logger.info(resultList.toString());
+		int start = (int) info.getOffset();
+		int end = (start + info.getPageSize()) > resultList.size() ? resultList.size() : (start + info.getPageSize());
+		int totalRows = resultList.size();
+
+		Page<ListedCandidateCustom> pageToReturn = new PageImpl<ListedCandidateCustom>(resultList.subList(start, end),
+				info, totalRows);
+		return pageToReturn;
+
+	}
+
+	/*********** PAGEABLE -> END */
+
 	@Override
 	public CandidateCustom getSingleCustomCandidate(Long id) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<CandidateCustom> query = null;
 		query = cb.createQuery(CandidateCustom.class);
-		
+
 		Root<Candidate> rootTable = query.from(Candidate.class);
 //		Root<User> joinTable = query.from(User.class);
-		Root<CandidateStates> joinTable2=query.from(CandidateStates.class);
-		
+		Root<CandidateStates> joinTable2 = query.from(CandidateStates.class);
+
 		List<Predicate> criteria = new ArrayList<Predicate>();
-		
+
 //		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
 //		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
 		criteria.add(cb.equal(rootTable.get("id"), id));
-		criteria.add(cb.equal(rootTable.get("candidateStatesId"),joinTable2.get("id")));
-		
+		criteria.add(cb.equal(rootTable.get("candidateStatesId"), joinTable2.get("id")));
+
 		query.where(criteria.toArray(new Predicate[criteria.size()]));
-		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(
-				rootTable.get("id"),
-				rootTable.get("userId"), 
-				rootTable.get("domicileCity"),
-				rootTable.get("studyQualification"),
-				rootTable.get("graduate"), 
-				rootTable.get("highGraduate"),
-				rootTable.get("stillHighStudy"),
-				rootTable.get("mobile"),
-				rootTable.get("cvExternalPath"),
-				rootTable.get("email"),
-				rootTable.get("firstname"),
-				rootTable.get("lastname"),
-				rootTable.get("dateOfBirth"),
-				rootTable.get("imgpath"),
-				rootTable.get("courseCode"),
-				rootTable.get("technicalNote"),
-				rootTable.get("label"),
-				rootTable.get("candidateStatesId"),
-				joinTable2.get("statusColor"),
-				joinTable2.get("statusLabel")
-				));
-		
-		
+		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(rootTable.get("id"), rootTable.get("userId"),
+				rootTable.get("domicileCity"), rootTable.get("studyQualification"), rootTable.get("graduate"),
+				rootTable.get("highGraduate"), rootTable.get("stillHighStudy"), rootTable.get("mobile"),
+				rootTable.get("cvExternalPath"), rootTable.get("email"), rootTable.get("firstname"),
+				rootTable.get("lastname"), rootTable.get("dateOfBirth"), rootTable.get("imgpath"),
+				rootTable.get("courseCode"), rootTable.get("technicalNote"), rootTable.get("label"),
+				rootTable.get("candidateStatesId"), joinTable2.get("statusColor"), joinTable2.get("statusLabel")));
+
 		q.setMaxResults(1);
 		CandidateCustom returnValue = q.getSingleResult();
-		return returnValue ;
+		return returnValue;
 	}
-	
-	
-	public List<CandidateCustom> findByCourseCode(String code){
-		
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<CandidateCustom> query = null;
-		query = cb.createQuery(CandidateCustom.class);
-		
-		Root<Candidate> rootTable = query.from(Candidate.class);
-//		Root<User> joinTable = query.from(User.class);
-		Root<CandidateStates> joinTable2=query.from(CandidateStates.class);
-		
-		List<Predicate> criteria = new ArrayList<Predicate>();
-		
-//		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
-//		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
-		criteria.add(cb.equal(rootTable.get("courseCode"), code));
-		criteria.add(cb.equal(rootTable.get("candidateStatesId"),joinTable2.get("id")));
-		
-		query.where(criteria.toArray(new Predicate[criteria.size()]));
-		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(
-				rootTable.get("id"),
-				rootTable.get("userId"), 
-				rootTable.get("domicileCity"),
-				rootTable.get("studyQualification"),
-				rootTable.get("graduate"), 
-				rootTable.get("highGraduate"),
-				rootTable.get("stillHighStudy"),
-				rootTable.get("mobile"),
-				rootTable.get("cvExternalPath"),
-				rootTable.get("email"),
-				rootTable.get("firstname"),
-				rootTable.get("lastname"),
-				rootTable.get("dateOfBirth"),
-				rootTable.get("imgpath"),
-				rootTable.get("courseCode"),
-				rootTable.get("technicalNote"),
-				rootTable.get("label"),
-				rootTable.get("candidateStatesId"),
-				joinTable2.get("statusColor"),
-				joinTable2.get("statusLabel")
-				));
-		
-		
-//		q.setMaxResults(1);
-//		CandidateCustom returnValue = q.getSingleResult();
-//		return returnValue ;
-		List<CandidateCustom> values=q.getResultList();
-//		logger.info(values.toString());
-		return values;
-		
-		
-		
-	}
+
+	/*
+	 * public List<CandidateCustom> findByCourseCode(String code){
+	 * 
+	 * CriteriaBuilder cb = em.getCriteriaBuilder(); CriteriaQuery<CandidateCustom>
+	 * query = null; query = cb.createQuery(CandidateCustom.class);
+	 * 
+	 * Root<Candidate> rootTable = query.from(Candidate.class); // Root<User>
+	 * joinTable = query.from(User.class); Root<CandidateStates>
+	 * joinTable2=query.from(CandidateStates.class);
+	 * 
+	 * List<Predicate> criteria = new ArrayList<Predicate>();
+	 * 
+	 * // criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id"))); //
+	 * criteria.add(cb.equal(joinTable.get("role"),
+	 * Role.JAVA_COURSE_CANDIDATE_LEVEL));
+	 * criteria.add(cb.equal(rootTable.get("courseCode"), code));
+	 * criteria.add(cb.equal(rootTable.get("candidateStatesId"),joinTable2.get("id")
+	 * ));
+	 * 
+	 * query.where(criteria.toArray(new Predicate[criteria.size()]));
+	 * TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(
+	 * rootTable.get("id"), rootTable.get("userId"), rootTable.get("domicileCity"),
+	 * rootTable.get("studyQualification"), rootTable.get("graduate"),
+	 * rootTable.get("highGraduate"), rootTable.get("stillHighStudy"),
+	 * rootTable.get("mobile"), rootTable.get("cvExternalPath"),
+	 * rootTable.get("email"), rootTable.get("firstname"),
+	 * rootTable.get("lastname"), rootTable.get("dateOfBirth"),
+	 * rootTable.get("imgpath"), rootTable.get("courseCode"),
+	 * rootTable.get("technicalNote"), rootTable.get("label"),
+	 * rootTable.get("candidateStatesId"), joinTable2.get("statusColor"),
+	 * joinTable2.get("statusLabel") ));
+	 * 
+	 * 
+	 * // q.setMaxResults(1); // CandidateCustom returnValue = q.getSingleResult();
+	 * // return returnValue ; List<CandidateCustom> values=q.getResultList(); //
+	 * logger.info(values.toString()); return values;
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 }

@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.ItConsultant;
-import centauri.academy.cerepro.persistence.entity.ItConsultantCustom;
+import centauri.academy.cerepro.persistence.entity.custom.ItConsultantCustom;
 import centauri.academy.cerepro.persistence.repository.itconsultant.ItConsultantRepository;
 
 /**
