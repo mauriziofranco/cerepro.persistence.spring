@@ -230,7 +230,7 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 
 		List<Predicate> criteria = new ArrayList<Predicate>();
 
-		criteria.add(cb.equal(rootTable.get("userId"), joinTable.get("id")));
+		criteria.add(cb.equal(rootTable.get("insertedBy"), joinTable.get("id")));
 //		criteria.add(cb.equal(joinTable.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
 		if (courseCode != null) {
 			criteria.add(cb.equal(rootTable.get("courseCode"), courseCode));
@@ -311,7 +311,7 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 		criteria.add(cb.equal(rootTable.get("candidateStateCode"), joinTable2.get("statusCode")));
 
 		query.where(criteria.toArray(new Predicate[criteria.size()]));
-		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(rootTable.get("id"), rootTable.get("userId"),
+		TypedQuery<CandidateCustom> q = em.createQuery(query.multiselect(rootTable.get("id"),
 				rootTable.get("domicileCity"), rootTable.get("studyQualification"), rootTable.get("graduate"),
 				rootTable.get("highGraduate"), rootTable.get("stillHighStudy"), rootTable.get("mobile"),
 				rootTable.get("cvExternalPath"), rootTable.get("email"), rootTable.get("firstname"),
