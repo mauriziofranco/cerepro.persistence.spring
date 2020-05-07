@@ -9,3 +9,7 @@ CONFIGURAZIONE PROGETTO cerepro.persistence.spring
 Obiettivi:
 1) fare l'install puntando al database di test(originariamente contenuto nel file application.properties)
 2) fare l'install puntando al database di sviluppo in locale(andando a cambiare il contenuto nel file application.properties)
+
+
+After clone provides to:
+- get file 01_schema_&_db_users.sql from resources/sql folder and execute it into local database.  
