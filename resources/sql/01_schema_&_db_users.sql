@@ -1,36 +1,25 @@
--- Author jefersson serrano
-
-drop database IF EXISTS  centauri_academy_3_stage;
-create database centauri_academy_3_stage;
-CREATE USER 'centauri_academy_3_stage'@'%' IDENTIFIED BY 'centauri_academy_3_stage';
-GRANT ALL PRIVILEGES ON centauri_academy_3_stage.* TO 'centauri_academy_3_stage'@'%'  WITH GRANT OPTION;
+drop database IF EXISTS  cerepro_dev;
+create database cerepro_dev;
+CREATE USER 'cerepro_dev'@'%' IDENTIFIED BY 'cerepro_dev';
+GRANT ALL PRIVILEGES ON cerepro_dev.* TO 'cerepro_dev'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
-
-drop database IF EXISTS  centauri_academy_3_test;
-create database centauri_academy_3_test;
-CREATE USER 'centauri_academy_3_test'@'%' IDENTIFIED BY 'centauri_academy_3_test';
-GRANT ALL PRIVILEGES ON centauri_academy_3_test.* TO 'centauri_academy_3_test'@'%' WITH GRANT OPTION;
+drop database IF EXISTS  cerepro_test;
+create database cerepro_test;
+CREATE USER 'cerepro_test'@'%' IDENTIFIED BY 'cerepro_test';
+GRANT ALL PRIVILEGES ON cerepro_test.* TO 'cerepro_test'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
-
-drop database IF EXISTS  centauri_academy_3_dev;
-create database centauri_academy_3_dev;
-CREATE USER 'centauri_academy_3_dev'@'%' IDENTIFIED BY 'centauri_academy_3_dev';
-GRANT ALL PRIVILEGES ON centauri_academy_3_dev.* TO 'centauri_academy_3_dev'@'%' WITH GRANT OPTION;
+drop database IF EXISTS  cerepro_stage;
+create database cerepro_stage;
+CREATE USER 'cerepro_stage'@'%' IDENTIFIED BY 'cerepro_stage1979';
+GRANT ALL PRIVILEGES ON cerepro_stage.* TO 'cerepro_stage'@'%'  WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
---create database centauri_academy_3_stage;
---GRANT ALL PRIVILEGES ON centauri_academy_3_stage.* TO 'centauri_academy_3_stage'@'%' IDENTIFIED BY 'centauri_academy_3_stage' WITH GRANT OPTION;
---FLUSH PRIVILEGES;
-
---create database centauri_academy_3_test;
---GRANT ALL PRIVILEGES ON centauri_academy_3_test.* TO 'centauri_academy_3_test'@'%' IDENTIFIED BY 'centauri_academy_3_test' WITH GRANT OPTION;
---FLUSH PRIVILEGES;
-
---create database centauri_academy_3_dev;
---GRANT ALL PRIVILEGES ON centauri_academy_3_dev.* TO 'centauri_academy_3_dev'@'%' IDENTIFIED BY 'centauri_academy_3_dev' WITH GRANT OPTION;
---FLUSH PRIVILEGES;
-
+drop database IF EXISTS  cerepro_prod;
+create database cerepro_prod;
+CREATE USER 'cerepro_prod'@'%' IDENTIFIED BY 'cerepro_prod1979';
+GRANT ALL PRIVILEGES ON cerepro_prod.* TO 'cerepro_prod'@'%'  WITH GRANT OPTION;
+FLUSH PRIVILEGES;
 
 

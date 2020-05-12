@@ -36,83 +36,91 @@ insert into roles(id, label, description, level) VALUES (4, 'java course candida
 insert into roles(id, label, description, level) VALUES (5, 'guest', 'guest', 100);
 insert into roles(id, label, description, level) VALUES (6, 'hr', 'human resources collegue', 5);
 
-create table users (
-	id bigint not null AUTO_INCREMENT, 
-	email VARCHAR(100) not null,
-	password VARCHAR(100),
-	firstname VARCHAR(50) not null,
-	lastname VARCHAR(50) not null,
-	dateofbirth date,
-	regdate datetime not null,
-	role int not null,
-	imgpath VARCHAR(255),
-	note VARCHAR(2000),
-	enabled boolean not null default false,
-	primary key(id),
-	CONSTRAINT uniqueEmail UNIQUE (email),
-	foreign key (role) references roles(level)	
+CREATE TABLE `users` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `dateofbirth` date DEFAULT NULL,
+  `regdate` datetime NOT NULL,
+  `role` int(11) NOT NULL,
+  `imgpath` varchar(255) DEFAULT NULL,
+  `note` varchar(2000) DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniqueEmail` (`email`),
+  KEY `role` (`role`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roles` (`level`)
 );
 
---insert into users (email,firstname,lastname, password, regdate, dateofbirth, role) VALUES ('1@2.3','bbb','aaa', '$2a$10$FKozujcHmWdulk6naR/XveW3x46hWPnRY2S/cyI/XhmjZZEOwz.bW', '2018-11-01', '2018-11-01',10);
+insert into users (email,firstname,lastname, password, regdate, dateofbirth, role) VALUES ('1@2.3','bbb','aaa', '$2a$10$FKozujcHmWdulk6naR/XveW3x46hWPnRY2S/cyI/XhmjZZEOwz.bW', '2018-11-01', '2018-11-01',10);
 
 
-create table coursepage (
-    id bigint primary key auto_increment,
-    title varchar(1000) not null,
-    code varchar(100) unique not null,
-    body_text text(50000) not null,
-    file_name varchar(300)
+CREATE TABLE `coursepage` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(1000) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `body_text` mediumtext NOT NULL,
+  `file_name` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`code`)
 );
-insert into coursepage(id, title, code, body_text) values (1, 'Candidatura generica', 'MIGEN01', 'Candidatura spontanea');
-insert into coursepage(id, title, code, body_text) values (2, 'Candidatura corso FullStackWeb+Java 01 Milano', 'MICEACFS01', 'Candidatura partecipazione a I Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Gen18-Mar18');
-insert into coursepage(id, title, code, body_text) values (3, 'Candidatura corso FullStackWeb+Java 02 Milano', 'MICEACFS02', 'Candidatura partecipazione a II Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Apr18-Giu18');
-insert into coursepage(id, title, code, body_text) values (4, 'Candidatura corso FullStackWeb+Java 03 Milano', 'MICEACFS03', 'Candidatura partecipazione a III Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Nov18-Gen19');
-insert into coursepage(id, title, code, body_text) values (5, 'Candidatura corso FullStackWeb+Java 04 Milano', 'MICEACFS04', 'Candidatura partecipazione a IV Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Mar19-Mag19');
-insert into coursepage(id, title, code, body_text) values (6, 'Candidatura corso FullStackWeb+Java 05 Milano', 'MICEACFS05', 'Candidatura partecipazione a V Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Set19-Dic19');
+INSERT INTO `coursepage` VALUES (1,'Candidatura generica','MIGEN01','Candidatura spontanea',NULL),(2,'Candidatura corso FullStackWeb+Java 01 Milano','MICEACFS01','Candidatura partecipazione a I Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Gen18-Mar18',NULL),(3,'Candidatura corso FullStackWeb+Java 02 Milano','MICEACFS02','Candidatura partecipazione a II Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Apr18-Giu18',NULL),(4,'Candidatura corso FullStackWeb+Java 03 Milano','MICEACFS03','Candidatura partecipazione a III Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Nov18-Gen19',NULL),(5,'Candidatura corso FullStackWeb+Java 04 Milano','MICEACFS04','Candidatura partecipazione a IV Centauri Academy sede di Milano, corso Full Stack Web Development Java+Frontend, Periodo Mar19-Mag19',NULL),(6,'Candidatura corso FullStackWeb+Java 05 Milano','MICEACFS05','Corso FullStack Java 05 - Milano',NULL),(9,'Corso Fullstack java developer Roma-Milano 01','FSRMMI01','https://proximainformatica.com/',NULL);
 
-create table candidate_states (
-    id bigint primary key auto_increment,
-    role_id bigint not null,
-    status_code int not null,
-    status_label varchar(300),
-    status_description varchar(1000),
-    status_color varchar(7) NOT NULL,
-    foreign key (role_id) references roles(id)
-);
+CREATE TABLE `candidate_states` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` bigint(20) NOT NULL,
+  `status_code` int(11) NOT NULL,
+  `status_label` varchar(300) DEFAULT NULL,
+  `status_description` varchar(1000) DEFAULT NULL,
+  `status_color` varchar(7) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `status_code` (`status_code`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `candidate_states_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+)
 
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (1,4,1, 'DA VALUTARE','entry appena effettuata. Stato: DA VALUTARE - DEFAULT','#f60000');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (2,4,2, 'ha rinunciato','Ha rinunciato di sua scelta al corso','#f98742');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (3,4,3, 'inadeguato standing/comportamentale','Scartato per inadeguatezza in termini di standing o criticità comportamentali','#f9c842');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (4,4,4, 'inadeguato backround','Scartato per inadeguatezza del suo backround','#f9ec14');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (5,4,5, 'da tenere in considerazione per corso formatemp','inadeguato backround/standing/altre criticità ma potrebbe rientrare in caso di formatemp','#0e81ec');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (6,4,6, 'background solo parzialmente adeguato, NON LAUREATO/NON LAUREANDO','background parzialmente adeguato, tenere in considerazione nella fase finale della selezione. NON LAUREATO/NON LAUREANDO','#2585de');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (7,4,7, 'background solo parzialmente adeguato, LAUREATO/LAUREANDO in materie informatiche, matematiche o affini','background parzialmente adeguato, tenere in considerazione nella fase finale della selezione. LAUREATO/LAUREANDO in materie informatiche, matematiche o affini','#25ded3');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (8,4,8, 'OK. Background di prima scelta. NON LAUREATO/LAUREANDO. Buona motivazione e backgound','OK già da subito.','#7af914');
-insert into candidate_states(id, role_id, status_code, status_label, status_description, status_color) values (9,4,9, 'OK. Background di prima scelta. LAUREATO/LAUREANDO. Buona motivazione e backgound','OK già da subito.','#63b81e');
+LOCK TABLES `candidate_states` WRITE;
+/*!40000 ALTER TABLE `candidate_states` DISABLE KEYS */;
+INSERT INTO `candidate_states` VALUES (1,4,1,'DA VALUTARE','entry appena effettuata. Stato: DA VALUTARE - DEFAULT','#f60000'),(2,4,2,'ha rinunciato','Ha rinunciato di sua scelta al corso','#f98742'),(3,4,3,'inadeguato standing/comportamentale','Scartato per inadeguatezza in termini di standing o criticità comportamentali','#f9c842'),(4,4,4,'inadeguato background','Scartato per inadeguatezza del suo backround','#f9ec14'),(5,4,5,'da tenere in considerazione per corso formatemp','inadeguato backround/standing/altre criticità ma potrebbe rientrare in caso di formatemp','#0e81ec'),(6,4,6,'background solo parzialmente adeguato, NON LAUREATO/NON LAUREANDO','background parzialmente adeguato, tenere in considerazione nella fase finale della selezione. NON LAUREATO/NON LAUREANDO','#2585de'),(7,4,7,'background solo parzialmente adeguato, LAUREATO/LAUREANDO in materie informatiche, matematiche o affini','background parzialmente adeguato, tenere in considerazione nella fase finale della selezione. LAUREATO/LAUREANDO in materie informatiche, matematiche o affini','#25ded3'),(8,4,8,'OK. Background di prima scelta. NON LAUREATO/LAUREANDO. Buona motivazione e backgound','OK già da subito.','#7af914'),(9,4,9,'OK. Background di prima scelta. LAUREATO/LAUREANDO. Buona motivazione e backgound','OK già da subito.','#63b81e');
+/*!40000 ALTER TABLE `candidate_states` ENABLE KEYS */;
+UNLOCK TABLES;
 
-create table candidates (
-	id bigint not null AUTO_INCREMENT, 
-	user_id bigint not null,
-	domicile_city varchar(100),
---	domicile_street_name varchar(100),
---	domicile_house_number varchar(100),
-	study_qualification varchar(300),
-	graduate boolean,
-	high_graduate boolean,
-	still_high_study boolean,
-	mobile varchar(20),
-	cv_external_path varchar(1000),
-	course_code varchar(100) not null,
-	candidacy_date_time datetime not null,
-	label VARCHAR(255),
-	candidate_states_id bigint,
-	primary key(id),	
-	foreign key (user_id) references users(id),
-	foreign key(course_code) references coursepage(code),
-	foreign key(candidate_states_id) references candidate_states(id)
-);
+CREATE TABLE `candidates` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `domicile_city` varchar(100) DEFAULT NULL,
+  `study_qualification` varchar(300) DEFAULT NULL,
+  `graduate` tinyint(1) DEFAULT NULL,
+  `high_graduate` tinyint(1) DEFAULT NULL,
+  `still_high_study` tinyint(1) DEFAULT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
+  `cv_external_path` varchar(1000) DEFAULT NULL,
+  `course_code` varchar(100) NOT NULL,
+  `candidacy_date_time` datetime NOT NULL,
+  `label` varchar(200) DEFAULT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `dateofbirth` date DEFAULT NULL,
+  `regdate` datetime NOT NULL,
+  `technical_note` varchar(2000) DEFAULT NULL,
+  `hr_note` varchar(2000) DEFAULT NULL,
+  `inserted_by` bigint(20) NOT NULL,
+  `imgpath` varchar(255) DEFAULT NULL,
+  `candidate_state_code` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `course_code` (`course_code`),
+  KEY `inserted_by` (`inserted_by`),
+  KEY `candidate_state_code` (`candidate_state_code`),
+  CONSTRAINT `candidates_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `candidates_ibfk_2` FOREIGN KEY (`course_code`) REFERENCES `coursepage` (`code`),
+  CONSTRAINT `candidates_ibfk_4` FOREIGN KEY (`inserted_by`) REFERENCES `users` (`id`),
+  CONSTRAINT `candidates_ibfk_5` FOREIGN KEY (`candidate_state_code`) REFERENCES `candidate_states` (`status_code`)
+)
 
---insert into candidates(user_id, course_code, candidacy_date_time) values (1, 'MICEACFS04', now()); 
 
 create table itconsultants (
 	id bigint not null AUTO_INCREMENT, 
@@ -130,16 +138,17 @@ create table itconsultants (
 	foreign key (user_id) references users(id)
 );
 
-create table employees (
-	id bigint not null AUTO_INCREMENT, 
-	user_id bigint not null,
-	domicile_city varchar(100),
-	domicile_street_name varchar(100),
-	domicile_house_number varchar(100),	
-	mobile varchar(20),
-	cv_external_path varchar(1000),
-	primary key(id),	
-	foreign key (user_id) references users(id)
+CREATE TABLE `employees` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `domicile_city` varchar(100) DEFAULT NULL,
+  `domicile_street_name` varchar(100) DEFAULT NULL,
+  `domicile_house_number` varchar(100) DEFAULT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
+  `cv_external_path` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
 
@@ -220,12 +229,15 @@ create table note_template (
     content varchar(2000) not null
 );  
 
-create table course_resume (
-    id bigint primary key auto_increment,
-    title varchar(100) unique not null,
-    content varchar(2000) not null,
-    code varchar(100) unique not null,
-    foreign key(code) references coursepage(code)
+CREATE TABLE `course_resume` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `content` varchar(2000) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`),
+  UNIQUE KEY `code` (`code`),
+  CONSTRAINT `course_resume_ibfk_1` FOREIGN KEY (`code`) REFERENCES `coursepage` (`code`)
 );
 
 create table origin_sites (
@@ -262,11 +274,7 @@ create table surveyinterviews (
     
 );
 
-create table news_letter_message(
-	id bigint primary key not null AUTO_INCREMENT, 
-	message_subject VARCHAR(250) not null,
-	message_text VARCHAR(2000) not null
-);
+
 --insert into news_letter_message(id, message_subject, message_text) VALUES (1, 'message_subject 1', 'messageText 1', );
 /*
 create table news_letter_message_group_mapping(
@@ -278,7 +286,11 @@ create table news_letter_message_group_mapping(
 );
 */
 --insert into news_letter_message_group_mapping(id,it_consultant_group_id,news_letter_message_id) values (1,1,1);
-
+create table newslettermessage(
+	id bigint primary key not null AUTO_INCREMENT, 
+	message_subject VARCHAR(250) not null,
+	message_text VARCHAR(2000) not null
+);
 CREATE TABLE trainee (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
@@ -293,3 +305,4 @@ CREATE TABLE trainee (
   KEY `coursepage_id` (`coursepage_id`),
   CONSTRAINT `coursepage_ibfk_1` FOREIGN KEY (`coursepage_id`) REFERENCES `coursepage` (`id`)
 );
+
