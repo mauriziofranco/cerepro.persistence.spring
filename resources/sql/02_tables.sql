@@ -1,6 +1,7 @@
 drop table if exists trainee; --Jesus
 drop table if exists news_letter_message_group_mapping; --jefersson serrano
-drop table if exists news_letter_message; --jefersson serrano
+--drop table if exists news_letter_message; --jefersson serrano
+drop table if exists newslettermessage; --jefersson serrano
 drop table if exists interviewreplies;
 drop table if exists surveyinterviews;
 drop table if exists interviews; 
@@ -79,7 +80,7 @@ CREATE TABLE `candidate_states` (
   UNIQUE KEY `status_code` (`status_code`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `candidate_states_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-)
+);
 
 LOCK TABLES `candidate_states` WRITE;
 /*!40000 ALTER TABLE `candidate_states` DISABLE KEYS */;
@@ -119,7 +120,7 @@ CREATE TABLE `candidates` (
   CONSTRAINT `candidates_ibfk_2` FOREIGN KEY (`course_code`) REFERENCES `coursepage` (`code`),
   CONSTRAINT `candidates_ibfk_4` FOREIGN KEY (`inserted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `candidates_ibfk_5` FOREIGN KEY (`candidate_state_code`) REFERENCES `candidate_states` (`status_code`)
-)
+);
 
 
 create table itconsultants (
