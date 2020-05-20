@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +15,16 @@ import centauri.academy.cerepro.persistence.entity.CoursePage;
 import centauri.academy.cerepro.persistence.entity.Employee;
 import centauri.academy.cerepro.persistence.entity.Interview;
 import centauri.academy.cerepro.persistence.entity.ItConsultant;
-import centauri.academy.cerepro.persistence.entity.NewsLetterMessage;
-import centauri.academy.cerepro.persistence.entity.NoteTemplate;
-import centauri.academy.cerepro.persistence.entity.OriginSite;
 import centauri.academy.cerepro.persistence.entity.Question;
 import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.Survey;
 import centauri.academy.cerepro.persistence.entity.SurveyInterview;
 import centauri.academy.cerepro.persistence.entity.SurveyQuestion;
 import centauri.academy.cerepro.persistence.entity.SurveyReply;
-import centauri.academy.cerepro.persistence.entity.Trainee;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.itconsultant.ItConsultantRepository;
-import centauri.academy.cerepro.persistence.repository.originsite.OriginSiteRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
@@ -44,8 +37,6 @@ import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurve
 public abstract class AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractRepositoryTest.class);
 
-	@Autowired
-	private TraineeRepository traineeRepository;// added by jesus
 	@Autowired
 	private RoleRepository roleRepository;
 	@Autowired
@@ -70,17 +61,10 @@ public abstract class AbstractRepositoryTest {
 	private CoursePageRepository coursePageRepository;
 	@Autowired
 	private InterviewRepository interviewRepository;	
-	
-	@Autowired
-	private NoteTemplateRepository NoteTemplateRepository;
 	@Autowired
 	private CandidateStatesRepository candidateStatesRepository;
 	@Autowired
-	private OriginSiteRepository originSiteRepository;
-	@Autowired
 	private SurveyInterviewRepository surveyInterviewRepository;
-	@Autowired
-	private NewsLetterMessageRepository newsLetterMessageRepository;
 	
 	protected Role getFakeRole() {
 		return getFakeRole(100);
@@ -274,14 +258,6 @@ public abstract class AbstractRepositoryTest {
 		userSurveyTokenRepository.save(testUST);
 		return testUST;
 	}
-
-	protected NoteTemplate getFakeNoteTemplate() {
-		NoteTemplate Note = new NoteTemplate();
-		Note.setTitle("Inter");
-		Note.setContent("dream team");
-		NoteTemplateRepository.save(Note);
-		return Note;
-	}
 	
 	protected CandidateStates getFakeCandidateStates() {
 		CandidateStates  csTest = new CandidateStates();
@@ -317,32 +293,6 @@ public abstract class AbstractRepositoryTest {
 		return csTest;
 	}
 	
-	protected OriginSite getFakeOriginSite() {
-		OriginSite os = new OriginSite();
-		os.setLabel("Inter");
-		os.setDescription("dream team");
-		os.setImgpath("dream team");
-		originSiteRepository.save(os);
-		return os;
-	}
-	
-	protected NewsLetterMessage getFakeNewsLetterMessage() {
-		NewsLetterMessage newsLetterMessage = new NewsLetterMessage();
-		newsLetterMessage.setSubject("Fake subject 1");
-		newsLetterMessage.setMessage("Fake message 1");
-		newsLetterMessageRepository.save(newsLetterMessage);
-		return newsLetterMessage;
-	}
-	
-	protected Trainee getFakeTrainee() {
-		Trainee tr = new Trainee();
-		tr.setEmail("email@mail.com");
-		tr.setFirstname("bob");
-		tr.setLastname("esponja");
-		tr.setPassword("password!!");
-		traineeRepository.save(tr);
-		return tr;
-	}
 	
 	public long getRandomLongBetweenLimits () {
 		long leftLimit = 100L;

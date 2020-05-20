@@ -1,13 +1,6 @@
-drop table if exists trainee; --Jesus
-drop table if exists news_letter_message_group_mapping; --jefersson serrano
---drop table if exists news_letter_message; --jefersson serrano
-drop table if exists newslettermessage; --jefersson serrano
 drop table if exists interviewreplies;
 drop table if exists surveyinterviews;
 drop table if exists interviews; 
-drop table if exists origin_sites;
-drop table if exists course_resume;
-drop table if exists note_template;
 drop table if exists surveyquestions; --fabio
 drop table if exists surveyreplies; --marcof
 drop table if exists usersurveytoken; --traian
@@ -224,30 +217,6 @@ create table surveyreplies(
 	foreign key(user_id) references users(id)
 );
 
-create table note_template (
-    id bigint primary key auto_increment,
-    title varchar(100) unique not null,
-    content varchar(2000) not null
-);  
-
-CREATE TABLE `course_resume` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `content` varchar(2000) NOT NULL,
-  `code` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`),
-  UNIQUE KEY `code` (`code`),
-  CONSTRAINT `course_resume_ibfk_1` FOREIGN KEY (`code`) REFERENCES `coursepage` (`code`)
-);
-
-create table origin_sites (
-    id bigint primary key auto_increment,
-    label varchar(100) unique not null,
-    description varchar(2000),
-    imgpath VARCHAR(255)
-);  
-
 create table interviews (
     id bigint primary key auto_increment,
   	question_text varchar(255),
@@ -273,37 +242,5 @@ create table surveyinterviews (
     foreign key (interview_id) references interviews(id),
     CONSTRAINT UC_SurveyInterview UNIQUE (survey_id,interview_id)
     
-);
-
-
---insert into news_letter_message(id, message_subject, message_text) VALUES (1, 'message_subject 1', 'messageText 1', );
-/*
-create table news_letter_message_group_mapping(
-	id bigint not null AUTO_INCREMENT, 
-	it_consultant_group_id bigint not null,
-	news_letter_message_id bigint not null,
-	foreign key (it_consultant_group_id) references it_consultant_group(id),
-    foreign key (news_letter_message_id) references news_letter_message(id)
-);
-*/
---insert into news_letter_message_group_mapping(id,it_consultant_group_id,news_letter_message_id) values (1,1,1);
-create table newslettermessage(
-	id bigint primary key not null AUTO_INCREMENT, 
-	message_subject VARCHAR(250) not null,
-	message_text VARCHAR(2000) not null
-);
-CREATE TABLE trainee (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `firstname` varchar(50) DEFAULT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
-  `coursepage_id` bigint(20) DEFAULT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '0',
-  haspassword tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniqueEmail` (`email`),
-  KEY `coursepage_id` (`coursepage_id`),
-  CONSTRAINT `coursepage_ibfk_1` FOREIGN KEY (`coursepage_id`) REFERENCES `coursepage` (`id`)
 );
 

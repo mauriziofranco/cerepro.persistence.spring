@@ -40,8 +40,6 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	@Autowired
 	private CoursePageRepository cpr;
 	@Autowired
-	private CourseResumeRepository crr;
-	@Autowired
 	private CandidateStatesRepository csr;
 	
     /**
@@ -52,7 +50,6 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	@After
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
-		crr.deleteAll();
 		cr.deleteAll();
 		csr.deleteAll();
 		cpr.deleteAll();
