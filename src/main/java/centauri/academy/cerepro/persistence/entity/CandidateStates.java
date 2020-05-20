@@ -15,8 +15,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 /**
+ * 
+ * Provides mapping with candidate_states table
+ * 
  * @author Sebastiano Varchetta
- *
+ * @author m.franco
  */
 
 @Entity
@@ -51,63 +54,95 @@ public class CandidateStates extends CeReProAbstractEntity {
 	@Column(name = "STATUS_COLOR")
 	@Length(max = 7, message = "error.statuscolor.length")
 	private String statusColor;
-	
+
+	/**
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the roleId
+	 */
 	public Long getRoleId() {
 		return roleId;
 	}
 
+	/**
+	 * @param roleId the roleId to set
+	 */
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 
-	public String getStatusLabel() {
-		return statusLabel;
-	}
-
-	public void setStatusLabel(String statusLabel) {
-		this.statusLabel = statusLabel;
-	}
-
-	public String getStatusDescription() {
-		return statusDescription;
-	}
-
-	public void setStatusDescription(String statusDescription) {
-		this.statusDescription = statusDescription;
-	}
-
-	public String getStatusColor() {
-		return statusColor;
-	}
-
-	public void setStatusColor(String statusColor) {
-		this.statusColor = statusColor;
-	}
-
+	/**
+	 * @return the statusCode
+	 */
 	public int getStatusCode() {
 		return statusCode;
 	}
 
+	/**
+	 * @param statusCode the statusCode to set
+	 */
 	public void setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
+	}
+
+	/**
+	 * @return the statusLabel
+	 */
+	public String getStatusLabel() {
+		return statusLabel;
+	}
+
+	/**
+	 * @param statusLabel the statusLabel to set
+	 */
+	public void setStatusLabel(String statusLabel) {
+		this.statusLabel = statusLabel;
+	}
+
+	/**
+	 * @return the statusDescription
+	 */
+	public String getStatusDescription() {
+		return statusDescription;
+	}
+
+	/**
+	 * @param statusDescription the statusDescription to set
+	 */
+	public void setStatusDescription(String statusDescription) {
+		this.statusDescription = statusDescription;
+	}
+
+	/**
+	 * @return the statusColor
+	 */
+	public String getStatusColor() {
+		return statusColor;
+	}
+
+	/**
+	 * @param statusColor the statusColor to set
+	 */
+	public void setStatusColor(String statusColor) {
+		this.statusColor = statusColor;
 	}
 
 	@Override
 	public String toString() {
 		return "CandidateStates [id=" + id + ", roleId=" + roleId + ", statusCode=" + statusCode + ", statusLabel="
-				+ statusLabel + ", statusDescription=" + statusDescription + ", statusColor=" + statusColor
-				+ ", getId()=" + getId() + ", getRoleId()=" + getRoleId() + ", getStatusLabel()=" + getStatusLabel()
-				+ ", getStatusDescription()=" + getStatusDescription() + ", getStatusColor()=" + getStatusColor()
-				+ ", getStatusCode()=" + getStatusCode() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ statusLabel + ", statusDescription=" + statusDescription + ", statusColor=" + statusColor + "]";
 	}
-
+    
 }
