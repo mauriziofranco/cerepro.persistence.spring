@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "candidate_states")
 public class CandidateStates extends CeReProAbstractEntity {
 	
-	public final static int DEFAULT_INSERTING_STATUS_CODE = 1 ;
+	public final static int DEFAULT_INSERTING_STATUS_CODE = 100 ;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
