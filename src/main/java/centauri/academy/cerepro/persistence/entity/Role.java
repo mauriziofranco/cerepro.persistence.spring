@@ -22,6 +22,7 @@ public class Role extends CeReProAbstractEntity{
 	
 	public static final int JAVA_COURSE_CANDIDATE_LEVEL = 90 ;
 	public static final int ITCONSULTANT_LEVEL = 50 ;
+	public static final int ADMIN_LEVEL = 0 ;
 	
 	@Id //specifies that this field is a primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
