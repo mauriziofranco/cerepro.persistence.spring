@@ -1,6 +1,5 @@
 package centauri.academy.cerepro.persistence.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  * @author ilaria
@@ -53,10 +51,6 @@ public class User extends CeReProAbstractEntity {
 	@Column(name = "lastname")
 	private String lastname; 
 	
-//	@NotNull(message = "error.user.dateofbirth.empty")
-	@Column(name="dateofbirth")
-	private LocalDate dateOfBirth;
-	
 //	@NotNull(message = "error.user.regdate.empty")
 	@Column(name="regdate")
 	private LocalDateTime regdate;
@@ -69,16 +63,6 @@ public class User extends CeReProAbstractEntity {
 //	@Max(11)
 	@Column(name="role")
 	private int role;
-	
-//	@NotEmpty(message = "error.user.imgpath.empty")
-	@Length(max = 200, message = "error.user.imgpath.length")
-	@Column(name="imgpath")
-	private String imgpath;
-	
-	
-    @Length(max = 2000, message = "error.user.note.length" )
-	@Column(name = "note")  	
-	private String note;
     
     @Column(name = "enabled")  
     private boolean enabled;
@@ -154,20 +138,6 @@ public class User extends CeReProAbstractEntity {
 	}
 
 	/**
-	 * @return the dateOfBirth
-	 */
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	/**
-	 * @param dateOfBirth the dateOfBirth to set
-	 */
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	/**
 	 * @return the regdate
 	 */
 	public LocalDateTime getRegdate() {
@@ -195,36 +165,6 @@ public class User extends CeReProAbstractEntity {
 		this.role = role;
 	}
 
-	/**
-	 * @return the imgpath
-	 */
-	public String getImgpath() {
-		return imgpath;
-	}
-
-	/**
-	 * @param imgpath the imgpath to set
-	 */
-	public void setImgpath(String imgpath) {
-		this.imgpath = imgpath;
-	}
-
-	/**
-	 * @return the note
-	 */
-	public String getNote() {
-		return note;
-	}
-
-	/**
-	 * @param note the note to set
-	 */
-	
-	public void setNote(String note) {
-		
-		this.note = note;
-		
-	}
 
 	/**
 	 * @return the enabled
@@ -240,20 +180,12 @@ public class User extends CeReProAbstractEntity {
 		this.enabled = enabled;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", dateOfBirth=" + dateOfBirth + ", regdate=" + regdate + ", role=" + role
-				+ ", imgpath=" + imgpath + ", note=" + note + ", enabled=" + enabled + "]";
+				+ ", lastname=" + lastname + ", regdate=" + regdate + ", role=" + role + ", enabled=" + enabled + "]";
 	}
 
-	
-
-
-	
 }
 
 
