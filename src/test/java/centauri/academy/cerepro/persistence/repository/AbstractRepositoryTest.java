@@ -14,7 +14,6 @@ import centauri.academy.cerepro.persistence.entity.CandidateStates;
 import centauri.academy.cerepro.persistence.entity.CoursePage;
 import centauri.academy.cerepro.persistence.entity.Employee;
 import centauri.academy.cerepro.persistence.entity.Interview;
-import centauri.academy.cerepro.persistence.entity.ItConsultant;
 import centauri.academy.cerepro.persistence.entity.Question;
 import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.Survey;
@@ -24,7 +23,6 @@ import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
-import centauri.academy.cerepro.persistence.repository.itconsultant.ItConsultantRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
@@ -45,8 +43,6 @@ public abstract class AbstractRepositoryTest {
 	private EmployeeRepository employeeRepository;
 	@Autowired
 	private CandidateRepository candidateRepository;
-	@Autowired
-	private ItConsultantRepository itConsultantRepository;
 	@Autowired
 	private QuestionRepository questionRepository;
 	@Autowired
@@ -94,10 +90,8 @@ public abstract class AbstractRepositoryTest {
 		testUser.setPassword("pippo");
 		testUser.setFirstname("pippo");
 		testUser.setLastname("prova");
-		testUser.setDateOfBirth(LocalDate.parse(("1989-10-21")));
 		testUser.setRegdate(LocalDateTime.now());
 		testUser.setRole(getFakeRole(level).getLevel());
-		testUser.setImgpath("impPippo");
 		userRepository.save(testUser);
 		return testUser;
 	}
@@ -145,14 +139,7 @@ public abstract class AbstractRepositoryTest {
 		testSI.setSurveyId(surveyId);
 		surveyInterviewRepository.save(testSI);
 		return testSI;
-	}
-
-	protected ItConsultant getFakeItConsultant() {
-		long userId = getFakeUser(Role.ITCONSULTANT_LEVEL).getId();
-		ItConsultant current = new ItConsultant(userId);
-		itConsultantRepository.save(current);
-		return current;
-	}
+	}	
 
 	protected Employee getFakeEmployee() {
 		Employee employee = new Employee();
