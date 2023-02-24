@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.entity.CandidateStates;
+import centauri.academy.cerepro.persistence.entity.CandidateSurveyToken;
 import centauri.academy.cerepro.persistence.entity.CoursePage;
 import centauri.academy.cerepro.persistence.entity.Employee;
 import centauri.academy.cerepro.persistence.entity.Interview;
@@ -23,6 +24,7 @@ import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
+import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
@@ -51,6 +53,8 @@ public abstract class AbstractRepositoryTest {
 	private SurveyReplyRepository surveyReplyRepository;
 	@Autowired
 	private UserSurveyTokenRepository userSurveyTokenRepository;
+	@Autowired
+	private CandidateSurveyTokenRepository candidateSurveyTokenRepository;
 	@Autowired
 	private SurveyQuestionRepository surveyQuestionRepository;
 	@Autowired
@@ -213,6 +217,23 @@ public abstract class AbstractRepositoryTest {
 		testUST.setExpirationdate(LocalDateTime.now());
 		userSurveyTokenRepository.save(testUST);
 		return testUST;
+	}
+	
+	protected CandidateSurveyToken getFakeCandidateSurveyToken() {
+		logger.info("getFakeCandidateSurveyToken - START");
+		CandidateSurveyToken testCST = new CandidateSurveyToken();
+		logger.info("getFakeCandidateSurveyToken - getting all candidates...");
+		List<Candidate> candidates = candidateRepository.findAll();
+		logger.info("getFakeCandidateSurveyToken - got " + candidates.size() + " candidates...");
+		if (candidates.isEmpty())
+			testCST.setCandidateId(getFakeCandidate().getId());
+		else
+			testCST.setCandidateId(candidates.get(0).getId());
+		testCST.setSurveyId(getFakeSurvey().getId());
+//		testUST.setGeneratedtoken("AAABBBCCCC");
+		testCST.setExpirationDateTime(LocalDateTime.now());
+		candidateSurveyTokenRepository.save(testCST);
+		return testCST;
 	}
 
 	protected CoursePage getFakeCoursePageWithCode(String code) {

@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
+import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
 
 /**
@@ -41,6 +42,10 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	private CandidateRepository cr;
 	@Autowired
 	private UserSurveyTokenRepository ustr;
+	@Autowired
+	private CandidateSurveyTokenRepository cstr;
+	@Autowired
+	private CandidateStatesRepository csr;
 	
     /**
      * 
@@ -51,10 +56,12 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
 		er.deleteAll();
-		cr.deleteAll();
+		cstr.deleteAll();
 		ustr.deleteAll();
+		cr.deleteAll();
 		sr.deleteAll();
 		ur.deleteAll();
+		csr.deleteAll();
 		rr.deleteAll();
 		logger.info(" END -> prepareDB() ");
 	}

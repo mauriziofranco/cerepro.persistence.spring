@@ -22,6 +22,7 @@ import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.entity.custom.CandidateCustom;
 import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
+import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 
 /**
  * Unit test for CandidateCustomRepository
@@ -41,6 +42,8 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	private CoursePageRepository cpr;
 	@Autowired
 	private CandidateStatesRepository csr;
+	@Autowired
+	private CandidateSurveyTokenRepository cstr;
 	
     /**
      * prepareDB method prepares the database in order to test
@@ -50,6 +53,7 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	@After
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
+		cstr.deleteAll();
 		cr.deleteAll();
 		csr.deleteAll();
 		cpr.deleteAll();

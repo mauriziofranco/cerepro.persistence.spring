@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
+import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 
 /**
  * Unit test for CandidateRepository
@@ -34,6 +35,8 @@ public class CandidateRepositoryTest extends AbstractRepositoryTest {
 	private CoursePageRepository cpr;
 	@Autowired
 	private CandidateStatesRepository csr;
+	@Autowired
+	private CandidateSurveyTokenRepository cstr;
 	
     /**
      * prepareDB method prepares the database in order to test
@@ -44,6 +47,7 @@ public class CandidateRepositoryTest extends AbstractRepositoryTest {
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
 		candidateRepository.deleteAll();
+		cstr.deleteAll();
 		cpr.deleteAll();
 		csr.deleteAll();
 		ur.deleteAll();
