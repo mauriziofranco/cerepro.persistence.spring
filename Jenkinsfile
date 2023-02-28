@@ -40,7 +40,9 @@ pipeline {
             }
         }
         stage("Install for All Environments") {
-            steps {              
+            steps {
+                sh "./java -v"
+                sh "./mvnw -v"              
 				sh "./mvnw install -DskipTests"
             }
         }
