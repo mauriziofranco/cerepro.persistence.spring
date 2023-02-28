@@ -3,7 +3,7 @@ pipeline {
     stages {        
         stage("Compile") {
             steps {
-            sh "./java -v"
+            
                 sh "./mvnw -v"    
                 sh "./mvnw clean compile"
             }
