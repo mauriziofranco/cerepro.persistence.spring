@@ -5,7 +5,7 @@ pipeline {
             steps {
             
                 sh "./mvnw -v"    
-                sh "./mvnw clean compile"
+                sh "./mvnw clean compile -e -X"
             }
         }
         stage("Provides application property file for Integration tests") {
