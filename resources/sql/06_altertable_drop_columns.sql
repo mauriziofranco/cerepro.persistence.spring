@@ -18,5 +18,9 @@ create table candidatesurveytokens (
 );
 
 INSERT INTO candidatesurveytokens (candidate_id, survey_id, generated_token, expiration_date_time, expired)
-select c.id, u.surveyid, u.generatedtoken, u.expirationdate, u.expired from usersurveytoken u, candidates c where u.userid=c.user_id 
+select c.id, u.surveyid, u.generatedtoken, u.expirationdate, u.expired from usersurveytoken u, candidates c where u.userid=c.user_id ;
+
+update  roles set label="technical recruiter", description="technical recruiter" where id = 2;
+update  roles set label="hr", description="human resources" where id = 3;
+update  roles set label="account", description="business account" where id = 4;
 
