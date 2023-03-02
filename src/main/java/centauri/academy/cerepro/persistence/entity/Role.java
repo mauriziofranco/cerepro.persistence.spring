@@ -20,10 +20,12 @@ import org.hibernate.validator.constraints.Length;
 @Table( name = "roles" )
 public class Role extends CeReProAbstractEntity{
 	
-	public static final int JAVA_COURSE_CANDIDATE_LEVEL = 90 ;
-	public static final int ITCONSULTANT_LEVEL = 50 ;
+	public static final int JAVA_COURSE_CANDIDATE_LEVEL = 90 ; // TO REMOVE
 	public static final int ADMIN_LEVEL = 0 ;
-	public static final int HR_LEVEL = 5 ;
+	public static final int TECHNICAL_RECRUITER_LEVEL = 10 ;
+	public static final int HR_LEVEL = 50 ;
+	public static final int ACCOUNT_LEVEL = 90 ;
+	public static final int GUEST_LEVEL = 100 ;
 	
 	@Id //specifies that this field is a primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
