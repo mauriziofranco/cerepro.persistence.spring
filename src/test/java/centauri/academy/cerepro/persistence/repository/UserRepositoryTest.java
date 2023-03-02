@@ -39,8 +39,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 	@Autowired
 	private CandidateRepository cr;
 	@Autowired
-	private EmployeeRepository er;
-	@Autowired
 	private CandidateSurveyTokenRepository cstr;
 	
 	/**
@@ -52,7 +50,6 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
     public void initializeUserTests() {	
     	logger.info("UserRepositoryTest.initializeUserTests - START");	
     	cstr.deleteAll();
-		er.deleteAll();
 		cr.deleteAll();
 		ur.deleteAll();	
 		rr.deleteAll();

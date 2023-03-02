@@ -37,8 +37,6 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Autowired
 	private SurveyRepository sr;
 	@Autowired
-	private EmployeeRepository er;
-	@Autowired
 	private CandidateRepository cr;
 	@Autowired
 	private UserSurveyTokenRepository ustr;
@@ -55,7 +53,6 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@After
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
-		er.deleteAll();
 		cstr.deleteAll();
 		ustr.deleteAll();
 		cr.deleteAll();

@@ -28,9 +28,9 @@ import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 /**
  * CandidateRepositoryImpl
  * 
- * This class provides implementation for CandidateRepositoryCustom methods
+ * Candidates table repository custom methods implementation
  * 
- * @author m.franco
+ * @author maurizio.franco@ymail.com
  * @author joffre
  * @author daniele
  * @author giacomo
@@ -244,33 +244,19 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 //		query.orderBy(cb.desc(rootTable.get("id")));
 		TypedQuery<ListedCandidateCustom> q = em.createQuery(query.multiselect(
 				rootTable.get("id"),
-//				rootTable.get("userId"), 
-//				rootTable.get("domicileCity"),
-//				rootTable.get("studyQualification"),
-//				rootTable.get("graduate"), 
-//				rootTable.get("highGraduate"),
-//				rootTable.get("stillHighStudy"),
-//				rootTable.get("mobile"),
-				rootTable.get("firstname"), rootTable.get("lastname"), rootTable.get("email"),
-				joinTable2.get("statusColor"), joinTable2.get("statusLabel"), rootTable.get("imgpath"),
-				rootTable.get("cvExternalPath"), rootTable.get("insertedBy"), joinTable.get("firstname"),
+				rootTable.get("firstname"), 
+				rootTable.get("lastname"), 
+				rootTable.get("email"),
+				joinTable2.get("statusColor"), 
+				joinTable2.get("statusLabel"), 
+				rootTable.get("imgpath"),
+				rootTable.get("cvExternalPath"), 
+				rootTable.get("insertedBy"), 
+				joinTable.get("firstname"),
 				joinTable.get("lastname")
-//				rootTable.get("dateOfBirth"),
-//				rootTable.get("courseCode"),
-//				rootTable.get("technicalNote"),
-//				rootTable.get("label"),
-//				rootTable.get("candidateStatesId"),
 		));
 
 		List<ListedCandidateCustom> resultList = q.getResultList();
-//		logger.info(resultList.toString());
-//		int start = (int) info.getOffset();
-//		int end = (start + info.getPageSize()) > resultList.size() ? resultList.size() : (start + info.getPageSize());
-//		int totalRows = resultList.size();
-//
-//		Page<ListedCandidateCustom> pageToReturn = new PageImpl<ListedCandidateCustom>(resultList.subList(start, end),
-//				info, totalRows);
-//		return pageToReturn;
 		return resultList ;
 
 	}

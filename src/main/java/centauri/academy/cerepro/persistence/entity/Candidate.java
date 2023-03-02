@@ -29,21 +29,9 @@ public class Candidate extends CeReProAbstractEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "user_id")
-	@NotNull(message = "error.candidate.userId.empty")
-	private long userId;
-
 	@Column(name = "domicile_city")
 	@Length(max = 100, message = "error.candidate.domicile_city.length")
 	private String domicileCity;
-
-//	@Column(name="domicile_street_name")
-//	@Length(max = 100, message = "error.candidate.domicile_street_name.length")
-//	private String domicileStreetName;
-//	
-//	@Column(name="domicile_house_number")
-//	@Length(max = 100, message = "error.candidate.domicile_house_number.length")
-//	private String domicileHouseNumber;
 
 	@Column(name = "study_qualification")
 	@Length(max = 300, message = "error.candidate.study_qualification.length")
@@ -114,14 +102,6 @@ public class Candidate extends CeReProAbstractEntity {
 	@Column(name = "inserted_by")
 	private long insertedBy;
 
-//	public Candidate(Long userId, String courseCode,Long candidateStatesId) {
-//		this.userId=userId;
-//		this.courseCode=courseCode;
-//		this.candidateStatesId=candidateStatesId;
-//	}
-//	
-//	
-
 	/**
 	 * @param userId
 	 * @param candidateStatesId
@@ -131,7 +111,7 @@ public class Candidate extends CeReProAbstractEntity {
 	 * @param regdate
 	 * @param insertedBy
 	 */
-	public Candidate(@NotNull(message = "error.candidate.userId.empty") long userId,
+	public Candidate(
 			@NotNull(message = "error.????.coursecode.empty") String courseCode,
 			@NotNull(message = "error.candidate.candidateStatusCode.empty") long candidateStatusCode,
 			@NotEmpty(message = "error.user.email.empty") String email,
@@ -140,7 +120,6 @@ public class Candidate extends CeReProAbstractEntity {
 			@NotNull(message = "?error.user.email.empty") long insertedBy,
 			@NotNull(message = "error.???.candidacy.date.time.notnull") LocalDateTime candidacyDateTime) {
 		super();
-		this.userId = userId;
 		this.courseCode = courseCode;
 		this.candidateStateCode = candidateStatusCode;
 		this.email = email;
@@ -170,20 +149,6 @@ public class Candidate extends CeReProAbstractEntity {
 	 */
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the userId
-	 */
-	public long getUserId() {
-		return userId;
-	}
-
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(long userId) {
-		this.userId = userId;
 	}
 
 	/**
@@ -468,7 +433,7 @@ public class Candidate extends CeReProAbstractEntity {
 
 	@Override
 	public String toString() {
-		return "Candidate [id=" + id + ", userId=" + userId + ", domicileCity=" + domicileCity + ", studyQualification="
+		return "Candidate [id=" + id + ", domicileCity=" + domicileCity + ", studyQualification="
 				+ studyQualification + ", graduate=" + graduate + ", highGraduate=" + highGraduate + ", stillHighStudy="
 				+ stillHighStudy + ", mobile=" + mobile + ", cvExternalPath=" + cvExternalPath + ", courseCode="
 				+ courseCode + ", candidacyDateTime=" + candidacyDateTime + ", label=" + label

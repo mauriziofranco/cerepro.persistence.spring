@@ -13,12 +13,9 @@ import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.entity.CandidateStates;
 import centauri.academy.cerepro.persistence.entity.CandidateSurveyToken;
 import centauri.academy.cerepro.persistence.entity.CoursePage;
-import centauri.academy.cerepro.persistence.entity.Employee;
-import centauri.academy.cerepro.persistence.entity.Interview;
 import centauri.academy.cerepro.persistence.entity.Question;
 import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.Survey;
-import centauri.academy.cerepro.persistence.entity.SurveyInterview;
 import centauri.academy.cerepro.persistence.entity.SurveyQuestion;
 import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.User;
@@ -42,8 +39,6 @@ public abstract class AbstractRepositoryTest {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private EmployeeRepository employeeRepository;
-	@Autowired
 	private CandidateRepository candidateRepository;
 	@Autowired
 	private QuestionRepository questionRepository;
@@ -60,11 +55,7 @@ public abstract class AbstractRepositoryTest {
 	@Autowired
 	private CoursePageRepository coursePageRepository;
 	@Autowired
-	private InterviewRepository interviewRepository;	
-	@Autowired
 	private CandidateStatesRepository candidateStatesRepository;
-	@Autowired
-	private SurveyInterviewRepository surveyInterviewRepository;
 	
 	protected Role getFakeRole() {
 		return getFakeRole(100);
@@ -102,17 +93,16 @@ public abstract class AbstractRepositoryTest {
 
 	protected Candidate getFakeCandidate() {
 		logger.info("getFakeCandidate - START");
-		long userId = getFakeUser(Role.JAVA_COURSE_CANDIDATE_LEVEL).getId();
+		long insertedBy = getFakeUser(Role.HR_LEVEL).getId();
 		String code = getFakeCoursePage().getCode();
 		long candidateStateCode=getFakeCandidateStates().getStatusCode();
 		//Candidate testCandidate = new Candidate(userId, code,candidateStatesId);
 		LocalDateTime regdate = LocalDateTime.now();
-		long insertedBy = userId ;
 		String firstname = "Test_Firstname" ;
 		String lastname = "Test_Lasstname" ;
 		String email = "test@email.com" ;
 		LocalDateTime candidacyDateTime = LocalDateTime.now();
-		Candidate testCandidate = new Candidate(userId, code, candidateStateCode, email, firstname, lastname, regdate, insertedBy, candidacyDateTime);
+		Candidate testCandidate = new Candidate(code, candidateStateCode, email, firstname, lastname, regdate, insertedBy, candidacyDateTime);
 		candidateRepository.save(testCandidate);
 		return testCandidate;
 	}
@@ -135,28 +125,6 @@ public abstract class AbstractRepositoryTest {
 		return testCandidate;
 	}
 	
-	protected SurveyInterview getFakeSurveyInterview() {
-		long surveyId = getFakeSurvey().getId();
-		long interviewId = getFakeInterview().getId();
-		SurveyInterview testSI = new SurveyInterview();
-		testSI.setInterviewId(interviewId);
-		testSI.setSurveyId(surveyId);
-		surveyInterviewRepository.save(testSI);
-		return testSI;
-	}	
-
-	protected Employee getFakeEmployee() {
-		Employee employee = new Employee();
-		employee.setUserId(getFakeUser().getId());
-		employee.setDomicileCity("Milano");
-		employee.setDomicileStreetName("Viale Monza");
-		employee.setDomicileHouseNumber("10");
-		employee.setMobile("118");
-		employee.setCvExternalPath("C://documents/mycv.doc");
-		employeeRepository.save(employee);
-		return employee;
-	}
-
 	protected Survey getFakeSurvey() {
 		Survey testSurvey = new Survey();
 		testSurvey.setDescription("ciccioBello");
@@ -172,13 +140,6 @@ public abstract class AbstractRepositoryTest {
 		return testQuestion;
 	}
 	
-	protected Interview getFakeInterview() {
-		Interview testInterview = new Interview();
-		testInterview.setQuestionText("FakeQuestion");
-		interviewRepository.save(testInterview);
-		return testInterview;
-	}
-
 	protected SurveyQuestion getFakeSurveyQuestion() {
 		long questionId = getFakeQuestion().getId();
 		long surveyId = getFakeSurvey().getId();

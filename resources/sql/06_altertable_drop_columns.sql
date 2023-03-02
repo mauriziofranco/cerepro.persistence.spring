@@ -24,3 +24,12 @@ update  roles set label="technical recruiter", description="technical recruiter"
 update  roles set label="hr", description="human resources" where id = 3;
 update  roles set label="account", description="business account" where id = 4;
 
+
+drop table if exists interviewreplies;
+drop table if exists surveyinterviews;
+drop table if exists interviews; 
+drop table if exists employees;
+
+alter table candidates DROP FOREIGN KEY candidates_ibfk_1;
+alter table candidates drop column user_id;
+

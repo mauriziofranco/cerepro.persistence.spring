@@ -13,13 +13,12 @@ import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 /**
  * CandidateRepositoryCustom
  * 
- * Provides signs for custom implementation methods
+ * Candidates table repository custom methods declaration
  * 
- * @author m.franco
+ * @author maurizio.franco@ymail.com
  *
  */
 public interface CandidateRepositoryCustom {
-	
 	
 	CandidateCustom getSingleCustomCandidate(Long id) throws NoResultException ;
 	
