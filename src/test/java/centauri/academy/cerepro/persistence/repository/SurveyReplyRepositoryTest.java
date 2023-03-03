@@ -4,19 +4,16 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.SurveyReply;
-import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 /**
  * 
  * @author anna
@@ -27,34 +24,6 @@ import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRe
 public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(SurveyReplyRepositoryTest.class);
-	
-	@Autowired
-	private UserRepository ur;
-	@Autowired
-	private SurveyRepository sr;
-	@Autowired
-	private SurveyReplyRepository srr;
-	@Autowired
-	private RoleRepository rr;
-	
-	
-	/**
-     * initializeUserTests() method inserts a new Role
-     * in order to be able to insert a new Role
-     */
-	@Before
-	@After
-    public void initializeSurveyReplyTests() {
-    	
-    	logger.info("SurveyReplyRepositoryTest.initializeSurveyReplyTests - START");
-    	
-    	srr.deleteAll();	
-		ur.deleteAll();
-		sr.deleteAll();
-		rr.deleteAll();
-	
-		logger.info("SurveyReplyRepositoryTest.initializeSurveyReplyTests - END");
-    }
 
 	/**
      * testSelectAllFilled() method tests if the method selectAll()
@@ -65,7 +34,7 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
     public void testSelectAllFilled(){
 		logger.info("SurveyReplyRepositoryTest.testSelectAllFilled() - START");
 		getFakeSurveyReply();
-		assertTrue(srr.count() == 1);
+		assertTrue(surveyReplyRepository.count() == 1);
     }
     
     /**
@@ -77,7 +46,7 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
     public void testSelectAllEmpty(){
 		
 		logger.info("SurveyReplyRepositoryTest.testSelectAllEmpty() - START");
-		assertTrue(srr.count()==0);
+		assertTrue(surveyReplyRepository.count()==0);
     }
    
 	/**
@@ -87,9 +56,9 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void testInsert() {
 		logger.info("SurveyReplyRepositoryTest.testInsert() - START");
-		assertTrue(srr.count()==0);
+		assertTrue(surveyReplyRepository.count()==0);
 		getFakeSurveyReply();
-		assertTrue(srr.count()==1);
+		assertTrue(surveyReplyRepository.count()==1);
 	}
 
 	/**
@@ -99,9 +68,9 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void testSelectById() {
 		logger.info("SurveyReplyRepositoryTest.testSelectById() - START");
-	//	SurveyReply currentSurveyReply = srr.save(getFakeSurveyReply());
+	//	SurveyReply currentSurveyReply = surveyReplyRepository.save(getFakeSurveyReply());
 		SurveyReply currentSurveyReply = getFakeSurveyReply();
-		assertTrue(srr.findById(currentSurveyReply.getId()).isPresent());		
+		assertTrue(surveyReplyRepository.findById(currentSurveyReply.getId()).isPresent());		
 	}
 	
 	/**
@@ -113,9 +82,9 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
 		logger.info("SurveyReplyRepositoryTest.testUpdate() - START");
 		SurveyReply currentSurveyReply = getFakeSurveyReply();
 		currentSurveyReply.setAnswers("pippopippo");
-		srr.save(currentSurveyReply);
-		assertTrue(srr.findById(currentSurveyReply.getId()).isPresent());	
-		assertTrue(srr.findById(currentSurveyReply.getId()).get().getAnswers().equals("pippopippo"));
+		surveyReplyRepository.save(currentSurveyReply);
+		assertTrue(surveyReplyRepository.findById(currentSurveyReply.getId()).isPresent());	
+		assertTrue(surveyReplyRepository.findById(currentSurveyReply.getId()).get().getAnswers().equals("pippopippo"));
 	}
 	
 	/**
@@ -126,9 +95,9 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
 	public void testDeleteById() {
 		logger.info("SurveyReplyRepositoryTest.testDeleteById() - START");
 		SurveyReply currentSurveyReply = getFakeSurveyReply();
-    	assertTrue(srr.count()==1);
-    	srr.deleteById(currentSurveyReply.getId());
-    	assertTrue(srr.count()==0);
+    	assertTrue(surveyReplyRepository.count()==1);
+    	surveyReplyRepository.deleteById(currentSurveyReply.getId());
+    	assertTrue(surveyReplyRepository.count()==0);
 	}
 	
 	/**
@@ -139,9 +108,9 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
 	public void testDeleteAll() {
 		logger.info("SurveyReplyRepositoryTest.testDeleteAll() - START");
 		getFakeSurveyReply();
-    	assertTrue(srr.count()==1);
-    	srr.deleteAll();
-		assertTrue(srr.count()==0);
+    	assertTrue(surveyReplyRepository.count()==1);
+    	surveyReplyRepository.deleteAll();
+		assertTrue(surveyReplyRepository.count()==0);
 		logger.info("SurveyReplyRepositoryTest.testDeleteAll() - END");
 	}
 	
@@ -154,7 +123,7 @@ public class SurveyReplyRepositoryTest extends AbstractRepositoryTest {
 	public void testGetSurveyReplyCountForDay() {
 		logger.info("SurveyReplyRepositoryTest.testGetSurveyReplyCountForDay() - START");
 		getFakeSurveyReply();
-		assertTrue(srr.getSurveyReplyCountForDay(LocalDate.now())==1);
+		assertTrue(surveyReplyRepository.getSurveyReplyCountForDay(LocalDate.now())==1);
 		logger.info("SurveyReplyRepositoryTest.testGetSurveyReplyCountForDay() - END");
 	}
 	

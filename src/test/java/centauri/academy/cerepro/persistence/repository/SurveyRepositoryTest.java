@@ -2,21 +2,21 @@ package centauri.academy.cerepro.persistence.repository;
 
 import static org.junit.Assert.assertTrue;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.Survey;
+import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
+import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
-import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
 
 /**
  * 
@@ -32,7 +32,9 @@ public class SurveyRepositoryTest extends AbstractRepositoryTest {
 		@Autowired
 		private SurveyRepository sr;
 		@Autowired
-		private UserSurveyTokenRepository ustr;
+		private CandidateRepository cr;
+		@Autowired
+		private CandidateSurveyTokenRepository cstr;
 		@Autowired
 		private SurveyQuestionRepository sqr;
 		@Autowired
@@ -47,10 +49,11 @@ public class SurveyRepositoryTest extends AbstractRepositoryTest {
 	    public void initializeSurveyTests() {
 	    	
 	    	logger.info("SurveyRepositoryTest.initializeSurveyTests - START");    	
-	    	ustr.deleteAll();
+	    	cstr.deleteAll();
 			sqr.deleteAll();
-			srr.deleteAll();	
+			srr.deleteAll();
 			sr.deleteAll();
+			cr.deleteAll();
 			logger.info("SurveyRepositoryTest.initializeSurveyTests - END");
 	    }
 

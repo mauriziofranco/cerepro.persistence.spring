@@ -19,9 +19,8 @@ import centauri.academy.cerepro.persistence.entity.SurveyReply;
 public interface SurveyReplyRepository extends JpaRepository<SurveyReply, Long>, SurveyReplyRepositoryCustom {
 	
 	List<SurveyReply> findBySurveyId(long surveyId);
-	List<SurveyReply> findByUserId(long userId);
+	List<SurveyReply> findByCandidateId(long candidateId);
 	
-//	@Query("SELECT  FROM Person p WHERE LOWER(p.lastName) = LOWER(:lastName)")
 	@Query("select count(id) from SurveyReply  where endtime between :start and :end")
 	long getSurveyReplyCountBetweenDates(LocalDateTime start, LocalDateTime end) ;
 	

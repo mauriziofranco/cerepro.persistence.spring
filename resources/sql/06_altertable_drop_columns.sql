@@ -4,6 +4,8 @@ alter table users drop column note;
 
 drop table itconsultants ;
 
+drop table if exists candidatesurveytokens ;
+
 create table candidatesurveytokens (
 	id bigint NOT NULL AUTO_INCREMENT, 
 	candidate_id bigint not null,
@@ -30,6 +32,25 @@ drop table if exists surveyinterviews;
 drop table if exists interviews; 
 drop table if exists employees;
 
+alter table surveyreplies add column candidate_id bigint(20) NOT NULL ;
+
+UPDATE surveyreplies
+INNER JOIN candidates ON surveyreplies.user_id=candidates.user_id
+SET surveyreplies.candidate_id = candidates.id ;
+
+alter table surveyreplies DROP FOREIGN KEY surveyreplies_ibfk_2;
+alter table surveyreplies drop column user_id;
+
+alter table surveyreplies ADD FOREIGN KEY (candidate_id) references candidates(id);
+
 alter table candidates DROP FOREIGN KEY candidates_ibfk_1;
 alter table candidates drop column user_id;
+
+drop table if exists usersurveytoken;
+
+
+
+
+
+
 

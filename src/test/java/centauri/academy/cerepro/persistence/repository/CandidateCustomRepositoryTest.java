@@ -23,6 +23,7 @@ import centauri.academy.cerepro.persistence.entity.custom.CandidateCustom;
 import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
+import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 
 /**
  * Unit test for CandidateCustomRepository
@@ -32,51 +33,6 @@ import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.Cand
 @SpringBootTest
 public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(CandidateCustomRepositoryTest.class);
-	@Autowired
-	private RoleRepository rr;
-	@Autowired
-	private UserRepository ur;
-	@Autowired
-	private CandidateRepository cr;
-	@Autowired
-	private CoursePageRepository cpr;
-	@Autowired
-	private CandidateStatesRepository csr;
-	@Autowired
-	private CandidateSurveyTokenRepository cstr;
-	
-    /**
-     * prepareDB method prepares the database in order to test
-     * CandidateRepository's methods
-     */
-	@Before
-	@After
-	public void prepareDB () {
-		logger.info(" START -> prepareDB() ");
-		cstr.deleteAll();
-		cr.deleteAll();
-		csr.deleteAll();
-		cpr.deleteAll();
-		ur.deleteAll();
-		rr.deleteAll();
-		logger.info(" END -> prepareDB() ");
-	}
-
-//    /**
-//     * testSelectAllFilled() method tests if the method selectAll()
-//     * is really able to select all tuples from a populated
-//     * candidates' table
-//     */
-//	@Test
-//    public void testSelectAllFilled(){
-//		logger.info(" START -> selectAllFilled() ");
-//		logger.info(" DEBUG XXX fakeCandidate: " + getFakeCandidate());
-//		List<CandidateCustom> ccList = cr.getAllCustomCandidates();
-//		logger.info("testSelectAllFilled - DEBUG - getAllCustomCandidates returns: " + ccList + " elements");
-////		for (CandidateCustom current : ccList) logger.info("current candidate custom: " + current.toString());
-//		assertTrue(cr.getAllCustomCandidates().size() == 1);
-//		logger.info(" END -> selectAllFilled() ");
-//    }
     
     /**
      * testSelectAllEmpty() method tests if the method selectAll()
@@ -86,7 +42,7 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testSelectAllEmpty(){
 		logger.info(" START -> selectAllEmpty() ");
-		assertTrue(cr.count()==0);
+		assertTrue(candidateRepository.count()==0);
 		logger.info(" END -> selectAllEmpty() ");
     }
     
@@ -99,7 +55,7 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 		logger.info(" START -> selectById() ");
 		Candidate currentCandidate = getFakeCandidate();
 		logger.info(" testSelectById -> {}", currentCandidate);
-		CandidateCustom currentCandidateCustom = cr.getSingleCustomCandidate(currentCandidate.getId());
+		CandidateCustom currentCandidateCustom = candidateRepository.getSingleCustomCandidate(currentCandidate.getId());
 		logger.info("current candidate custom  " + currentCandidateCustom);
 		assertTrue( currentCandidateCustom != null ); 
 		logger.info(" END -> selectById() ");
@@ -116,14 +72,14 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 //	@Test
 //    public void testSelectAllFullAndRightOrdered(){
 //		logger.info(" START -> selectAllEmpty() ");
-//		assertTrue(cr.count()==0);
+//		assertTrue(candidateRepository.count()==0);
 //		LocalDateTime ldtNow = LocalDateTime.now();
 //		getFakeCandidateByCandidacyTime(ldtNow);
-//		assertTrue(cr.count()==1);
+//		assertTrue(candidateRepository.count()==1);
 //		LocalDateTime ldtYesterday = LocalDateTime.now().minusDays(1);
 //		getFakeCandidateByCandidacyTime(ldtYesterday);
-//		assertTrue(cr.count()==2);
-//		Page<CandidateCustom>  currentPage = cr.getAllCustomCandidatesPaginated(PageRequest.of(0, 10));
+//		assertTrue(candidateRepository.count()==2);
+//		Page<CandidateCustom>  currentPage = candidateRepository.getAllCustomCandidatesPaginated(PageRequest.of(0, 10));
 //		assertTrue(currentPage.getTotalElements()==2);
 //		CandidateCustom first = currentPage.getContent().get(0);
 //		logger.info(" DEBUG - first.getId().longValue(): " + first.getId().longValue() + " - candidacyTime:"  );
@@ -145,15 +101,15 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testSelectAllCandidatesPaginatedByCourseCode(){
 		logger.info("START --> testSelectAllCandidatesPaginatedByCourseCode() ");
-		assertTrue(cr.count()==0);
+		assertTrue(candidateRepository.count()==0);
 		String courseCode = getFakeCoursePage().getCode();
 		LocalDateTime ldtNow = LocalDateTime.now();
 		getFakeCandidateByCandidacyTimeAndCourseCode(ldtNow, courseCode);
-		assertTrue(cr.count()==1);
+		assertTrue(candidateRepository.count()==1);
 		LocalDateTime ldtYesterday = LocalDateTime.now().minusDays(1);
 		getFakeCandidateByCandidacyTimeAndCourseCode(ldtYesterday, courseCode);
-		assertTrue(cr.count()==2);
-		Page<ListedCandidateCustom>  currentPage = cr.getAllCustomCandidatesPaginatedByCourseCode(PageRequest.of(0, 10), courseCode);
+		assertTrue(candidateRepository.count()==2);
+		Page<ListedCandidateCustom>  currentPage = candidateRepository.getAllCustomCandidatesPaginatedByCourseCode(PageRequest.of(0, 10), courseCode);
 		assertTrue(currentPage.getTotalElements()==2);
 		ListedCandidateCustom first = currentPage.getContent().get(0);
 		logger.info(" DEBUG - first.getId().longValue(): " + first.getId().longValue() + " - candidacyTime:"  );
@@ -172,9 +128,9 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 //		Timestamp start = Timestamp.valueOf(startLDT);
 //		Timestamp end = Timestamp.valueOf(endLDT);
 		this.getFakeCandidate();
-		logger.info("getCandidateCountWithRegdateInPeriodOfToday - DEBUG - ur.getUserRegdateInPeriod(start, end): " + cr.getCandidateCountWithRegdateInPeriod(startLDT, endLDT));
+		logger.info("getCandidateCountWithRegdateInPeriodOfToday - DEBUG - ur.getUserRegdateInPeriod(start, end): " + candidateRepository.getCandidateCountWithRegdateInPeriod(startLDT, endLDT));
 //		logger.info("getUserRegistratedTodayTest - DEBUG - ur.getUserRegdateInPeriod(start, end): " + ur.getUserRegdateInPeriodSQL(start, end));		
-		Assert.assertEquals(cr.getCandidateCountWithRegdateInPeriod(startLDT, endLDT), 1l);
+		Assert.assertEquals(candidateRepository.getCandidateCountWithRegdateInPeriod(startLDT, endLDT), 1l);
 		logger.info("getCandidateCountWithRegdateInPeriodOfToday - END");
 	}
 //	

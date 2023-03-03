@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +21,13 @@ import centauri.academy.cerepro.persistence.entity.Survey;
 import centauri.academy.cerepro.persistence.entity.SurveyQuestion;
 import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.User;
-import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
-import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
 
 /**
- * @author m.franco
+ * @author maurizio.franco@ymail.com
  * @author anna
  * @author Daniele Piccinni
  */
@@ -35,27 +35,50 @@ public abstract class AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractRepositoryTest.class);
 
 	@Autowired
-	private RoleRepository roleRepository;
+	protected RoleRepository roleRepository;
 	@Autowired
-	private UserRepository userRepository;
+	protected UserRepository userRepository;
 	@Autowired
-	private CandidateRepository candidateRepository;
+	protected CandidateRepository candidateRepository;
 	@Autowired
-	private QuestionRepository questionRepository;
+	protected QuestionRepository questionRepository;
 	@Autowired
-	private SurveyRepository surveyRepository;
+	protected SurveyRepository surveyRepository;
 	@Autowired
-	private SurveyReplyRepository surveyReplyRepository;
+	protected SurveyReplyRepository surveyReplyRepository;
 	@Autowired
-	private UserSurveyTokenRepository userSurveyTokenRepository;
+	protected CandidateSurveyTokenRepository candidateSurveyTokenRepository;
 	@Autowired
-	private CandidateSurveyTokenRepository candidateSurveyTokenRepository;
+	protected SurveyQuestionRepository surveyQuestionRepository;
 	@Autowired
-	private SurveyQuestionRepository surveyQuestionRepository;
+	protected CoursePageRepository coursePageRepository;
 	@Autowired
-	private CoursePageRepository coursePageRepository;
-	@Autowired
-	private CandidateStatesRepository candidateStatesRepository;
+	protected CandidateStatesRepository candidateStatesRepository;
+	
+	/**
+     * prepareDB method prepares the database in order to test
+     * CandidateRepository's methods
+     */
+	@Before
+	@After
+	public void prepareDB () {
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info(" START -> prepareDB() ");
+		surveyReplyRepository.deleteAll();
+		surveyQuestionRepository.deleteAll();
+		candidateSurveyTokenRepository.deleteAll();		
+		surveyRepository.deleteAll();
+		candidateRepository.deleteAll();
+		userRepository.deleteAll();
+		coursePageRepository.deleteAll();
+		candidateStatesRepository.deleteAll();
+		roleRepository.deleteAll();
+		logger.info(" END -> prepareDB() ");
+	}
 	
 	protected Role getFakeRole() {
 		return getFakeRole(100);
@@ -154,7 +177,7 @@ public abstract class AbstractRepositoryTest {
 
 	protected SurveyReply getFakeSurveyReply() {
 		SurveyReply testSR = new SurveyReply();
-		testSR.setUserId(getFakeUser().getId());
+		testSR.setCandidateId(getFakeCandidate().getId());
 		testSR.setSurveyId(getFakeSurvey().getId());
 		testSR.setStarttime(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 		testSR.setEndtime(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
@@ -165,20 +188,18 @@ public abstract class AbstractRepositoryTest {
 		return testSR;
 	}
 	
-	
-	protected UserTokenSurvey getFakeUserTokenSurvey() {
-		UserTokenSurvey testUST = new UserTokenSurvey(1l);
-		List<User> users = userRepository.findAll();
-		if (users.isEmpty())
-			testUST.setUserid(getFakeUser().getId());
-		else
-			testUST.setUserid(users.get(0).getId());
-		testUST.setSurveyid(getFakeSurvey().getId());
-//		testUST.setGeneratedtoken("AAABBBCCCC");
-		testUST.setExpirationdate(LocalDateTime.now());
-		userSurveyTokenRepository.save(testUST);
-		return testUST;
-	}
+//	protected CandidateSurveyToken getFakeCandidateSurveyToken() {
+//		CandidateSurveyToken testCST = new CandidateSurveyToken();
+//		List<Candidate> candidates = candidateRepository.findAll();
+//		if (candidates.isEmpty())
+//			testCST.setCandidateId(getFakeCandidate().getId());
+//		else
+//			testCST.setCandidateId(candidates.get(0).getId());
+//		testCST.setSurveyId(getFakeSurvey().getId());
+//		testCST.setExpirationDateTime(LocalDateTime.now());
+//		candidateSurveyTokenRepository.save(testCST);
+//		return testCST;
+//	}
 	
 	protected CandidateSurveyToken getFakeCandidateSurveyToken() {
 		logger.info("getFakeCandidateSurveyToken - START");
@@ -213,19 +234,22 @@ public abstract class AbstractRepositoryTest {
 		return getFakeCoursePageWithCode("FakeFileName " + random);
 	}
 
-	protected UserTokenSurvey getFakeUserTokenSurveyExpired() {
-		UserTokenSurvey testUST = new UserTokenSurvey(1l);
-		List<User> users = userRepository.findAll();
-		if (users.isEmpty())
-			testUST.setUserid(getFakeUser().getId());
+	protected CandidateSurveyToken getFakeUserTokenSurveyExpired() {
+		logger.info("getFakeCandidateSurveyToken - START");
+		CandidateSurveyToken testCST = new CandidateSurveyToken();
+		logger.info("getFakeCandidateSurveyToken - getting all candidates...");
+		List<Candidate> candidates = candidateRepository.findAll();
+		logger.info("getFakeCandidateSurveyToken - got " + candidates.size() + " candidates...");
+		if (candidates.isEmpty())
+			testCST.setCandidateId(getFakeCandidate().getId());
 		else
-			testUST.setUserid(users.get(0).getId());
-		testUST.setSurveyid(getFakeSurvey().getId());
+			testCST.setCandidateId(candidates.get(0).getId());
+		testCST.setSurveyId(getFakeSurvey().getId());
 //		testUST.setGeneratedtoken("AAABBBCCCC");
-		testUST.setExpirationdate(LocalDateTime.now());
-		testUST.setExpired(true);
-		userSurveyTokenRepository.save(testUST);
-		return testUST;
+		testCST.setExpirationDateTime(LocalDateTime.now());
+		testCST.setExpired(true);
+		candidateSurveyTokenRepository.save(testCST);
+		return testCST;
 	}
 	
 	protected CandidateStates getFakeCandidateStates() {

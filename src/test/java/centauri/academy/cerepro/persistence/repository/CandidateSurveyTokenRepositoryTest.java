@@ -2,34 +2,32 @@ package centauri.academy.cerepro.persistence.repository;
 
 import static org.junit.Assert.assertTrue;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import centauri.academy.cerepro.persistence.entity.UserTokenSurvey;
+import centauri.academy.cerepro.persistence.entity.CandidateSurveyToken;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
-import centauri.academy.cerepro.persistence.repository.usersurveytoken.UserSurveyTokenRepository;
 
 /**
  * 
  * Provides a repository test class to test repository methods
  * 
- * @author Anna
+ * @author maurizio.franco@ymail.com
  *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
+public class CandidateSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserSurveyTokenRepositoryTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(CandidateSurveyTokenRepositoryTest.class);
 	@Autowired
 	private RoleRepository rr;
 	@Autowired
@@ -38,8 +36,6 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	private SurveyRepository sr;
 	@Autowired
 	private CandidateRepository cr;
-	@Autowired
-	private UserSurveyTokenRepository ustr;
 	@Autowired
 	private CandidateSurveyTokenRepository cstr;
 	@Autowired
@@ -54,7 +50,6 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
 		cstr.deleteAll();
-		ustr.deleteAll();
 		cr.deleteAll();
 		sr.deleteAll();
 		ur.deleteAll();
@@ -71,8 +66,8 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testSelectAllFilled(){
 		logger.info(" START -> selectAllFilled() ");
-		getFakeUserTokenSurvey();
-		assertTrue(ustr.count() == 1);
+		getFakeCandidateSurveyToken();
+		assertTrue(cstr.count() == 1);
 		logger.info(" END -> selectAllFilled() ");
     }
     
@@ -83,7 +78,7 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testSelectAllEmpty(){
 		logger.info(" START -> selectAllEmpty() ");
-		assertTrue(ustr.count()==0);
+		assertTrue(cstr.count()==0);
 		logger.info(" END -> selectAllEmpty() ");
     }
     
@@ -94,8 +89,8 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testSelectById(){
 		logger.info(" START -> selectById() ");
-		UserTokenSurvey currentUserSurveyToken = getFakeUserTokenSurvey();
-		assertTrue(ustr.findById(currentUserSurveyToken.getId()).isPresent());
+		CandidateSurveyToken currentCandidateSurveyToken = getFakeCandidateSurveyToken();
+		assertTrue(cstr.findById(currentCandidateSurveyToken.getId()).isPresent());
 		logger.info(" END -> selectById() ");
     }
     
@@ -106,9 +101,9 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testInsert(){
 		logger.info(" START -> insert() ");
-		assertTrue(ustr.count()==0);
-		getFakeUserTokenSurvey();
-		assertTrue(ustr.count()==1);
+		assertTrue(cstr.count()==0);
+		getFakeCandidateSurveyToken();
+		assertTrue(cstr.count()==1);
 		logger.info(" END -> insert() ");
     }
     
@@ -119,11 +114,11 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testUpdate(){
 		logger.info(" START -> update() ");
-		UserTokenSurvey currentUserSurveyToken = getFakeUserTokenSurvey();
-		currentUserSurveyToken.setGeneratedtoken("newPath");
-		ustr.save(currentUserSurveyToken);
-		assertTrue(ustr.findById(currentUserSurveyToken.getId()).isPresent());	
-		assertTrue((ustr.findById(currentUserSurveyToken.getId()).get().getGeneratedtoken().equals("newPath")));
+		CandidateSurveyToken currentCandidateSurveyToken = getFakeCandidateSurveyToken();
+		currentCandidateSurveyToken.setGeneratedToken("newPath");
+		cstr.save(currentCandidateSurveyToken);
+		assertTrue(cstr.findById(currentCandidateSurveyToken.getId()).isPresent());	
+		assertTrue((cstr.findById(currentCandidateSurveyToken.getId()).get().getGeneratedToken().equals("newPath")));
 		logger.info(" END -> update() ");
     }
     
@@ -134,10 +129,10 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testDeleteAll(){
 		logger.info(" START -> deleteAll() ");
-		getFakeUserTokenSurvey();
-    	assertTrue(ustr.count()==1);
-    	ustr.deleteAll();
-		assertTrue(ustr.count()==0);
+		getFakeCandidateSurveyToken();
+    	assertTrue(cstr.count()==1);
+    	cstr.deleteAll();
+		assertTrue(cstr.count()==0);
 		logger.info(" END -> deleteAll() ");
     }
     
@@ -148,10 +143,10 @@ public class UserSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 	@Test
     public void testDeleteById(){
 		logger.info(" START -> deleteById() ");
-		UserTokenSurvey currentUserSurveyToken = getFakeUserTokenSurvey();
-    	assertTrue(ustr.count()==1);
-    	ustr.deleteById(currentUserSurveyToken.getId());
-    	assertTrue(ustr.count()==0);
+		CandidateSurveyToken currentCandidateSurveyToken = getFakeCandidateSurveyToken();
+    	assertTrue(cstr.count()==1);
+    	cstr.deleteById(currentCandidateSurveyToken.getId());
+    	assertTrue(cstr.count()==0);
 		logger.info(" END -> deleteById() ");
     }
 

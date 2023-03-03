@@ -16,7 +16,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The persistence class for the candidatesurveytokens database table
+ * 
+ * The persistence entity class for the candidatesurveytokens database table
+ * 
+ * 
  * @author maurizio.franco@ymail.com
  *
  */

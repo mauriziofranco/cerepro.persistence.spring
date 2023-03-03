@@ -24,14 +24,11 @@ import centauri.academy.cerepro.persistence.entity.CoursePage;
 public class CoursePageRepositoryTest extends AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(CoursePageRepositoryTest.class);
 	
-	@Autowired
-	private CoursePageRepository cpr;
-	
 	@Before
 	@After
     public void initializeCoursePageTest() {
     	logger.info("CoursePageRepositoryTest.initializeCoursePageTest - START");    	
-    	cpr.deleteAll();
+    	coursePageRepository.deleteAll();
 		logger.info("CoursePageRepositoryTest.initializeCoursePageTest - END");
     }
 	
@@ -39,23 +36,23 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
     public void testSelectAllFilled(){
     	logger.info("CoursePageRepositoryTest.testSelectAllFilled() - START");    	
     	getFakeCoursePage();
-    	assertTrue(cpr.count() == 1);
+    	assertTrue(coursePageRepository.count() == 1);
     	logger.info("CoursePageRepositoryTest.testSelectAllFilled() - END");
     }
 	
 	@Test
     public void testSelectAllEmpty(){
     	logger.info("CoursePageRepositoryTest.testSelectAllEmpty() - START");    	
-		assertTrue(cpr.count()==0);
+		assertTrue(coursePageRepository.count()==0);
 		logger.info("CoursePageRepositoryTest.testSelectAllEmpty() - END");
     }
 	
 	@Test
 	public void testInsert() {
     	logger.info("CoursePageRepositoryTest.testInsert() - START");    	
-		assertTrue(cpr.count()==0);
+		assertTrue(coursePageRepository.count()==0);
 		getFakeCoursePage();
-		assertTrue(cpr.count()==1);
+		assertTrue(coursePageRepository.count()==1);
 		logger.info("CoursePageRepositoryTest.testInsert() - END");
 	}
 	
@@ -63,7 +60,7 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
 	public void testSelectById() {
     	logger.info("CoursePageRepositoryTest.testSelectById() - START");    	
     	CoursePage currentCoursePage = getFakeCoursePage();
-		assertTrue(cpr.findById(currentCoursePage.getId()).isPresent());	
+		assertTrue(coursePageRepository.findById(currentCoursePage.getId()).isPresent());	
 		logger.info("CoursePageRepositoryTest.testSelectById() - END");
 	}
 	
@@ -73,7 +70,7 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
     	int random = (int)(Math.random() * 10000);
     	String code = "test_code_" + random ;
     	getFakeCoursePageWithCode(code);
-		assertTrue(cpr.findByCode(code)!=null);	
+		assertTrue(coursePageRepository.findByCode(code)!=null);	
 		logger.info("CoursePageRepositoryTest.testSelectByCodeOk() - END");
 	}
 	
@@ -84,7 +81,7 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
     	String code = "test_code_" + random ;
     	String fakeCode = code + "X" ;
     	getFakeCoursePageWithCode(code);
-		assertTrue(cpr.findByCode(fakeCode)==null);	
+		assertTrue(coursePageRepository.findByCode(fakeCode)==null);	
 		logger.info("CoursePageRepositoryTest.testSelectByCodeKo() - END");
 	}
 	
@@ -93,17 +90,17 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
 		logger.info("CoursePageRepositoryTest.testUpdate() - START");
 		CoursePage currentCoursePage = getFakeCoursePage();
 		currentCoursePage.setFileName("testUpdate");
-		cpr.save(currentCoursePage);
-		assertTrue(cpr.findById(currentCoursePage.getId()).isPresent());	
-		assertTrue(cpr.findById(currentCoursePage.getId()).get().getFileName().equals("testUpdate"));
+		coursePageRepository.save(currentCoursePage);
+		assertTrue(coursePageRepository.findById(currentCoursePage.getId()).isPresent());	
+		assertTrue(coursePageRepository.findById(currentCoursePage.getId()).get().getFileName().equals("testUpdate"));
 	}
 	@Test
 	public void testDeleteById() {
     	logger.info("CoursePageRepositoryTest.testDeleteById() - START");    	
     	CoursePage currentCoursePage = getFakeCoursePage();
-    	assertTrue(cpr.count()==1);
-    	cpr.deleteById(currentCoursePage.getId());
-    	assertTrue(cpr.count()==0);
+    	assertTrue(coursePageRepository.count()==1);
+    	coursePageRepository.deleteById(currentCoursePage.getId());
+    	assertTrue(coursePageRepository.count()==0);
     	logger.info("CoursePageRepositoryTest.testDeleteById() - END");
 	}
 	
@@ -111,9 +108,9 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
 	public void testDeleteAll () {
     	logger.info("CoursePageRepositoryTest.testDeleteAll() - START");    	
     	getFakeCoursePage();
-    	assertTrue(cpr.count()==1);
-    	cpr.deleteAll();
-		assertTrue(cpr.count()==0);
+    	assertTrue(coursePageRepository.count()==1);
+    	coursePageRepository.deleteAll();
+		assertTrue(coursePageRepository.count()==0);
 		logger.info("CoursePageRepositoryTest.testDeleteAll() - END");
 	}
 

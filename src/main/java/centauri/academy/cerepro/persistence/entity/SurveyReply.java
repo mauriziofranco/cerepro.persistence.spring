@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
  *
  */
 
-@Entity // dichiaro che � un'entit�
-@Table( name = "surveyreplies" ) // specifico il nome della tabella a cui fa riferimeto questo oggetto, se i nomi coincidono non serve
+@Entity
+@Table( name = "surveyreplies" )
 public class SurveyReply extends CeReProAbstractEntity {
 
 	/* ATTRIBUTI */
@@ -29,9 +29,9 @@ public class SurveyReply extends CeReProAbstractEntity {
 	@NotNull(message = "error.surveyId.empty")
 	private long surveyId;
 	
-	@Column (name="user_id")
-	@NotNull(message = "error.userId.empty")
-	private long userId;
+	@Column (name="candidate_id") 
+	@NotNull(message = "surveyreply.error.candidateId.empty")
+	private long candidateId;
 	
 	@Column (name="starttime")
 //	@NotNull(message = "error.starttime.empty")
@@ -75,18 +75,7 @@ public class SurveyReply extends CeReProAbstractEntity {
 	public void setSurveyId(long surveyId) {
 		this.surveyId = surveyId;
 	}
-	/**
-	 * @return the userId
-	 */
-	public long getUserId() {
-		return userId;
-	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
+	
 	/**
 	 * @return the starttime
 	 */
@@ -147,20 +136,23 @@ public class SurveyReply extends CeReProAbstractEntity {
 	public void setPoints(String points) {
 		this.points = points;
 	}
-
+	/**
+	 * @return the candidateId
+	 */
+	public long getCandidateId() {
+		return candidateId;
+	}
+	/**
+	 * @param candidateId the candidateId to set
+	 */
+	public void setCandidateId(long candidateId) {
+		this.candidateId = candidateId;
+	}
+	@Override
 	public String toString() {
-		/* Method to transform my list of SQL objects into a string */
-		StringBuilder sb = new StringBuilder();
-		sb.append("# id: ").append(id);
-		sb.append(" - surveyId: ").append(surveyId);
-		sb.append(" - userId: ").append(userId);
-		sb.append(" - starttime: ").append(starttime);
-		sb.append(" - endtime: ").append(endtime);
-		sb.append(" - answers: ").append(answers);
-		sb.append(" - pdffilename: ").append(pdffilename);
-		sb.append(" - points: ").append(points);
-		
-		return sb.toString();
+		return "SurveyReply [id=" + id + ", surveyId=" + surveyId + ", candidateId=" + candidateId + ", starttime="
+				+ starttime + ", endtime=" + endtime + ", answers=" + answers + ", pdffilename=" + pdffilename
+				+ ", points=" + points + "]";
 	}
 
 }

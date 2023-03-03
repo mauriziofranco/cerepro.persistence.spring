@@ -17,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import centauri.academy.cerepro.persistence.entity.custom.CandidateSurveyTokenCustom;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
+import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
+import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 
 /**
  * Unit test for CandidateSurveyTokenCustomRepository
@@ -34,28 +36,17 @@ public class CandidateSurveyTokenCustomRepositoryTest extends AbstractRepository
 	@Autowired
 	private SurveyRepository sr;
 	@Autowired
+	private SurveyQuestionRepository sqr;
+	@Autowired
 	private CandidateSurveyTokenRepository candidateSurveyTokenRepository;
 	@Autowired
 	private CandidateRepository cr;
 	@Autowired
 	private CandidateStatesRepository csr;
+	@Autowired
+	private SurveyReplyRepository srr;
 	
-    /**
-     * prepareDB method prepares the database in order to test
-     * CandidateRepository's methods
-     */
-	@Before
-	@After
-	public void prepareDB () {
-		logger.info(" START -> prepareDB() ");
-		candidateSurveyTokenRepository.deleteAll();		
-		cr.deleteAll();
-		ur.deleteAll();
-		csr.deleteAll();
-		rr.deleteAll();
-		sr.deleteAll();
-		logger.info(" END -> prepareDB() ");
-	}
+    
 
     /**
      * testSelectAllFilled() method tests if the method selectAll()
@@ -64,12 +55,18 @@ public class CandidateSurveyTokenCustomRepositoryTest extends AbstractRepository
      */
 	@Test
     public void testSelectAllFilled(){
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");		
 		logger.info(" START -> selectAllFilled() ");
 		getFakeCandidateSurveyToken();
 		
 		List<CandidateSurveyTokenCustom> candidateSurveyTokenCustomList = candidateSurveyTokenRepository.getAllCustomCandidateSurveyToken();
 		for (CandidateSurveyTokenCustom current : candidateSurveyTokenCustomList) logger.info("current userSurveyTokenCustom: " + current.toString());
-		assertTrue(candidateSurveyTokenRepository.getAllCustomCandidateSurveyToken().size() == 1);		
+		assertTrue(candidateSurveyTokenRepository.getAllCustomCandidateSurveyToken().size() == 1);
+//		assertTrue(true);
 		logger.info(" END -> selectAllFilled() ");
     }
 }

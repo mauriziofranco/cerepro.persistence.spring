@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
+import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 
 /**
  * 
@@ -40,6 +41,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 	private CandidateRepository cr;
 	@Autowired
 	private CandidateSurveyTokenRepository cstr;
+	@Autowired
+	private SurveyReplyRepository srr;
 	
 	/**
      * initializeUserTests() method inserts a new Role
@@ -49,6 +52,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 	@After
     public void initializeUserTests() {	
     	logger.info("UserRepositoryTest.initializeUserTests - START");	
+    	srr.deleteAll();
     	cstr.deleteAll();
 		cr.deleteAll();
 		ur.deleteAll();	
