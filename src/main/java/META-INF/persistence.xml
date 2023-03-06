@@ -7,7 +7,6 @@
 		<class>centauri.academy.cerepro.persistence.entity.Question</class>
 		<class>centauri.academy.cerepro.persistence.entity.Role</class>
 		<class>centauri.academy.cerepro.persistence.entity.Survey</class>
-		<class>centauri.academy.cerepro.persistence.entity.SurveyInterview</class>
 		<class>centauri.academy.cerepro.persistence.entity.SurveyQuestion</class>
 		<class>centauri.academy.cerepro.persistence.entity.SurveyReply</class>
 		<class>centauri.academy.cerepro.persistence.entity.User</class>
