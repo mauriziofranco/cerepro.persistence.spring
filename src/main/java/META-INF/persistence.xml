@@ -4,9 +4,6 @@
 		<class>centauri.academy.cerepro.persistence.entity.Candidate</class>
 		<class>centauri.academy.cerepro.persistence.entity.CandidateStates</class>
 		<class>centauri.academy.cerepro.persistence.entity.CoursePage</class>
-		<class>centauri.academy.cerepro.persistence.entity.Employee</class>
-		<class>centauri.academy.cerepro.persistence.entity.Interview</class>
-		<class>centauri.academy.cerepro.persistence.entity.ItConsultant</class>
 		<class>centauri.academy.cerepro.persistence.entity.Question</class>
 		<class>centauri.academy.cerepro.persistence.entity.Role</class>
 		<class>centauri.academy.cerepro.persistence.entity.Survey</class>
@@ -14,6 +11,6 @@
 		<class>centauri.academy.cerepro.persistence.entity.SurveyQuestion</class>
 		<class>centauri.academy.cerepro.persistence.entity.SurveyReply</class>
 		<class>centauri.academy.cerepro.persistence.entity.User</class>
-		<class>centauri.academy.cerepro.persistence.entity.UserTokenSurvey</class>
+		<class>centauri.academy.cerepro.persistence.entity.CandidateSurveyToken</class>
 	</persistence-unit>
 </persistence>
