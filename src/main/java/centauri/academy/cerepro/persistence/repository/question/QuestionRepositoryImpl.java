@@ -44,7 +44,7 @@ public class QuestionRepositoryImpl implements QuestionRepositoryCustom {
 		criteria.add(cb.equal(rootTable.get("surveyId"), surveyId));
 		
 		query.where(criteria.toArray(new Predicate[criteria.size()]));
-		query.orderBy(cb.desc(rootTable.get("position")));
+		query.orderBy(cb.asc(rootTable.get("position")));
 		
 		TypedQuery<QuestionCustom> q = em.createQuery(query.multiselect(
 			joinTable.get("id"),
