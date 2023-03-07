@@ -1,3 +1,6 @@
+--update candidates set technical_note = null ;
+--update candidates set candidate_state_code = 100 ;
+
 alter table users drop column dateofbirth;
 alter table users drop column imgpath;
 alter table users drop column note;
