@@ -23,6 +23,7 @@ import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
+import centauri.academy.cerepro.persistence.repository.question.QuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
 

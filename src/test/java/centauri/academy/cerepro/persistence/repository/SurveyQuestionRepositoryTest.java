@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import centauri.academy.cerepro.persistence.entity.SurveyQuestion;
+import centauri.academy.cerepro.persistence.repository.question.QuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 
 /**

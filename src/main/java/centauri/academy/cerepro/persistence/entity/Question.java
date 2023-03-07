@@ -19,48 +19,45 @@ import org.hibernate.validator.constraints.Length;
  *
  */
 
-@Entity //specifies that class Question is an Hibernate entity
-@Table( name = "questions" ) //connect this entity with database table which have name "questions"
-//senza la riga @table lui cerca una tabella con il nome che coincide con il nome della classe
-//controlla inoltre che gli attributi coincidano con le colonne della tabella
+@Entity
+@Table(name = "questions")
 public class Question extends CeReProAbstractEntity {
 
-//	attributi
-	@Id //specifies that this field is a primary key
-	@GeneratedValue(strategy=GenerationType.IDENTITY) //specifies that this field is auto increment by db's language
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@NotNull(message="error.question.label.notnull")
-	@Length(min=3, max=500, message="error.question.label.length")
+
+	@NotNull(message = "error.question.label.notnull")
+	@Length(min = 3, max = 500, message = "error.question.label.length")
 	private String label;
-	
-	@Length(max=3000, message="error.question.description.length")
+
+	@Length(max = 3000, message = "error.question.description.length")
 	private String description;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String ansa;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String ansb;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String ansc;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String ansd;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String anse;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String ansf;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String ansg;
-	
-	@Length(max=250, message="error.question.answer.length")
+
+	@Length(max = 250, message = "error.question.answer.length")
 	private String ansh;
-	
+
 	private Boolean cansa;
 	private Boolean cansb;
 	private Boolean cansc;
@@ -69,12 +66,12 @@ public class Question extends CeReProAbstractEntity {
 	private Boolean cansf;
 	private Boolean cansg;
 	private Boolean cansh;
-	
-	@Length(max=3000, message="error.question.fullanswer.length")
-	@Column(name="full_answer")
+
+	@Length(max = 3000, message = "error.question.fullanswer.length")
+	@Column(name = "full_answer")
 	private String fullAnswer;
 
-//	costruttori
+////	costruttori
 	public Question(long id, String label, String description, String ansa, Boolean cansa) {
 		this();
 		this.id = id;
@@ -83,27 +80,85 @@ public class Question extends CeReProAbstractEntity {
 		this.ansa = ansa;
 		this.cansa = cansa;
 	}
-	
+
 	public Question(long id, String label, String description) {
 		this();
 		this.id = id;
 		this.label = label;
 		this.description = description;
 	}
-	
+
+	/**
+	 * @param id
+	 * @param label
+	 * @param description
+	 * @param ansa
+	 * @param ansb
+	 * @param ansc
+	 * @param ansd
+	 * @param anse
+	 * @param ansf
+	 * @param ansg
+	 * @param ansh
+	 * @param cansa
+	 * @param cansb
+	 * @param cansc
+	 * @param cansd
+	 * @param canse
+	 * @param cansf
+	 * @param cansg
+	 * @param cansh
+	 * @param fullAnswer
+	 */
+	public Question(long id,
+			@NotNull(message = "error.question.label.notnull") @Length(min = 3, max = 500, message = "error.question.label.length") String label,
+			@Length(max = 3000, message = "error.question.description.length") String description,
+			@Length(max = 250, message = "error.question.answer.length") String ansa,
+			@Length(max = 250, message = "error.question.answer.length") String ansb,
+			@Length(max = 250, message = "error.question.answer.length") String ansc,
+			@Length(max = 250, message = "error.question.answer.length") String ansd,
+			@Length(max = 250, message = "error.question.answer.length") String anse,
+			@Length(max = 250, message = "error.question.answer.length") String ansf,
+			@Length(max = 250, message = "error.question.answer.length") String ansg,
+			@Length(max = 250, message = "error.question.answer.length") String ansh, Boolean cansa, Boolean cansb,
+			Boolean cansc, Boolean cansd, Boolean canse, Boolean cansf, Boolean cansg, Boolean cansh,
+			@Length(max = 3000, message = "error.question.fullanswer.length") String fullAnswer) {
+		super();
+		this.id = id;
+		this.label = label;
+		this.description = description;
+		this.ansa = ansa;
+		this.ansb = ansb;
+		this.ansc = ansc;
+		this.ansd = ansd;
+		this.anse = anse;
+		this.ansf = ansf;
+		this.ansg = ansg;
+		this.ansh = ansh;
+		this.cansa = cansa;
+		this.cansb = cansb;
+		this.cansc = cansc;
+		this.cansd = cansd;
+		this.canse = canse;
+		this.cansf = cansf;
+		this.cansg = cansg;
+		this.cansh = cansh;
+		this.fullAnswer = fullAnswer;
+	}
+
 	public Question(long id, String label) {
 		this();
 		this.id = id;
 		this.label = label;
 	}
-	
+
 	public Question(String label) {
 		this();
 		this.label = label;
 	}
 
 	public Question() {
-		
+
 	}
 
 	// getters and setters
@@ -387,34 +442,13 @@ public class Question extends CeReProAbstractEntity {
 		this.fullAnswer = fullAnswer;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("id: ").append(id);
-		sb.append(" - label: ").append(label);
-		sb.append(" - description: ").append(description);
-		sb.append(" - ansa: ").append(ansa);
-		sb.append(" - ansb: ").append(ansb);
-		sb.append(" - ansc: ").append(ansc);
-		sb.append(" - ansd: ").append(ansd);
-		sb.append(" - anse: ").append(anse);
-		sb.append(" - ansf: ").append(ansf);
-		sb.append(" - ansg: ").append(ansg);
-		sb.append(" - ansh: ").append(ansh);
-		sb.append(" - cansa: ").append(cansa);
-		sb.append(" - cansb: ").append(cansb);
-		sb.append(" - cansc: ").append(cansc);
-		sb.append(" - cansd: ").append(cansd);
-		sb.append(" - canse: ").append(canse);
-		sb.append(" - cansf: ").append(cansf);
-		sb.append(" - cansg: ").append(cansg);
-		sb.append(" - cansh: ").append(cansh);
-		sb.append(" - fullAnswer: ").append(fullAnswer);
-		return sb.toString();
+		return "Question [id=" + id + ", label=" + label + ", description=" + description + ", ansa=" + ansa + ", ansb="
+				+ ansb + ", ansc=" + ansc + ", ansd=" + ansd + ", anse=" + anse + ", ansf=" + ansf + ", ansg=" + ansg
+				+ ", ansh=" + ansh + ", cansa=" + cansa + ", cansb=" + cansb + ", cansc=" + cansc + ", cansd=" + cansd
+				+ ", canse=" + canse + ", cansf=" + cansf + ", cansg=" + cansg + ", cansh=" + cansh + ", fullAnswer="
+				+ fullAnswer + "]";
 	}
 
-	
 }

@@ -1,4 +1,4 @@
-package centauri.academy.cerepro.persistence.repository;
+package centauri.academy.cerepro.persistence.repository.question;
 
 import java.util.List;
 
@@ -10,13 +10,15 @@ import centauri.academy.cerepro.persistence.entity.Question;
  * QuestionRepository with SpringBoot
  * 
  * It allows the management of the question table, through insert, delete,
- * update and insert question The connection with Database is made by ConfigDB
- * java class
+ * update and insert question
  * 
  * @author daniele piccinni
+ * @author maurizio.franco@ymail.com
  *
  */
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface QuestionRepository extends JpaRepository<Question, Long>, QuestionRepositoryCustom {
 	List<Question> findByLabel(String label);
+	
+	
 }
