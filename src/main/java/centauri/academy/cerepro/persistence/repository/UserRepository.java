@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.User;
@@ -28,5 +30,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
 	List<User> findByRole(int role);
+	
+	@Modifying
+	@Query("UPDATE users SET u.enabled :b WHERE u.id :id")
+	Integer updateEnabledById(@Param("id") Long id, @Param("b") Boolean b);
 
 }

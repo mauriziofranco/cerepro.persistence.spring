@@ -175,4 +175,16 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		Page<User> currentPage = ur.findAll(PageRequest.of(1, 5, Sort.Direction.ASC, "email"));
 		assertTrue(currentPage.getNumberOfElements() == 0);
     }
+	
+	/*
+	 * testUpdateEnabled() method tests if the method updateEnabledById(Integer id, Boolean b)
+	 * is really able to update a user "enabled" value
+	 */
+	@Test
+	public void testUpdateEnabled() {
+		logger.info("UserRepositoryTest.testUpdateEnabled() - START");
+		User currentUser=getFakeUser();
+		System.out.println(currentUser.isEnabled());
+		assertTrue(ur.updateEnabledById(currentUser.getId(), true)==1?true:false);
+	}
 }
