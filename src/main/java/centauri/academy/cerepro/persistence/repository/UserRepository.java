@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.entity.User;
 
 /**
@@ -21,6 +22,7 @@ import centauri.academy.cerepro.persistence.entity.User;
  * @author joffre
  * @author anna
  * @author m.franco
+ * @author Antonio Iannaccone - Roma Academy VII
  */
 
 @Repository
@@ -28,5 +30,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
 	List<User> findByRole(int role);
+	Optional<User> findById(Long id);
 
 }
