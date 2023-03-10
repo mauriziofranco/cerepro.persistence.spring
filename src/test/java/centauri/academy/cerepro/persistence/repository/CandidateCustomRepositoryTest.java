@@ -55,7 +55,13 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 		logger.info(" START -> selectById() ");
 		Candidate currentCandidate = getFakeCandidate();
 		logger.info(" testSelectById -> {}", currentCandidate);
-		CandidateCustom currentCandidateCustom = candidateRepository.getSingleCustomCandidate(currentCandidate.getId());
+		CandidateCustom currentCandidateCustom = null;
+		try {
+			currentCandidateCustom = candidateRepository.getSingleCustomCandidate(currentCandidate.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		logger.info("current candidate custom  " + currentCandidateCustom);
 		assertTrue( currentCandidateCustom != null ); 
 		logger.info(" END -> selectById() ");

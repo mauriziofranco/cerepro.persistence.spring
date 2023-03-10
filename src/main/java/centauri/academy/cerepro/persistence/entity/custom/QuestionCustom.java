@@ -1,10 +1,10 @@
 package centauri.academy.cerepro.persistence.entity.custom;
 
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
 import centauri.academy.cerepro.persistence.entity.Question;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * 

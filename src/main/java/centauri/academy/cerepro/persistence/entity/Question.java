@@ -1,14 +1,14 @@
 package centauri.academy.cerepro.persistence.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Question
@@ -25,51 +25,51 @@ public class Question extends CeReProAbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	protected long id;
 
 	@NotNull(message = "error.question.label.notnull")
 	@Length(min = 3, max = 500, message = "error.question.label.length")
-	private String label;
+	protected String label;
 
 	@Length(max = 3000, message = "error.question.description.length")
-	private String description;
+	protected String description;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String ansa;
+	protected String ansa;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String ansb;
+	protected String ansb;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String ansc;
+	protected String ansc;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String ansd;
+	protected String ansd;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String anse;
+	protected String anse;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String ansf;
+	protected String ansf;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String ansg;
+	protected String ansg;
 
 	@Length(max = 250, message = "error.question.answer.length")
-	private String ansh;
+	protected String ansh;
 
-	private Boolean cansa;
-	private Boolean cansb;
-	private Boolean cansc;
-	private Boolean cansd;
-	private Boolean canse;
-	private Boolean cansf;
-	private Boolean cansg;
-	private Boolean cansh;
+	protected Boolean cansa;
+	protected Boolean cansb;
+	protected Boolean cansc;
+	protected Boolean cansd;
+	protected Boolean canse;
+	protected Boolean cansf;
+	protected Boolean cansg;
+	protected Boolean cansh;
 
 	@Length(max = 3000, message = "error.question.fullanswer.length")
 	@Column(name = "full_answer")
-	private String fullAnswer;
+	protected String fullAnswer;
 
 ////	costruttori
 	public Question(long id, String label, String description, String ansa, Boolean cansa) {

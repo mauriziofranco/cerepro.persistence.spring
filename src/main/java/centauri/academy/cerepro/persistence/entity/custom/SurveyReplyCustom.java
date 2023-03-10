@@ -1,9 +1,6 @@
 package centauri.academy.cerepro.persistence.entity.custom;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
 
 import centauri.academy.cerepro.persistence.entity.CeReProAbstractEntity;
 
