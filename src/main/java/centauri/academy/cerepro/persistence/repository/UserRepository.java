@@ -31,12 +31,10 @@ import centauri.academy.cerepro.persistence.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
-	Optional<User> findById(Long id);
 	List<User> findByRole(int role);
 	
-	@Transactional
 	@Modifying
-	@Query("UPDATE User as u SET u.enabled :b WHERE u.id :id")
-	Integer updateEnabledById(@Param("id") long id, @Param("b") boolean b);
+	@Query("UPDATE users SET u.enabled :b WHERE u.id :id")
+	Integer updateEnabledById(@Param("id") Long id, @Param("b") Boolean b);
 
 }
