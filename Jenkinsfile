@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent { 
+	    label 'Locale-Master-Node' 
+	    
+	}	
     stages {        
         stage("Compile") {
             steps {
