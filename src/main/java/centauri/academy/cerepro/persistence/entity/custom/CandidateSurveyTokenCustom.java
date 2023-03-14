@@ -32,6 +32,8 @@ public class CandidateSurveyTokenCustom {
 	private LocalDateTime expirationDateTime;
 	private String generatedToken;
 	private boolean expired;
+	private Long surveyreplyId=93L;
+	private String urlPdf="Maurizio-Franco-3-13-93.pdf";
 	
 	/**
 	 * @param id
@@ -59,6 +61,20 @@ public class CandidateSurveyTokenCustom {
 		this.expirationDateTime = expirationDateTime;
 		this.generatedToken = generatedToken;
 		this.expired = expired;
+	}
+
+	/**
+	 * @return the urlPdf
+	 */
+	public String getUrlPdf() {
+		return urlPdf;
+	}
+
+	/**
+	 * @param urlPdf the urlPdf to set
+	 */
+	public void setUrlPdf(String urlPdf) {
+		this.urlPdf = urlPdf;
 	}
 
 	/**
@@ -92,6 +108,20 @@ public class CandidateSurveyTokenCustom {
 	public CandidateSurveyTokenCustom() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @return the surveyreplyId
+	 */
+	public Long getSurveyreplyId() {
+		return surveyreplyId;
+	}
+
+	/**
+	 * @param surveyreplyId the surveyreplyId to set
+	 */
+	public void setSurveyreplyId(Long surveyreplyId) {
+		this.surveyreplyId = surveyreplyId;
 	}
 
 	/**
