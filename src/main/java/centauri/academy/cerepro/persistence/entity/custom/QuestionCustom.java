@@ -77,7 +77,7 @@ public class QuestionCustom extends Question {
 
 	@Override
 	public String toString() {
-		return "QuestionCustom [position=" + position + ", getId()=" + getId() + ", getLabel()=" + getLabel()
+		return "QuestionCustom [getId()=" + getId() + " position=" + position + ", getLabel()=" + getLabel()
 				+ ", getDescription()=" + getDescription() + ", getAnsa()=" + getAnsa() + ", getAnsb()=" + getAnsb()
 				+ ", getAnsc()=" + getAnsc() + ", getAnsd()=" + getAnsd() + ", getAnse()=" + getAnse() + ", getAnsf()="
 				+ getAnsf() + ", getAnsg()=" + getAnsg() + ", getAnsh()=" + getAnsh() + ", getCansa()=" + getCansa()

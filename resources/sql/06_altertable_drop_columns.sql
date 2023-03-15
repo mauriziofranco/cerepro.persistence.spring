@@ -51,6 +51,14 @@ alter table candidates drop column user_id;
 
 drop table if exists usersurveytoken;
 
+delete from users where id > 0 and id <= 12;
+delete from users where id >= 14 and id <= 53;
+update users set password = (select password from users where id = 56) where id = 13;
+update users set email = 'm.franco@proximanetwork.it' where id = 13;
+update candidates set inserted_by=13 where id >=72;
+
+update users set enabled=true where id = 13;
+
 
 
 
