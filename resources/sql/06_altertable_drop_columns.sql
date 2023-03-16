@@ -59,6 +59,10 @@ update candidates set inserted_by=13 where id >=72;
 
 update users set enabled=true where id = 13;
 
+
+#
+#16/03/23
+#
 alter table surveyreplies add generated_token varchar(50);
 
 //COURSEPAGE - USER LEGACY
