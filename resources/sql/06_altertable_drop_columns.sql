@@ -63,10 +63,13 @@ update users set enabled=true where id = 13;
 
 #
 #16/03/23
-#
-alter table surveyreplies add generated_token varchar(50);
 
-//COURSEPAGE - USER LEGACY
+#task 54 di daim - START
+alter table surveyreplies add generated_token varchar(50);
+#task 54 di daim - END
+
+
+#task 66 di matteo - START
 drop table if exists positionuserowner;
 
 create table positionuserowner (
@@ -77,7 +80,7 @@ create table positionuserowner (
     foreign key (user_id) references users(id)    
 );
 
-
+#task 66 di matteo - END
 
 
 
