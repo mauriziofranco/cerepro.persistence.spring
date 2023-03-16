@@ -59,6 +59,19 @@ update candidates set inserted_by=13 where id >=72;
 
 update users set enabled=true where id = 13;
 
+alter table surveyreplies add generated_token varchar(50);
+
+//COURSEPAGE - USER LEGACY
+drop table if exists positionuserowner;
+
+create table positionuserowner (
+    id bigint primary key auto_increment,
+    course_page_id bigint not null,
+    user_id bigint not null,    
+    foreign key (course_page_id) references coursepage(id),
+    foreign key (user_id) references users(id)    
+);
+
 
 
 
