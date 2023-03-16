@@ -32,8 +32,42 @@ public class CandidateSurveyTokenCustom {
 	private LocalDateTime expirationDateTime;
 	private String generatedToken;
 	private boolean expired;
-	private Long surveyreplyId=93L;
-	private String urlPdf="Maurizio-Franco-3-13-93.pdf";
+	private Long surveyReplyId;
+	private String urlPdf;
+	
+	/**
+	 * @param id
+	 * @param candidateId
+	 * @param firstname
+	 * @param lastname
+	 * @param email
+	 * @param surveyId
+	 * @param surveyLabel
+	 * @param expirationDateTime
+	 * @param generatedToken
+	 * @param expired
+	 * Long surveyReplyId;
+	private String urlPdf
+	 */
+	public CandidateSurveyTokenCustom(Long id, Long candidateId, String firstname, String lastname, String email,
+			Long surveyId, String surveyLabel, LocalDateTime expirationDateTime, String generatedToken,
+			boolean expired, 
+			Long surveyReplyId,
+	String urlPdf) {
+		super();
+		this.id = id;
+		this.candidateId = candidateId;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.surveyId = surveyId;
+		this.surveyLabel = surveyLabel;
+		this.expirationDateTime = expirationDateTime;
+		this.generatedToken = generatedToken;
+		this.expired = expired;
+		this.surveyReplyId = surveyReplyId;
+		this.urlPdf = urlPdf;
+	}
 	
 	/**
 	 * @param id
@@ -61,20 +95,6 @@ public class CandidateSurveyTokenCustom {
 		this.expirationDateTime = expirationDateTime;
 		this.generatedToken = generatedToken;
 		this.expired = expired;
-	}
-
-	/**
-	 * @return the urlPdf
-	 */
-	public String getUrlPdf() {
-		return urlPdf;
-	}
-
-	/**
-	 * @param urlPdf the urlPdf to set
-	 */
-	public void setUrlPdf(String urlPdf) {
-		this.urlPdf = urlPdf;
 	}
 
 	/**
@@ -108,20 +128,6 @@ public class CandidateSurveyTokenCustom {
 	public CandidateSurveyTokenCustom() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @return the surveyreplyId
-	 */
-	public Long getSurveyreplyId() {
-		return surveyreplyId;
-	}
-
-	/**
-	 * @param surveyreplyId the surveyreplyId to set
-	 */
-	public void setSurveyreplyId(Long surveyreplyId) {
-		this.surveyreplyId = surveyreplyId;
 	}
 
 	/**
@@ -264,12 +270,43 @@ public class CandidateSurveyTokenCustom {
 		this.expired = expired;
 	}
 
+	/**
+	 * @return the surveyReplyId
+	 */
+	public Long getSurveyReplyId() {
+		return surveyReplyId;
+	}
+
+	/**
+	 * @param surveyReplyId the surveyReplyId to set
+	 */
+	public void setSurveyReplyId(Long surveyReplyId) {
+		this.surveyReplyId = surveyReplyId;
+	}
+
+	/**
+	 * @return the urlPdf
+	 */
+	public String getUrlPdf() {
+		return urlPdf;
+	}
+
+	/**
+	 * @param urlPdf the urlPdf to set
+	 */
+	public void setUrlPdf(String urlPdf) {
+		this.urlPdf = urlPdf;
+	}
+
 	@Override
 	public String toString() {
-		return "CandidateSurveyTokenCustom [id=" + id + ", candidateId=" + candidateId + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", email=" + email + ", surveyId=" + surveyId + ", surveyLabel="
-				+ surveyLabel + ", expirationDateTime=" + expirationDateTime + ", generatedToken=" + generatedToken
-				+ ", expired=" + expired + "]";
+		return "CandidateSurveyTokenCustom [id=" + id + ", candidateId="
+				+ candidateId + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", email=" + email + ", surveyId=" + surveyId
+				+ ", surveyLabel=" + surveyLabel + ", expirationDateTime="
+				+ expirationDateTime + ", generatedToken=" + generatedToken
+				+ ", expired=" + expired + ", surveyReplyId=" + surveyReplyId
+				+ ", urlPdf=" + urlPdf + "]";
 	}
 
 }

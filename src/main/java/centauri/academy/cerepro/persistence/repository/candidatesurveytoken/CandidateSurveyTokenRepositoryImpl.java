@@ -13,15 +13,13 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import centauri.academy.cerepro.persistence.entity.Role;
 import org.springframework.stereotype.Repository;
 
-import centauri.academy.cerepro.persistence.entity.Survey;
-import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.entity.CandidateSurveyToken;
+import centauri.academy.cerepro.persistence.entity.Survey;
+import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.custom.CandidateSurveyTokenCustom;
 /**
  * CandidateSurveyTokenRepositoryImpl
@@ -45,9 +43,12 @@ public class CandidateSurveyTokenRepositoryImpl implements CandidateSurveyTokenR
 		Root<CandidateSurveyToken> rootTable = query.from(CandidateSurveyToken.class);
 		Root<Candidate> joinCandidateTable = query.from(Candidate.class);
 		Root<Survey> joinSurveyTable = query.from(Survey.class);
+		Root<SurveyReply> joinSurveyReplyTable = query.from(SurveyReply.class);
 		List<Predicate> criteria = new ArrayList<Predicate>();
 		criteria.add(cb.equal(rootTable.get("candidateId"), joinCandidateTable.get("id")));
 		criteria.add(cb.equal(rootTable.get("surveyId"), joinSurveyTable.get("id")));
+		
+		criteria.add(cb.equal(rootTable.get("generatedToken"), joinSurveyReplyTable.get("generated_token")));
 		
 		query.where(criteria.toArray(new Predicate[criteria.size()]));
 		query.orderBy(cb.desc(rootTable.get("id")));
@@ -61,7 +62,11 @@ public class CandidateSurveyTokenRepositoryImpl implements CandidateSurveyTokenR
 			joinSurveyTable.get("label"),
 			rootTable.get("expirationDateTime"),
 			rootTable.get("generatedToken"),
-			rootTable.get("expired")
+			rootTable.get("expired"),
+			joinSurveyReplyTable.get("id"),
+			joinSurveyReplyTable.get("pdffilename")
+			
+			
 		));
 		List<CandidateSurveyTokenCustom> resultList = q.getResultList();
 		return resultList ;
@@ -75,10 +80,13 @@ public class CandidateSurveyTokenRepositoryImpl implements CandidateSurveyTokenR
 		Root<CandidateSurveyToken> rootTable = query.from(CandidateSurveyToken.class);
 		Root<Candidate> joinCandidateTable = query.from(Candidate.class);
 		Root<Survey> joinSurveyTable = query.from(Survey.class);
+		Root<SurveyReply> joinSurveyReplyTable = query.from(SurveyReply.class);
 		List<Predicate> criteria = new ArrayList<Predicate>();
 		criteria.add(cb.equal(rootTable.get("candidateId"), joinCandidateTable.get("id")));
 		criteria.add(cb.equal(rootTable.get("surveyId"), joinSurveyTable.get("id")));
 		criteria.add(cb.equal(rootTable.get("expired"), situation));
+		
+		criteria.add(cb.equal(rootTable.get("generatedToken"), joinSurveyReplyTable.get("generated_token")));
 
 //		criteria.add(cb.equal(joinTableUser.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
 		
@@ -93,7 +101,9 @@ public class CandidateSurveyTokenRepositoryImpl implements CandidateSurveyTokenR
 				joinSurveyTable.get("label"),
 				rootTable.get("expirationDateTime"),
 				rootTable.get("generatedToken"),
-				rootTable.get("expired")
+				rootTable.get("expired"),
+				joinSurveyReplyTable.get("id"),
+				joinSurveyReplyTable.get("pdffilename")
 				));
 		List<CandidateSurveyTokenCustom> resultList = q.getResultList();
 		int start=(int) info.getOffset();
