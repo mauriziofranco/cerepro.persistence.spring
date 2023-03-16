@@ -49,6 +49,21 @@ public class SurveyReply extends CeReProAbstractEntity {
 	
 	@Column (name="points")
 	private String points;
+	
+	@Column (name="generated_token")
+	private String generated_token;
+	/**
+	 * @return the generated_token
+	 */
+	public String getGenerated_token() {
+		return generated_token;
+	}
+	/**
+	 * @param generated_token the generated_token to set
+	 */
+	public void setGenerated_token(String generated_token) {
+		this.generated_token = generated_token;
+	}
 	/**
 	 * @return the id
 	 */

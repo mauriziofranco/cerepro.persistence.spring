@@ -185,9 +185,10 @@ public abstract class AbstractRepositoryTest {
 		testSR.setAnswers("qualcosa");
 		testSR.setPdffilename("qualcosa");
 		testSR.setPoints("bravo");
+		testSR.setGenerated_token(getFakeCandidateSurveyToken().getGeneratedToken());
 		surveyReplyRepository.save(testSR);
 		return testSR;
-	}
+	}	
 	
 //	protected CandidateSurveyToken getFakeCandidateSurveyToken() {
 //		CandidateSurveyToken testCST = new CandidateSurveyToken();
@@ -213,7 +214,7 @@ public abstract class AbstractRepositoryTest {
 		else
 			testCST.setCandidateId(candidates.get(0).getId());
 		testCST.setSurveyId(getFakeSurvey().getId());
-//		testUST.setGeneratedtoken("AAABBBCCCC");
+		testCST.setGeneratedToken("WI9DKPJE");
 		testCST.setExpirationDateTime(LocalDateTime.now());
 		candidateSurveyTokenRepository.save(testCST);
 		return testCST;

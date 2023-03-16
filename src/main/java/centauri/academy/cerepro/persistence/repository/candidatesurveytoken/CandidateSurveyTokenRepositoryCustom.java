@@ -21,4 +21,6 @@ public interface CandidateSurveyTokenRepositoryCustom  {
 	
 	Page<CandidateSurveyTokenCustom> getAllCustomCandidateSurveyTokenExpiredPaginated(Pageable info, Boolean situation);
 
+//	CandidateSurveyTokenCustom findCandidateSurveyTokenCustomByGeneratedCustom(Long id);
+	
 }
