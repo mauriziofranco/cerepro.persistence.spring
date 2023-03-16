@@ -61,11 +61,12 @@ public class CandidateSurveyTokenCustomRepositoryTest extends AbstractRepository
 		logger.info("############################");
 		logger.info("############################");		
 		logger.info(" START -> selectAllFilled() ");
-		getFakeCandidateSurveyToken();
-		
+//		getFakeCandidateSurveyToken();
+		getFakeSurveyReply();
+		System.out.println(" ------------------------- BELLA -----------------------");
 		List<CandidateSurveyTokenCustom> candidateSurveyTokenCustomList = candidateSurveyTokenRepository.getAllCustomCandidateSurveyToken();
 		for (CandidateSurveyTokenCustom current : candidateSurveyTokenCustomList) logger.info("current userSurveyTokenCustom: " + current.toString());
-		assertTrue(candidateSurveyTokenRepository.getAllCustomCandidateSurveyToken().size() == 1);
+		assertTrue(candidateSurveyTokenCustomList.size() == 1);
 //		assertTrue(true);
 		logger.info(" END -> selectAllFilled() ");
     }
