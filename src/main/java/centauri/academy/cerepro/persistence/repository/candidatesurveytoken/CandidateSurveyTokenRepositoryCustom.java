@@ -20,7 +20,7 @@ public interface CandidateSurveyTokenRepositoryCustom  {
 	List<CandidateSurveyTokenCustom> getAllCustomCandidateSurveyToken() ;
 	
 	Page<CandidateSurveyTokenCustom> getAllCustomCandidateSurveyTokenExpiredPaginated(Pageable info, Boolean situation);
-
-//	CandidateSurveyTokenCustom findCandidateSurveyTokenCustomByGeneratedCustom(Long id);
 	
+	List<CandidateSurveyTokenCustom> getAllCustomCandidateSurveyTokenActive () ;
+
 }
