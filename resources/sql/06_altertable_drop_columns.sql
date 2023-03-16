@@ -45,6 +45,8 @@ alter table surveyreplies DROP FOREIGN KEY surveyreplies_ibfk_2;
 alter table surveyreplies drop column user_id;
 
 alter table surveyreplies ADD FOREIGN KEY (candidate_id) references candidates(id);
+alter table surveyreplies add generated_token varchar(50);
+
 
 alter table candidates DROP FOREIGN KEY candidates_ibfk_1;
 alter table candidates drop column user_id;

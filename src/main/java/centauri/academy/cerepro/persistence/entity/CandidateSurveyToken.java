@@ -44,7 +44,7 @@ public class CandidateSurveyToken extends CeReProAbstractEntity {
 	private LocalDateTime expirationDateTime ;
 	
 	private boolean expired;
-
+	
 	/**
 	 * @param id
 	 * @param candidateId
