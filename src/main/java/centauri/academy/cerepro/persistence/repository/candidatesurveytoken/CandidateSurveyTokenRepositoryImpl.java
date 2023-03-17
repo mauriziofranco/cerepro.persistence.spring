@@ -11,9 +11,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import centauri.academy.cerepro.persistence.entity.Candidate;
@@ -31,6 +30,8 @@ import centauri.academy.cerepro.persistence.entity.custom.CandidateSurveyTokenCu
  */
 @Repository
 public class CandidateSurveyTokenRepositoryImpl implements CandidateSurveyTokenRepositoryCustom {
+	
+	public static final Logger logger = LoggerFactory.getLogger(CandidateSurveyTokenRepositoryImpl.class);
 
 	@PersistenceContext
 	private EntityManager em;
@@ -73,46 +74,46 @@ public class CandidateSurveyTokenRepositoryImpl implements CandidateSurveyTokenR
 	}
 	
 	/********** PAGEABLE  -> START */
-	public Page<CandidateSurveyTokenCustom> getAllCustomCandidateSurveyTokenExpiredPaginated(Pageable info, Boolean situation) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<CandidateSurveyTokenCustom> query = null;
-		query = cb.createQuery(CandidateSurveyTokenCustom.class);
-		Root<CandidateSurveyToken> rootTable = query.from(CandidateSurveyToken.class);
-		Root<Candidate> joinCandidateTable = query.from(Candidate.class);
-		Root<Survey> joinSurveyTable = query.from(Survey.class);
-		Root<SurveyReply> joinSurveyReplyTable = query.from(SurveyReply.class);
-		List<Predicate> criteria = new ArrayList<Predicate>();
-		criteria.add(cb.equal(rootTable.get("candidateId"), joinCandidateTable.get("id")));
-		criteria.add(cb.equal(rootTable.get("surveyId"), joinSurveyTable.get("id")));
-		criteria.add(cb.equal(rootTable.get("expired"), situation));
-		
-		criteria.add(cb.equal(rootTable.get("generatedToken"), joinSurveyReplyTable.get("generated_token")));
-
-//		criteria.add(cb.equal(joinTableUser.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
-		
-		query.where(criteria.toArray(new Predicate[criteria.size()]));
-		TypedQuery<CandidateSurveyTokenCustom> q = em.createQuery(query.multiselect(
-				rootTable.get("id"),
-				rootTable.get("candidateId"), 
-				joinCandidateTable.get("firstname"),
-				joinCandidateTable.get("lastname"),
-				joinCandidateTable.get("email"),
-				rootTable.get("surveyId"),
-				joinSurveyTable.get("label"),
-				rootTable.get("expirationDateTime"),
-				rootTable.get("generatedToken"),
-				rootTable.get("expired"),
-				joinSurveyReplyTable.get("id"),
-				joinSurveyReplyTable.get("pdffilename")
-				));
-		List<CandidateSurveyTokenCustom> resultList = q.getResultList();
-		int start=(int) info.getOffset();
-		int end = (start + info.getPageSize()) > resultList .size() ? resultList .size() : (start + info.getPageSize());        
-		int totalRows = resultList .size();
-		Page<CandidateSurveyTokenCustom> pageToReturn = new PageImpl<CandidateSurveyTokenCustom>(resultList .subList(start, end), info, totalRows); 
-		return pageToReturn;
-	
-	}
+//	public Page<CandidateSurveyTokenCustom> getAllCustomCandidateSurveyTokenExpiredPaginated(Pageable info, Boolean situation) {
+//		CriteriaBuilder cb = em.getCriteriaBuilder();
+//		CriteriaQuery<CandidateSurveyTokenCustom> query = null;
+//		query = cb.createQuery(CandidateSurveyTokenCustom.class);
+//		Root<CandidateSurveyToken> rootTable = query.from(CandidateSurveyToken.class);
+//		Root<Candidate> joinCandidateTable = query.from(Candidate.class);
+//		Root<Survey> joinSurveyTable = query.from(Survey.class);
+//		Root<SurveyReply> joinSurveyReplyTable = query.from(SurveyReply.class);
+//		List<Predicate> criteria = new ArrayList<Predicate>();
+//		criteria.add(cb.equal(rootTable.get("candidateId"), joinCandidateTable.get("id")));
+//		criteria.add(cb.equal(rootTable.get("surveyId"), joinSurveyTable.get("id")));
+//		criteria.add(cb.equal(rootTable.get("expired"), situation));
+//		
+//		criteria.add(cb.equal(rootTable.get("generatedToken"), joinSurveyReplyTable.get("generated_token")));
+//
+////		criteria.add(cb.equal(joinTableUser.get("role"), Role.JAVA_COURSE_CANDIDATE_LEVEL));
+//		
+//		query.where(criteria.toArray(new Predicate[criteria.size()]));
+//		TypedQuery<CandidateSurveyTokenCustom> q = em.createQuery(query.multiselect(
+//				rootTable.get("id"),
+//				rootTable.get("candidateId"), 
+//				joinCandidateTable.get("firstname"),
+//				joinCandidateTable.get("lastname"),
+//				joinCandidateTable.get("email"),
+//				rootTable.get("surveyId"),
+//				joinSurveyTable.get("label"),
+//				rootTable.get("expirationDateTime"),
+//				rootTable.get("generatedToken"),
+//				rootTable.get("expired"),
+//				joinSurveyReplyTable.get("id"),
+//				joinSurveyReplyTable.get("pdffilename")
+//				));
+//		List<CandidateSurveyTokenCustom> resultList = q.getResultList();
+//		int start=(int) info.getOffset();
+//		int end = (start + info.getPageSize()) > resultList .size() ? resultList .size() : (start + info.getPageSize());        
+//		int totalRows = resultList .size();
+//		Page<CandidateSurveyTokenCustom> pageToReturn = new PageImpl<CandidateSurveyTokenCustom>(resultList .subList(start, end), info, totalRows); 
+//		return pageToReturn;
+//	
+//	}
 	
 /*********** PAGEABLE  -> END */
 	
@@ -182,19 +183,20 @@ public class CandidateSurveyTokenRepositoryImpl implements CandidateSurveyTokenR
 	}
 	
 	public List<CandidateSurveyTokenCustom> getAllCustomCandidateSurveyTokenExpiredAndNotExecuted() {
+		logger.info("getAllCustomCandidateSurveyTokenExpiredAndNotExecuted - START - ");
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<CandidateSurveyTokenCustom> query = null;
 		query = cb.createQuery(CandidateSurveyTokenCustom.class);
 		Root<CandidateSurveyToken> rootTable = query.from(CandidateSurveyToken.class);
 		Root<Candidate> joinCandidateTable = query.from(Candidate.class);
 		Root<Survey> joinSurveyTable = query.from(Survey.class);
-//		Root<SurveyReply> joinSurveyReplyTable = query.from(SurveyReply.class);
+		Root<SurveyReply> joinSurveyReplyTable = query.from(SurveyReply.class);
 		List<Predicate> criteria = new ArrayList<Predicate>();
 		criteria.add(cb.equal(rootTable.get("candidateId"), joinCandidateTable.get("id")));
 		criteria.add(cb.equal(rootTable.get("surveyId"), joinSurveyTable.get("id")));
 		criteria.add(cb.equal(rootTable.get("expired"), true));
 		
-		criteria.add(cb.equal(rootTable.get("generatedToken"), null));
+		criteria.add(cb.notEqual(rootTable.get("generatedToken"), joinSurveyReplyTable.get("generated_token")));
 		
 		query.where(criteria.toArray(new Predicate[criteria.size()]));
 		TypedQuery<CandidateSurveyTokenCustom> q = em.createQuery(query.multiselect(
