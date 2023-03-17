@@ -25,7 +25,7 @@ import centauri.academy.cerepro.persistence.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
-	List<User> findByRole(int role);
+	List <Optional <User>> findByRole(int role);
 	
 	@Transactional
 	@Modifying
