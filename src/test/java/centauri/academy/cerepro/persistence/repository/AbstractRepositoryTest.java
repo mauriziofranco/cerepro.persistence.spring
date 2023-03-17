@@ -15,6 +15,7 @@ import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.entity.CandidateStates;
 import centauri.academy.cerepro.persistence.entity.CandidateSurveyToken;
 import centauri.academy.cerepro.persistence.entity.CoursePage;
+import centauri.academy.cerepro.persistence.entity.PositionUserOwner;
 import centauri.academy.cerepro.persistence.entity.Question;
 import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.Survey;
@@ -53,6 +54,8 @@ public abstract class AbstractRepositoryTest {
 	protected SurveyQuestionRepository surveyQuestionRepository;
 	@Autowired
 	protected CoursePageRepository coursePageRepository;
+	@Autowired
+	protected PositionUserOwnerRepository positionUserOwnerRepository;
 	@Autowired
 	protected CandidateStatesRepository candidateStatesRepository;
 	
@@ -233,6 +236,17 @@ public abstract class AbstractRepositoryTest {
 	protected CoursePage getFakeCoursePage() {
 		int random = (int) (Math.random() * 10000);
 		return getFakeCoursePageWithCode("FakeFileName " + random);
+	}
+	
+	protected PositionUserOwner getFakePositionUserOwner() {
+		User testUser = getFakeUser();
+		CoursePage testCoursePage = getFakeCoursePage();
+		PositionUserOwner testPositionUserOwner = new PositionUserOwner();
+		int random = (int) (Math.random() * 10000);
+		testPositionUserOwner.setCoursePageId(testCoursePage.getId());
+		testPositionUserOwner.setUserId(testUser.getId());
+		return testPositionUserOwner;
+		
 	}
 
 	protected CandidateSurveyToken getFakeUserTokenSurveyExpired() {
