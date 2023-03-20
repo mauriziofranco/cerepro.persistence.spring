@@ -30,7 +30,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class PositionUserOwner {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

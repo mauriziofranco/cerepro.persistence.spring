@@ -2,6 +2,7 @@ package centauri.academy.cerepro.persistence.repository;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import centauri.academy.cerepro.persistence.entity.CoursePage;
+import centauri.academy.cerepro.persistence.entity.custom.CoursePageCustom;
 
 /**
  * 
@@ -23,15 +25,7 @@ import centauri.academy.cerepro.persistence.entity.CoursePage;
 @SpringBootTest
 public class CoursePageRepositoryTest extends AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(CoursePageRepositoryTest.class);
-	
-	@Before
-	@After
-    public void initializeCoursePageTest() {
-    	logger.info("CoursePageRepositoryTest.initializeCoursePageTest - START");    	
-    	coursePageRepository.deleteAll();
-		logger.info("CoursePageRepositoryTest.initializeCoursePageTest - END");
-    }
-	
+		
 	@Test
     public void testSelectAllFilled(){
     	logger.info("CoursePageRepositoryTest.testSelectAllFilled() - START");    	
@@ -113,5 +107,16 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
 		assertTrue(coursePageRepository.count()==0);
 		logger.info("CoursePageRepositoryTest.testDeleteAll() - END");
 	}
+	
+	@Test
+    public void testSelectAllCustomFilled(){
+    	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - START");    	
+    	getFakePositionUserOwner();
+    	List<CoursePageCustom> customList = coursePageRepository.findAllCustom() ;
+    	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - DEBUG - customList.size():{}", customList.size());
+    	assertTrue(customList.size() > 0);
+    	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - END");
+    }
+	
 
 }

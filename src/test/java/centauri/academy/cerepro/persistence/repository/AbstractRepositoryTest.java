@@ -24,6 +24,7 @@ import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
+import centauri.academy.cerepro.persistence.repository.coursepage.CoursePageRepository;
 import centauri.academy.cerepro.persistence.repository.question.QuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
@@ -77,11 +78,17 @@ public abstract class AbstractRepositoryTest {
 		candidateSurveyTokenRepository.deleteAll();		
 		surveyRepository.deleteAll();
 		candidateRepository.deleteAll();
+		positionUserOwnerRepository.deleteAll();
 		userRepository.deleteAll();
 		coursePageRepository.deleteAll();
 		candidateStatesRepository.deleteAll();
 		roleRepository.deleteAll();
 		logger.info(" END -> prepareDB() ");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");		
 	}
 	
 	protected Role getFakeRole() {
@@ -239,12 +246,12 @@ public abstract class AbstractRepositoryTest {
 	}
 	
 	protected PositionUserOwner getFakePositionUserOwner() {
-		User testUser = getFakeUser();
+		User testUser = getFakeUser(50);
 		CoursePage testCoursePage = getFakeCoursePage();
 		PositionUserOwner testPositionUserOwner = new PositionUserOwner();
-		int random = (int) (Math.random() * 10000);
 		testPositionUserOwner.setCoursePageId(testCoursePage.getId());
 		testPositionUserOwner.setUserId(testUser.getId());
+		positionUserOwnerRepository.save(testPositionUserOwner);
 		return testPositionUserOwner;
 		
 	}
