@@ -21,6 +21,5 @@ public interface CoursePageRepositoryCustom {
 	
 	List<CoursePageCustom> findAllCustom();
 	
-	List<CoursePageCustom> findAllCustomEmpty();
 	
 }
