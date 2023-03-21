@@ -26,7 +26,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class PositionUserOwner {
@@ -44,4 +43,13 @@ public class PositionUserOwner {
 	@Column(name = "user_id")
 	private Long userId;
 
+	public PositionUserOwner(@NotNull(message = "error.positionuserowner.course_page_id.notnull") Long coursePageId,
+			@NotNull(message = "error.positionuserowner.user_id.notnull") Long userId) {
+		super();
+		this.coursePageId = coursePageId;
+		this.userId = userId;
+	}
+
+	
+	
 }

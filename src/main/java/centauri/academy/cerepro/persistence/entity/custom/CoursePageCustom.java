@@ -21,10 +21,14 @@ public class CoursePageCustom extends CoursePage {
 	public CoursePageCustom() {
 		super();
 	}
+	
+	public CoursePageCustom(Long id, String bodyText, String fileName, String title, String code) {
+		super(id, bodyText, fileName, title, code);
+	}
 
-	public CoursePageCustom(Long id, String bodyText, String fileName, String title, Long userId,
+	public CoursePageCustom(Long id, String bodyText, String fileName, String title, String code, Long userId,
 			String coursePageOwnerFirstname, String coursePageOwnerLastname) {
-		super(id, bodyText, fileName, title);
+		super(id, bodyText, fileName, title, code);
 		this.userId = userId;
 		this.coursePageOwnerFirstname = coursePageOwnerFirstname;
 		this.coursePageOwnerLastname = coursePageOwnerLastname;

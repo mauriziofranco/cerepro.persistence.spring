@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +36,7 @@ import centauri.academy.cerepro.persistence.entity.custom.ListedCandidateCustom;
  *
  */
 @Repository
+@Primary
 public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
 
 	private Logger logger = LoggerFactory.getLogger(CoursePageRepositoryImpl.class);
@@ -77,6 +79,7 @@ public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
 				rootTable.get("bodyText"), 
 				rootTable.get("fileName"), 
 				rootTable.get("title"),
+				rootTable.get("code"),
 				joinTable2.get("id"), 
 				joinTable2.get("firstname"),
 			    joinTable2.get("lastname")			
@@ -85,6 +88,33 @@ public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
 		List<CoursePageCustom> resultList = q.getResultList();
 		return resultList ;
 
+	}
+	
+	public List<CoursePageCustom> findAllCustomEmpty() {
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<CoursePageCustom> query = cb.createQuery(CoursePageCustom.class);
+		
+		Root<CoursePage> rootTable = query.from(CoursePage.class);
+		//Root<PositionUserOwner> joinTable = query.from(PositionUserOwner.class);
+		
+		List<Predicate> criteria = new ArrayList<Predicate>();
+		
+		//criteria.add(cb.notEqual(rootTable.get("id"), joinTable.get("coursePageId")));
+		
+		query.multiselect(rootTable);
+		
+		TypedQuery<CoursePageCustom> q = em.createQuery(query.multiselect(
+				rootTable.get("id"),
+				rootTable.get("bodyText"), 
+				rootTable.get("fileName"), 
+				rootTable.get("title"),
+				rootTable.get("code")
+		));
+		
+		List<CoursePageCustom> resultList = q.getResultList();
+		return resultList ;
+				
 	}
 	
 }
