@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import javax.persistence.Tuple;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.junit.After;
@@ -112,11 +114,11 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
     public void testSelectAllCustomFilled(){
     	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - START");    	
     	getFakePositionUserOwner();
+    	getFakeCoursePage();
     	List<CoursePageCustom> customList = coursePageRepository.findAllCustom() ;
     	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - DEBUG - customList.size():{}", customList.size());
-    	assertTrue(customList.size() > 0);
+    	assertTrue(customList.size() == 2);
     	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - END");
-    }
-	
+    }	
 
 }
