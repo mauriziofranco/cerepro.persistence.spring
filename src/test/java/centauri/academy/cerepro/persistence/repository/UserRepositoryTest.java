@@ -2,6 +2,9 @@ package centauri.academy.cerepro.persistence.repository;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -71,6 +74,16 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		logger.info("UserRepositoryTest.testSelectById() - START");
 		User currentUser = getFakeUser();
 		assertTrue(userRepository.findById(currentUser.getId()).isPresent());		
+	}
+	
+	/**
+	 * testSelectByRole() method tests if the emthod findByRole() really works
+	 */
+	@Test
+	public void testSelectByRole() {
+		logger.info("UserRepositoryTest.testSelectByRole() - START");
+		User currentUser = getFakeUser();
+		assertTrue(userRepository.findByRole(currentUser.getRole()).size() > 0);
 	}
 	
 	/**

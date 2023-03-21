@@ -26,30 +26,38 @@ public class CoursePage extends CeReProAbstractEntity {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="id")
-	private Long id;
+	protected Long id;
 	
 	@Length(max = 1000, message = "error.coursepage.title.length")
 	@Column(name ="title")
-	private String title;
+	protected String title;
 	
 	@NotEmpty(message = "error.coursepage.bodyText.empty")
 	@Length(max = 50000, message = "error.coursepage.bodyText.length")
 	@Column(name ="body_text")
-	private String bodyText;
+	protected String bodyText;
 	
 	@Length(max = 300, message = "error.coursepage.fileName.length")
 	@Column(name ="file_name")
-	private String fileName;
+	protected String fileName;
 	
 	@Length(max = 50, message = "error.coursepage.code.length")
 	@Column(name ="code")
-	private String code;
+	protected String code;
 
 	public CoursePage(Long id, String bodyText, String fileName, String title) {
 		this.id = id;
 		this.bodyText = bodyText;
 		this.title=title;
 		this.fileName = fileName;
+	}
+	
+	public CoursePage(Long id, String bodyText, String fileName, String title, String code) {
+		this.id = id;
+		this.bodyText = bodyText;
+		this.title=title;
+		this.fileName = fileName;
+		this.code = code;
 	}
 	
 	public CoursePage(String bodyText, String fileName, String title) {
@@ -60,7 +68,7 @@ public class CoursePage extends CeReProAbstractEntity {
 
 	public CoursePage() {
 	}
-	
+
 	/**
 	 * @return the id
 	 */

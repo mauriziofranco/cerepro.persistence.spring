@@ -15,6 +15,7 @@ import centauri.academy.cerepro.persistence.entity.Candidate;
 import centauri.academy.cerepro.persistence.entity.CandidateStates;
 import centauri.academy.cerepro.persistence.entity.CandidateSurveyToken;
 import centauri.academy.cerepro.persistence.entity.CoursePage;
+import centauri.academy.cerepro.persistence.entity.PositionUserOwner;
 import centauri.academy.cerepro.persistence.entity.Question;
 import centauri.academy.cerepro.persistence.entity.Role;
 import centauri.academy.cerepro.persistence.entity.Survey;
@@ -23,6 +24,7 @@ import centauri.academy.cerepro.persistence.entity.SurveyReply;
 import centauri.academy.cerepro.persistence.entity.User;
 import centauri.academy.cerepro.persistence.repository.candidate.CandidateRepository;
 import centauri.academy.cerepro.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
+import centauri.academy.cerepro.persistence.repository.coursepage.CoursePageRepository;
 import centauri.academy.cerepro.persistence.repository.question.QuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyquestion.SurveyQuestionRepository;
 import centauri.academy.cerepro.persistence.repository.surveyreply.SurveyReplyRepository;
@@ -54,6 +56,8 @@ public abstract class AbstractRepositoryTest {
 	@Autowired
 	protected CoursePageRepository coursePageRepository;
 	@Autowired
+	protected PositionUserOwnerRepository positionUserOwnerRepository;
+	@Autowired
 	protected CandidateStatesRepository candidateStatesRepository;
 	
 	/**
@@ -74,11 +78,17 @@ public abstract class AbstractRepositoryTest {
 		candidateSurveyTokenRepository.deleteAll();		
 		surveyRepository.deleteAll();
 		candidateRepository.deleteAll();
+		positionUserOwnerRepository.deleteAll();
 		userRepository.deleteAll();
 		coursePageRepository.deleteAll();
 		candidateStatesRepository.deleteAll();
 		roleRepository.deleteAll();
 		logger.info(" END -> prepareDB() ");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");
+		logger.info("############################");		
 	}
 	
 	protected Role getFakeRole() {
@@ -234,6 +244,17 @@ public abstract class AbstractRepositoryTest {
 	protected CoursePage getFakeCoursePage() {
 		int random = (int) (Math.random() * 10000);
 		return getFakeCoursePageWithCode("FakeFileName " + random);
+	}
+	
+	protected PositionUserOwner getFakePositionUserOwner() {
+		User testUser = getFakeUser(50);
+		CoursePage testCoursePage = getFakeCoursePage();
+		PositionUserOwner testPositionUserOwner = new PositionUserOwner();
+		testPositionUserOwner.setCoursePageId(testCoursePage.getId());
+		testPositionUserOwner.setUserId(testUser.getId());
+		positionUserOwnerRepository.save(testPositionUserOwner);
+		return testPositionUserOwner;
+		
 	}
 
 	protected CandidateSurveyToken getFakeUserTokenSurveyExpired() {
