@@ -90,6 +90,18 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	}
 	
 	/**
+     * testSelectByLevel() method tests if the method selectByLevel()
+     * really works
+     */
+	@Test
+	public void testSelectByLevel() {
+		logger.info("RoleRepositoryTest.testSelectByLevel() - START");
+		Role currentRole = getFakeRole();
+		assertTrue(rr.findByLevel(currentRole.getLevel())!=null);
+		logger.info("RoleRepositoryTest.testSelectByLevel() - END");
+	}
+	
+	/**
      * testUpdate() method tests if the method update()
      * really works
      */
