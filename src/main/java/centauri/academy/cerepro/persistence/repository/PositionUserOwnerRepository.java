@@ -18,6 +18,6 @@ import centauri.academy.cerepro.persistence.entity.PositionUserOwner;
 public interface PositionUserOwnerRepository extends JpaRepository<PositionUserOwner, Long>{
 	
 	
-	List <Optional <PositionUserOwner>> findByCoursePageIdAndUserId(long course_page_id, long user_id);
+	Optional <PositionUserOwner> findByCoursePageId(long course_page_id);
 
 }

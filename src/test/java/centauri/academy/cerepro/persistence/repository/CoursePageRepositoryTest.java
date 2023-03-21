@@ -119,6 +119,25 @@ public class CoursePageRepositoryTest extends AbstractRepositoryTest {
     	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - DEBUG - customList.size():{}", customList.size());
     	assertTrue(customList.size() == 2);
     	logger.info("CoursePageRepositoryTest.testSelectAllCustomFilled() - END");
+<<<<<<< HEAD
     }	
+=======
+    }
+	
+	@Test
+    public void testSelectAllCustomEmpty(){
+    	logger.info("CoursePageRepositoryTest.testSelectAllCustomEmpty() - START");    	
+    	getFakePositionUserOwner();
+    	getFakeCoursePage();
+    	List<CoursePageCustom> customList = coursePageRepository.findAllCustomEmpty() ;
+    	for (CoursePageCustom li : customList) {
+    		logger.info("###########" + li + "\n");
+    	}
+    	logger.info("CoursePageRepositoryTest.testSelectAllCustomEmpty() - DEBUG - customList.size():{}", customList.size());
+    	assertTrue(customList.size() > 0);
+    	logger.info("CoursePageRepositoryTest.testSelectAllCustomEmpty() - END");
+    }
+	
+>>>>>>> branch '#66' of https://github.com/MaurizioFranco/cerepro.persistence.spring.git
 
 }

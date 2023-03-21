@@ -52,6 +52,14 @@ public class CoursePage extends CeReProAbstractEntity {
 		this.fileName = fileName;
 	}
 	
+	public CoursePage(Long id, String bodyText, String fileName, String title, String code) {
+		this.id = id;
+		this.bodyText = bodyText;
+		this.title=title;
+		this.fileName = fileName;
+		this.code = code;
+	}
+	
 	public CoursePage(String bodyText, String fileName, String title) {
 		this.bodyText = bodyText;
 		this.fileName = fileName;
@@ -60,7 +68,7 @@ public class CoursePage extends CeReProAbstractEntity {
 
 	public CoursePage() {
 	}
-	
+
 	/**
 	 * @return the id
 	 */
