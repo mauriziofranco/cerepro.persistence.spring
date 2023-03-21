@@ -9,16 +9,14 @@
 	<version>1.5.3</version>
 	<packaging>jar</packaging>
 
-	<name>CeReProPersistence</name>
-	<description>Persistence module for CeRePro project designed by milan
-		centauri academy number 3 and 4
-	</description>
+	<name>cerepro.persistence</name>
+	<description>persistence module for cerepro project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.0.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
 	</parent>
 
 	<properties>
@@ -32,7 +30,7 @@
 
 
 	<build>
-		<finalName>cerepropersistence</finalName>
+		<finalName>cerepro.persistence</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
