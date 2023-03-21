@@ -76,7 +76,13 @@ public class CoursePageCustom extends CoursePage {
 		this.coursePageOwnerLastname = coursePageOwnerLastname;
 	}
 
-	
-	 
+	@Override
+	public String toString() {
+		return "CoursePageCustom [userId=" + userId + ", coursePageOwnerFirstname=" + coursePageOwnerFirstname
+				+ ", coursePageOwnerLastname=" + coursePageOwnerLastname + ", getId()=" + getId() + ", getBodyText()="
+				+ getBodyText() + ", getFileName()=" + getFileName() + ", getTitle()=" + getTitle() + ", getCode()="
+				+ getCode() + ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
+	}
 
 }
