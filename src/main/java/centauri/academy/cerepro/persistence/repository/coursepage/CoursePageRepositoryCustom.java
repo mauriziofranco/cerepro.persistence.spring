@@ -14,6 +14,7 @@ import centauri.academy.cerepro.persistence.entity.custom.CoursePageCustom;
  */
 public interface CoursePageRepositoryCustom {
 	
+	
 	List<CoursePageCustom> findAllCustom();
 	
 }
