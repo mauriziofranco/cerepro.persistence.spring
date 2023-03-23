@@ -3,6 +3,8 @@
  */
 package centauri.academy.cerepro.persistence.entity.custom;
 
+import java.time.LocalDateTime;
+
 import centauri.academy.cerepro.persistence.entity.CoursePage;
 
 /**
@@ -22,13 +24,13 @@ public class CoursePageCustom extends CoursePage {
 		super();
 	}
 	
-	public CoursePageCustom(Long id, String bodyText, String fileName, String title, String code) {
-		super(id, bodyText, fileName, title, code);
+	public CoursePageCustom(Long id, String bodyText, String fileName, String title, String code,Long opened_by) {
+		super(id, bodyText, fileName, title, code,opened_by);
 	}
 
 	public CoursePageCustom(Long id, String bodyText, String fileName, String title, String code, Long userId,
-			String coursePageOwnerFirstname, String coursePageOwnerLastname) {
-		super(id, bodyText, fileName, title, code);
+			String coursePageOwnerFirstname, String coursePageOwnerLastname,Long opened_by) {
+		super(id, bodyText, fileName, title, code,opened_by);
 		this.userId = userId;
 		this.coursePageOwnerFirstname = coursePageOwnerFirstname;
 		this.coursePageOwnerLastname = coursePageOwnerLastname;

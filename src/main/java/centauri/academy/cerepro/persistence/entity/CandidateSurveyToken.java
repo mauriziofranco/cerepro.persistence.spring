@@ -25,7 +25,6 @@ import lombok.ToString;
  */
 @Entity
 @Table( name = "candidatesurveytokens" )
-@Getter @Setter @NoArgsConstructor @ToString
 public class CandidateSurveyToken extends CeReProAbstractEntity {
 	
 	@Id
@@ -65,5 +64,67 @@ public class CandidateSurveyToken extends CeReProAbstractEntity {
 		this.expirationDateTime = expirationDateTime;
 		this.expired = expired;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getCandidateId() {
+		return candidateId;
+	}
+
+	public void setCandidateId(Long candidateId) {
+		this.candidateId = candidateId;
+	}
+
+	public Long getSurveyId() {
+		return surveyId;
+	}
+
+	public void setSurveyId(Long surveyId) {
+		this.surveyId = surveyId;
+	}
+
+	public String getGeneratedToken() {
+		return generatedToken;
+	}
+
+	public void setGeneratedToken(String generatedToken) {
+		this.generatedToken = generatedToken;
+	}
+
+	public LocalDateTime getExpirationDateTime() {
+		return expirationDateTime;
+	}
+
+	public void setExpirationDateTime(LocalDateTime expirationDateTime) {
+		this.expirationDateTime = expirationDateTime;
+	}
+
+	public boolean isExpired() {
+		return expired;
+	}
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
+
+	public CandidateSurveyToken() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "CandidateSurveyToken [id=" + id + ", candidateId=" + candidateId + ", surveyId=" + surveyId
+				+ ", generatedToken=" + generatedToken + ", expirationDateTime=" + expirationDateTime + ", expired="
+				+ expired + "]";
+	}
+	
+	
 	
 }

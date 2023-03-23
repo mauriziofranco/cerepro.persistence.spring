@@ -1,5 +1,7 @@
 package centauri.academy.cerepro.persistence.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,26 +46,38 @@ public class CoursePage extends CeReProAbstractEntity {
 	@Length(max = 50, message = "error.coursepage.code.length")
 	@Column(name ="code")
 	protected String code;
+	
+	@Column(name ="opened_by")
+	protected Long opened_by;
+	
+	@Column(name="created_datetime")
+	private LocalDateTime created_datetime;
 
-	public CoursePage(Long id, String bodyText, String fileName, String title) {
+	public CoursePage(Long id, String bodyText, String fileName, String title,Long opened_by) {
 		this.id = id;
 		this.bodyText = bodyText;
 		this.title=title;
 		this.fileName = fileName;
+		this.opened_by = opened_by;
+		this.created_datetime = LocalDateTime.now();
 	}
 	
-	public CoursePage(Long id, String bodyText, String fileName, String title, String code) {
+	public CoursePage(Long id, String bodyText, String fileName, String title, String code,Long opened_by) {
 		this.id = id;
 		this.bodyText = bodyText;
 		this.title=title;
 		this.fileName = fileName;
 		this.code = code;
+		this.opened_by = opened_by;
+		this.created_datetime = LocalDateTime.now();
 	}
 	
-	public CoursePage(String bodyText, String fileName, String title) {
+	public CoursePage(String bodyText, String fileName, String title,Long opened_by) {
 		this.bodyText = bodyText;
 		this.fileName = fileName;
 		this.title=title;
+		this.opened_by = opened_by;
+		this.created_datetime = LocalDateTime.now();
 	}
 
 	public CoursePage() {
@@ -137,6 +151,22 @@ public class CoursePage extends CeReProAbstractEntity {
 	 */
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Long getOpened_by() {
+		return opened_by;
+	}
+
+	public void setOpened_by(Long opened_by) {
+		this.opened_by = opened_by;
+	}
+
+	public LocalDateTime getCreated_datetime() {
+		return created_datetime;
+	}
+
+	public void setCreated_datetime(LocalDateTime created_datetime) {
+		this.created_datetime = created_datetime;
 	}
 
 	@Override

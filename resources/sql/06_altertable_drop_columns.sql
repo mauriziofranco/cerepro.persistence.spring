@@ -82,6 +82,14 @@ create table positionuserowner (
 
 #task 66 di matteo - END
 
+#task 84 di giammarco - START
+alter table coursepage add opened_by userId bigint(20);
+alter table coursepage add created_datetime datetime;
+update coursepage set opened_by = 13;
+alter table coursepage ADD FOREIGN KEY (opened_by) references users(id);
+
+#task 84 di giammarco - END
+
 
 
 
