@@ -19,6 +19,10 @@ public class CoursePageCustom extends CoursePage {
 	private String coursePageOwnerFirstname ;
 	
 	private String coursePageOwnerLastname ;
+	
+	private String coursePageFirstNameOpenedBy;
+	
+	private String coursePageLastNameOpenedBy;
 		
 	public CoursePageCustom() {
 		super();
@@ -29,11 +33,14 @@ public class CoursePageCustom extends CoursePage {
 	}
 
 	public CoursePageCustom(Long id, String bodyText, String fileName, String title, String code, Long userId,
-			String coursePageOwnerFirstname, String coursePageOwnerLastname,Long opened_by) {
+			String coursePageOwnerFirstname, String coursePageOwnerLastname,Long opened_by,String coursePageFirstNameOpenedBy,
+			String coursePageLastNameOpenedBy) {
 		super(id, bodyText, fileName, title, code,opened_by);
 		this.userId = userId;
 		this.coursePageOwnerFirstname = coursePageOwnerFirstname;
 		this.coursePageOwnerLastname = coursePageOwnerLastname;
+		this.coursePageFirstNameOpenedBy = coursePageFirstNameOpenedBy;
+		this.coursePageLastNameOpenedBy = coursePageLastNameOpenedBy;
 	}
 
 	/**
@@ -76,6 +83,22 @@ public class CoursePageCustom extends CoursePage {
 	 */
 	public void setCoursePageOwnerLastname(String coursePageOwnerLastname) {
 		this.coursePageOwnerLastname = coursePageOwnerLastname;
+	}
+
+	public String getCoursePageFirstNameOpenedBy() {
+		return coursePageFirstNameOpenedBy;
+	}
+
+	public void setCoursePageFirstNameOpenedBy(String coursePageFirstNameOpenedBy) {
+		this.coursePageFirstNameOpenedBy = coursePageFirstNameOpenedBy;
+	}
+
+	public String getCoursePageLastNameOpenedBy() {
+		return coursePageLastNameOpenedBy;
+	}
+
+	public void setCoursePageLastNameOpenedBy(String coursePageLastNameOpenedBy) {
+		this.coursePageLastNameOpenedBy = coursePageLastNameOpenedBy;
 	}
 
 	@Override
