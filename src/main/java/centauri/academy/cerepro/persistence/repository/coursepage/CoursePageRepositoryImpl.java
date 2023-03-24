@@ -76,14 +76,28 @@ public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
 			logger.info("findAllCustom - DEBUG - currentObj[4]:{} ", currentObj[4]);
 			item.setCode(""+currentObj[4]);
 			logger.info("findAllCustom - DEBUG - currentObj[5]:{} ", currentObj[5]);
-			item.setOpened_by(Long.parseLong(""+currentObj[5]));
+			if (currentObj[5]!=null) {
+				try {
+				    item.setOpened_by(Long.parseLong(""+currentObj[5]));
+				} catch (Exception e) {
+					logger.error(e.getMessage(), e);
+				}
+			}
 			logger.info("findAllCustom - DEBUG - currentObj[6]:{} ", currentObj[6]);
-			item.setCreated_datetime(LocalDateTime.parse(""+currentObj[6]));
+			if (currentObj[6]!=null) {
+				try {
+					item.setCreated_datetime(LocalDateTime.parse(""+currentObj[6]));
+				} catch (Exception e) {
+					logger.error(e.getMessage(), e);
+				}
+			}
 			logger.info("findAllCustom - DEBUG - currentObj[7]:{} ", currentObj[7]);
-			if(currentObj[7]!=null) {
-				item.setUserId(Long.parseLong(""+currentObj[7]));
-			}else {
-				item.setUserId(0L);
+			if (currentObj[7]!=null) {
+				try {
+					item.setUserId(Long.parseLong(""+currentObj[7]));
+				} catch (Exception e) {
+					logger.error(e.getMessage(), e);
+				}
 			}
 			logger.info("findAllCustom - DEBUG - currentObj[8]:{} ", currentObj[8]);
 			item.setCoursePageOwnerFirstname(""+currentObj[8]);
