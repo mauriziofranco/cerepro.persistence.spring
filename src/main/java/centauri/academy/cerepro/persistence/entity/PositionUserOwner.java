@@ -50,34 +50,32 @@ public class PositionUserOwner {
 		this.userId = userId;
 	}
 
-	public PositionUserOwner() {
-		super();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getCoursePageId() {
-		return coursePageId;
-	}
-
-	public void setCoursePageId(Long coursePageId) {
-		this.coursePageId = coursePageId;
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-	
-	
+//	public PositionUserOwner() {
+//		super();
+//	}
+//
+//	public Long getId() {
+//		return id;
+//	}
+//
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
+//
+//	public Long getCoursePageId() {
+//		return coursePageId;
+//	}
+//
+//	public void setCoursePageId(Long coursePageId) {
+//		this.coursePageId = coursePageId;
+//	}
+//
+//	public Long getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(Long userId) {
+//		this.userId = userId;
+//	}
 	
 }
