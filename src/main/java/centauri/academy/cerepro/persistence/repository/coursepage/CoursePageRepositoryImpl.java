@@ -80,7 +80,11 @@ public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
 			logger.info("findAllCustom - DEBUG - currentObj[6]:{} ", currentObj[6]);
 			item.setCreated_datetime(LocalDateTime.parse(""+currentObj[6]));
 			logger.info("findAllCustom - DEBUG - currentObj[7]:{} ", currentObj[7]);
-			item.setUserId(Long.parseLong(""+currentObj[7]));
+			if(currentObj[7]!=null) {
+				item.setUserId(Long.parseLong(""+currentObj[7]));
+			}else {
+				item.setUserId(0L);
+			}
 			logger.info("findAllCustom - DEBUG - currentObj[8]:{} ", currentObj[8]);
 			item.setCoursePageOwnerFirstname(""+currentObj[8]);
 			logger.info("findAllCustom - DEBUG - currentObj[9]:{} ", currentObj[9]);
