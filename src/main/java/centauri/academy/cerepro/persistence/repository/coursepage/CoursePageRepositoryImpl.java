@@ -59,7 +59,8 @@ public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
 						  + "    from CoursePage coursepage0_ \n"
 						  + "        left join PositionUserOwner positionus1_ on coursepage0_.id=positionus1_.coursePageId\n"
 						  + "        left join User user2_                   on user2_.id=positionus1_.userId\n"
-						  + " 		 left join User user3_  on user3_.id=coursepage0_.opened_by")
+						  + " 		 left join User user3_  on user3_.id=coursepage0_.opened_by"
+						  + "		 order by coursepage0_.created_datetime desc")
 				  .getResultList();
 
 		List<CoursePageCustom> results = new ArrayList<CoursePageCustom> () ;
