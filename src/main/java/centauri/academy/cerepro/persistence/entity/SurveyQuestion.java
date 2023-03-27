@@ -1,10 +1,16 @@
 package centauri.academy.cerepro.persistence.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -36,6 +42,9 @@ public class SurveyQuestion extends CeReProAbstractEntity {
 	@Min(value=1, message="error.surveyquestion.position.min" )
 	@Column(name = "position")
 	private Long position;
+	
+	@OneToMany(mappedBy = "surveyQuestion")
+    private List<SurveyQuestionRole> surveyQuestionRoles;
 
 	//costruttore vuoto
 	public SurveyQuestion() {
@@ -47,6 +56,15 @@ public class SurveyQuestion extends CeReProAbstractEntity {
 		this.questionId = questionId;
 		this.position = position;
 	}
+	
+	public SurveyQuestion(Long id, Long surveyId, Long questionId, Long position,List<SurveyQuestionRole> surveyQuestionRoles) {
+		this.id = id;
+		this.surveyId = surveyId;
+		this.questionId = questionId;
+		this.position = position;
+		this.surveyQuestionRoles = surveyQuestionRoles;
+	}
+	
 	
 	/**
 	 * @return the id
@@ -95,6 +113,13 @@ public class SurveyQuestion extends CeReProAbstractEntity {
 	 */
 	public void setPosition(Long position) {
 		this.position = position;
+	}
+	
+	public List<SurveyQuestionRole> getSurveyQuestionRoles() {
+		return surveyQuestionRoles;
+	}
+	public void setSurveyQuestionRoles(List<SurveyQuestionRole> surveyQuestionRoles) {
+		this.surveyQuestionRoles = surveyQuestionRoles;
 	}
 	/**
 	 * Provides a full debug of the Entity

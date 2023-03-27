@@ -1,10 +1,13 @@
 package centauri.academy.cerepro.persistence.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -47,7 +50,8 @@ public class Role extends CeReProAbstractEntity{
 	@Column(name = "level")
 	private int level;
 
-	
+	@OneToMany(mappedBy = "role")
+    private List<SurveyQuestionRole> surveyQuestionRoles;
 	
 	public Role () {}
 	
@@ -56,6 +60,14 @@ public class Role extends CeReProAbstractEntity{
 		this.description = description;
 		this.level=level;
 	}
+	
+	public Role (String label, String description, int level,List<SurveyQuestionRole> surveyQuestionRoles) {
+		this.label = label;
+		this.description = description;
+		this.level=level;
+		this.surveyQuestionRoles = surveyQuestionRoles;
+	}
+	
 	
 	public Role (Long id, String label, String description, int level) {
 		this.id = id;
@@ -119,6 +131,14 @@ public class Role extends CeReProAbstractEntity{
 	 */
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public List<SurveyQuestionRole> getSurveyQuestionRoles() {
+		return surveyQuestionRoles;
+	}
+
+	public void setSurveyQuestionRoles(List<SurveyQuestionRole> surveyQuestionRoles) {
+		this.surveyQuestionRoles = surveyQuestionRoles;
 	}
 
 	/**
