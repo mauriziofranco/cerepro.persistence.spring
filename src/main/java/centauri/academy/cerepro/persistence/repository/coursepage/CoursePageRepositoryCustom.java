@@ -19,5 +19,7 @@ public interface CoursePageRepositoryCustom {
 	
 	List<CoursePageCustom> findAllCustom();
 	
+//	CoursePageCustom findById();
+	
 	
 }
