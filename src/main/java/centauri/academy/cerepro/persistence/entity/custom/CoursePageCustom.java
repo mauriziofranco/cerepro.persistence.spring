@@ -3,8 +3,6 @@
  */
 package centauri.academy.cerepro.persistence.entity.custom;
 
-import java.time.LocalDateTime;
-
 import centauri.academy.cerepro.persistence.entity.CoursePage;
 
 /**

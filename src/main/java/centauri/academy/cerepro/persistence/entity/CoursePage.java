@@ -171,12 +171,8 @@ public class CoursePage extends CeReProAbstractEntity {
 
 	@Override
 	public String toString() {
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("id: ").append(id);
-		sb.append(" - bodyText: ").append(bodyText);
-		sb.append(" - fileName: ").append(fileName);	
-		return sb.toString();
-		
+		return "CoursePage [id=" + id + ", title=" + title + ", bodyText=" + bodyText + ", fileName=" + fileName
+				+ ", code=" + code + ", opened_by=" + opened_by + ", created_datetime=" + created_datetime + "]";
 	}
+
 }
