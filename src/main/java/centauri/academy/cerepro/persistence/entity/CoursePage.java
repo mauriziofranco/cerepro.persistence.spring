@@ -52,6 +52,9 @@ public class CoursePage extends CeReProAbstractEntity {
 	
 	@Column(name="created_datetime")
 	private LocalDateTime created_datetime;
+	
+	@Column(name="status_open")
+	private Boolean statusOpen;
 
 	public CoursePage(Long id, String bodyText, String fileName, String title,Long opened_by) {
 		this.id = id;
@@ -167,6 +170,14 @@ public class CoursePage extends CeReProAbstractEntity {
 
 	public void setCreated_datetime(LocalDateTime created_datetime) {
 		this.created_datetime = created_datetime;
+	}
+	
+	public Boolean getStatusOpen() {
+		return statusOpen;
+	}
+
+	public void setStatusOpen(Boolean statusOpen) {
+		this.statusOpen = statusOpen;
 	}
 
 	@Override

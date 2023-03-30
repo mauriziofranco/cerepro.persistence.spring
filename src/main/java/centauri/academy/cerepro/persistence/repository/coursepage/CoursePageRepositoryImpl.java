@@ -37,7 +37,7 @@ public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
 		List<Object[]> objResults = em
 				  .createQuery(
 						  "select "
-						  + "    coursepage0_.id as col_0_0_, coursepage0_.bodyText as col_1_0_, coursepage0_.fileName as col_2_0_, coursepage0_.title as col_3_0_, coursepage0_.code as col_4_0_,coursepage0_.opened_by as col_5_0_,coursepage0_.created_datetime as col_6_0_, user2_.id as col_7_0_, user2_.firstname as col_8_0_, user2_.lastname as col_9_0_,user3_.firstname as col_10_0_, user3_.lastname as col_11_0_ \n"
+						  + "    coursepage0_.id as col_0_0_, coursepage0_.bodyText as col_1_0_, coursepage0_.fileName as col_2_0_, coursepage0_.title as col_3_0_, coursepage0_.code as col_4_0_,coursepage0_.opened_by as col_5_0_,coursepage0_.created_datetime as col_6_0_,coursepage0_.statusOpen as col_7_0_ , user2_.id as col_8_0_, user2_.firstname as col_9_0_, user2_.lastname as col_10_0_,user3_.firstname as col_11_0_, user3_.lastname as col_12_0_ \n"
 						  + "    from CoursePage coursepage0_ \n"
 						  + "        left join PositionUserOwner positionus1_ on coursepage0_.id=positionus1_.coursePageId\n"
 						  + "        left join User user2_                   on user2_.id=positionus1_.userId\n"
@@ -74,22 +74,26 @@ public class CoursePageRepositoryImpl implements CoursePageRepositoryCustom {
                     logger.error(e.getMessage(), e);
                 }
             }
+            
             logger.info("findAllCustom - DEBUG - currentObj[7]:{} ", currentObj[7]);
-            if (currentObj[7]!=null) {
+			item.setStatusOpen(Boolean.valueOf(""+currentObj[7]));
+            
+            logger.info("findAllCustom - DEBUG - currentObj[8]:{} ", currentObj[8]);
+            if (currentObj[8]!=null) {
                 try {
-                    item.setUserId(Long.parseLong(""+currentObj[7]));
+                    item.setUserId(Long.parseLong(""+currentObj[8]));
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);
                 }
             }
-			logger.info("findAllCustom - DEBUG - currentObj[8]:{} ", currentObj[8]);
-			item.setCoursePageOwnerFirstname(""+currentObj[8]);
 			logger.info("findAllCustom - DEBUG - currentObj[9]:{} ", currentObj[9]);
-			item.setCoursePageOwnerLastname(""+currentObj[9]);
+			item.setCoursePageOwnerFirstname(""+currentObj[9]);
 			logger.info("findAllCustom - DEBUG - currentObj[10]:{} ", currentObj[10]);
-			item.setCoursePageFirstNameOpenedBy(""+currentObj[10]);
+			item.setCoursePageOwnerLastname(""+currentObj[10]);
 			logger.info("findAllCustom - DEBUG - currentObj[11]:{} ", currentObj[11]);
-			item.setCoursePageLastNameOpenedBy(""+currentObj[11]);
+			item.setCoursePageFirstNameOpenedBy(""+currentObj[11]);
+			logger.info("findAllCustom - DEBUG - currentObj[12]:{} ", currentObj[12]);
+			item.setCoursePageLastNameOpenedBy(""+currentObj[12]);
 			
 			results.add(item);
 		}
