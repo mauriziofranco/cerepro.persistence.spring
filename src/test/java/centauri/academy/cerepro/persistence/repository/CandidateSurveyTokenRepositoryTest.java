@@ -45,18 +45,18 @@ public class CandidateSurveyTokenRepositoryTest extends AbstractRepositoryTest {
      * 
      * 
      */
-	@Before
-	@After
-	public void prepareDB () {
-		logger.info(" START -> prepareDB() ");
-		cstr.deleteAll();
-		cr.deleteAll();
-		sr.deleteAll();
-		ur.deleteAll();
-		csr.deleteAll();
-		rr.deleteAll();
-		logger.info(" END -> prepareDB() ");
-	}
+//	@Before
+//	@After
+//	public void prepareDB () {
+//		logger.info(" START -> prepareDB() ");
+//		cstr.deleteAll();
+//		cr.deleteAll();
+//		sr.deleteAll();
+//		ur.deleteAll();
+//		csr.deleteAll();
+//		rr.deleteAll();
+//		logger.info(" END -> prepareDB() ");
+//	}
 
     /**
      * 

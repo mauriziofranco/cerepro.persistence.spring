@@ -79,8 +79,8 @@ public abstract class AbstractRepositoryTest {
 		surveyRepository.deleteAll();
 		candidateRepository.deleteAll();
 		positionUserOwnerRepository.deleteAll();
-		userRepository.deleteAll();
 		coursePageRepository.deleteAll();
+		userRepository.deleteAll();
 		candidateStatesRepository.deleteAll();
 		roleRepository.deleteAll();
 		logger.info(" END -> prepareDB() ");
@@ -237,6 +237,9 @@ public abstract class AbstractRepositoryTest {
 		testCoursePage.setBodyText("FakeBodyText " + random);
 		testCoursePage.setFileName("FakeFileName " + random);
 		testCoursePage.setCode(code);
+		testCoursePage.setStatusOpen(true);
+		testCoursePage.setCreated_datetime(LocalDateTime.now());
+		testCoursePage.setOpened_by(getFakeUser().getId());
 		coursePageRepository.save(testCoursePage);
 		return testCoursePage;
 	}
