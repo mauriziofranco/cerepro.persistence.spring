@@ -92,7 +92,7 @@ alter table coursepage ADD FOREIGN KEY (opened_by) references users(id);
 
 
 #task 107 di giammarco - START
-alter table coursepage add column statusOpen BOOLEAN NOT NULL default true;
+alter table coursepage add column status_open BOOLEAN NOT NULL default true;
 #task 107 di giammarco - END
 
 
