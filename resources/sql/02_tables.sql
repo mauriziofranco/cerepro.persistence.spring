@@ -50,6 +50,8 @@ CREATE TABLE `users` (
 
 insert into users (email,firstname,lastname, password, regdate, dateofbirth, role) VALUES ('1@2.3','bbb','aaa', '$2a$10$FKozujcHmWdulk6naR/XveW3x46hWPnRY2S/cyI/XhmjZZEOwz.bW', '2018-11-01', '2018-11-01',10);
 
+insert into users (id, email,firstname,lastname, password, regdate, role) VALUES (13,'21@2.3','admin','aaa', '$2a$10$FKozujcHmWdulk6naR/XveW3x46hWPnRY2S/cyI/XhmjZZEOwz.bW', '2018-11-01', '2018-11-01', 0);
+
 
 CREATE TABLE `coursepage` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,

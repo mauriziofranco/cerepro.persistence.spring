@@ -61,8 +61,8 @@ public abstract class AbstractRepositoryTest {
 	protected CandidateStatesRepository candidateStatesRepository;
 	
 	/**
-     * prepareDB method prepares the database in order to test
-     * CandidateRepository's methods
+	 * Provides to clean tables in order to execute single integration tests
+     * Execute table cleaning before and after each test
      */
 	@Before
 	@After

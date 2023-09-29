@@ -23,11 +23,6 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 
 	private static final Logger logger = LoggerFactory.getLogger(RoleRepositoryTest.class);
 	
-	@Autowired
-	private RoleRepository rr;
-	@Autowired
-	private UserRepository ur;
-
 	/**
 	 * Provides to clean role table and all(previously) referenced tables:
 	 * user, candidate and employee.
@@ -38,8 +33,7 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	@After
 	public void initializeRoleTests () {
 		logger.info("RoleRepositoryTest.initializeRoleTests - START");		
-		ur.deleteAll();
-		rr.deleteAll();
+		roleRepository.deleteAll();
 		logger.info("RoleRepositoryTest.initializeRoleTests - END");
 	}
 
@@ -52,7 +46,7 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
     public void testSelectAllFilled(){
 		logger.info("RoleRepositoryTest.testSelectAllFilled() - START");
 		getFakeRole();
-		assertTrue(rr.count() == 1);
+		assertTrue(roleRepository.count() == 1);
     }
     
     /**
@@ -63,7 +57,7 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	@Test
     public void testSelectAllEmpty(){
 		logger.info("RoleRepositoryTest.testSelectAllEmpty() - START");
-		assertTrue(rr.count()==0);
+		assertTrue(roleRepository.count()==0);
     }
 
 	/**
@@ -73,9 +67,9 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	@Test
 	public void testInsert() {
 		logger.info("RoleRepositoryTest.testInsert() - START");
-		assertTrue(rr.count()==0);
+		assertTrue(roleRepository.count()==0);
 		getFakeRole();
-		assertTrue(rr.count()==1);
+		assertTrue(roleRepository.count()==1);
 	}
 
 	/**
@@ -86,7 +80,7 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	public void testSelectById() {
 		logger.info("RoleRepositoryTest.testSelectById() - START");
 		Role currentRole = getFakeRole();
-		assertTrue(rr.findById(currentRole.getId()).isPresent());		
+		assertTrue(roleRepository.findById(currentRole.getId()).isPresent());		
 	}
 	
 	/**
@@ -97,7 +91,7 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	public void testSelectByLevel() {
 		logger.info("RoleRepositoryTest.testSelectByLevel() - START");
 		Role currentRole = getFakeRole();
-		assertTrue(rr.findByLevel(currentRole.getLevel())!=null);
+		assertTrue(roleRepository.findByLevel(currentRole.getLevel())!=null);
 		logger.info("RoleRepositoryTest.testSelectByLevel() - END");
 	}
 	
@@ -110,9 +104,9 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 		logger.info("RoleRepositoryTest.testUpdate() - START");
 		Role currentRole = getFakeRole();
 		currentRole.setLabel("developer");
-		rr.save(currentRole);
-		assertTrue(rr.findById(currentRole.getId()).isPresent());	
-		assertTrue((rr.findById(currentRole.getId()).get().getLabel().equals("developer")));
+		roleRepository.save(currentRole);
+		assertTrue(roleRepository.findById(currentRole.getId()).isPresent());	
+		assertTrue((roleRepository.findById(currentRole.getId()).get().getLabel().equals("developer")));
 	}
 
 	/**
@@ -123,9 +117,9 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	public void testDeleteById() {
 		logger.info("RoleRepositoryTest.testDeleteById() - START");
 		Role currentRole = getFakeRole();
-    	assertTrue(rr.count()==1);
-    	rr.deleteById(currentRole.getId());
-    	assertTrue(rr.count()==0);
+    	assertTrue(roleRepository.count()==1);
+    	roleRepository.deleteById(currentRole.getId());
+    	assertTrue(roleRepository.count()==0);
 	}
 	
 	/**
@@ -136,9 +130,9 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
 	public void testDeleteAll () {
 		logger.info("RoleRepositoryTest.testDeleteAll() - START");
 		getFakeRole();
-    	assertTrue(rr.count()==1);
-    	rr.deleteAll();
-		assertTrue(rr.count()==0);
+    	assertTrue(roleRepository.count()==1);
+    	roleRepository.deleteAll();
+		assertTrue(roleRepository.count()==0);
 		logger.info("RoleRepositoryTest.testDeleteAll() - END");
 	}
 }

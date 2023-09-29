@@ -10,4 +10,12 @@ CREATE USER 'cerepro_test'@'%' IDENTIFIED BY 'cerepro_test';
 GRANT ALL PRIVILEGES ON cerepro_test.* TO 'cerepro_test'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
+drop database IF EXISTS  cerepro_stage;
+create database cerepro_stage;
+CREATE USER 'cerepro_stage'@'%' IDENTIFIED BY 'cerepro_stage';
+GRANT ALL PRIVILEGES ON cerepro_stage.* TO 'cerepro_stage'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+
+
 
